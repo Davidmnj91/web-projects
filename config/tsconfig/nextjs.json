@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "NextJs",
+  "compilerOptions": {
+    "useDefineForClassFields": true,
+    "allowImportingTsExtensions": true,
+
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "target": "ESNext",
+    "jsx": "react-jsx"
+  }
+}
