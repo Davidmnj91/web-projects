@@ -1,0 +1,52 @@
+{
+  "name": "@web-projects/lea4int",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "email:dev": "email dev -p 3001 -d src/emails",
+    "lint": "eslint .  --max-warnings 0",
+    "lint:fix": "eslint . --fix --max-warnings 0",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@headlessui/react": "catalog:ui-kit",
+    "@hookform/error-message": "catalog:hookform",
+    "@hookform/resolvers": "catalog:hookform",
+    "@next/third-parties": "catalog:next",
+    "@phosphor-icons/react": "catalog:ui-kit",
+    "@react-email/components": "catalog:react-email",
+    "@react-email/render": "catalog:react-email",
+    "class-variance-authority": "catalog:ui-kit",
+    "clsx": "catalog:ui-kit",
+    "embla-carousel": "catalog:ui-kit",
+    "embla-carousel-react": "catalog:ui-kit",
+    "framer-motion": "catalog:ui-kit",
+    "googleapis": "^166.0.0",
+    "next": "catalog:next",
+    "next-intl": "catalog:i18n",
+    "nodemailer": "catalog:nodemailer",
+    "react": "catalog:react",
+    "react-datepicker": "^8.9.0",
+    "react-dom": "catalog:react",
+    "react-email": "catalog:react-email",
+    "react-hook-form": "catalog:hookform",
+    "react-player": "catalog:ui-kit",
+    "sharp": "catalog:next",
+    "use-intl": "catalog:i18n",
+    "zod": "catalog:zod",
+    "zod-form-data": "catalog:zod"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "catalog:tailwind",
+    "@types/node": "catalog:node",
+    "@types/nodemailer": "catalog:nodemailer",
+    "@types/react": "catalog:react",
+    "@types/react-dom": "catalog:react",
+    "@web-projects/eslint": "workspace:*",
+    "@web-projects/prettier": "workspace:*",
+    "tailwindcss": "catalog:tailwind",
+    "typescript": "catalog:typescript"
+  }
+}

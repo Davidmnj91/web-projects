@@ -1,0 +1,737 @@
+{
+  "pages": {
+    "home": "Bienvenido",
+    "services": {
+      "main": "Servicios",
+      "erasmus": "Proyectos Erasmus+",
+      "language-courses": "Cursos de inglés y español",
+      "student-exchange": "Programas intercambio e inmersión lingüística",
+      "concierge": "Servicios de conserjería para estudiantes"
+    },
+    "about-us": "Sobre nosotros",
+    "destinations": "Destinos",
+    "accommodations": "Alojamientos",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "contact": "Contacto",
+    "404": "CUATRO ZERO CUATRO"
+  },
+  "home-page": {
+    "language": "Idioma.",
+    "education": "Educación.",
+    "travel": "Viajar.",
+    "slogan": "LEA 4 International promueve la Educación Superior en el Extranjero mediante la planificación, implementación y coordinación de una variedad de proyectos educativos. Trabajamos en colaboración con programas de financiamiento como Erasmus+ en diversos países europeos.",
+    "request-more-info": "Infórmate",
+    "who-we-are": {
+      "title": "Quienes Somos",
+      "description": "LEA 4 International es una empresa de gestión de proyectos y consultoría especializada en la planificación, organización y ejecución de una variedad de proyectos educativos."
+    },
+    "our-focus": {
+      "title": "Nuestra Misión",
+      "description": "Nuestro objetivo principal es ayudar a las personas a obtener experiencias significativas en el extranjero que les ayuden a crecer, tanto profesional como personalmente."
+    },
+    "our-principles": {
+      "title": "Nuestros Principios",
+      "description": "En LEA 4 International creemos que tener una experiencia en el extranjero es una gran oportunidad para abrir la mente, explorar <b>diferentes culturas y hablar otros idiomas.</b> Gracias a la globalización, vivimos en un mundo conectado que ofrece muchas oportunidades para <b>viajar y explorar</b> fuera de nuestro país de origen."
+    },
+    "coming-challenges": {
+      "title": "Superando Desafíos",
+      "description": "Salir de nuestra zona de confort y aventurarse en el extranjero puede ser desafiante. Por eso, en LEA 4 International, nos esforzamos por facilitar tu experiencia en el extranjero al proporcionar un apoyo integral y realizar todos los trámites necesarios para tu proyecto."
+    },
+    "our-commitment": {
+      "title": "Nuestro compromiso"
+    },
+    "top-destinations": {
+      "title": "Nuestros destinos más populares",
+      "see-all": "Ver todos los destinos",
+      "destinations": {
+        "madrid": "Madrid",
+        "prague": "Praga",
+        "malaga": "Malaga",
+        "czech": "República Checa",
+        "spain": "España"
+      }
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "see-more": "Ver más preguntas"
+    },
+    "help-you": "Esperamos poder ayudarte a disfrutar de tu aventura educativa",
+    "see-more": "Saber más"
+  },
+  "services-page": {
+    "title": "Nuestros Servicios",
+    "message": "Selecciona y descubre nuestros servicios para conocer <br></br>más sobre ellos.",
+    "services": {
+      "see-more": "Ver más",
+      "back-to-services": "Volver a nuestros servicios",
+      "other-services": {
+        "title": "Otros servicios",
+        "description": "Selecciona y descubre nuestros servicios para conocer <br></br>más sobre ellos."
+      },
+      "erasmus": {
+        "title": "Proyectos Erasmus+",
+        "overview": "Descripción general",
+        "categories": {
+          "work-experience": {
+            "title": "Prácticas profesionales",
+            "description": "Erasmus+ puede ayudarte a adquirir una valiosa experiencia laboral en el extranjero. Al participar en el programa de prácticas Erasmus+ mejorarás tus habilidades interpersonales y de idiomas extranjeros, y desarrollarás habilidades interculturales que te ayudarán a encontrar un trabajo después de tus estudios.<br></br>Erasmus+ apoya las prácticas laborales o los períodos de estudio en el extranjero para estudiantes actualmente matriculados en educación y formación profesional (FP) y para recién graduados.",
+            "with": "Prácticas <br></br>profesionales <br></br>con <br></br>LEA 4 Int.",
+            "message": "En LEA 4 International ofrecemos una variedad de sectores profesionales en los que podrás realizar tu experiencia de prácticas. Sabemos lo importante que es adquirir experiencia profesional, por eso ofrecemos pasantías de alta calidad adaptadas a cada individuo.<br></br>Contamos con un equipo de expertos que revisarán y estudiarán tu CV y carta de motivación para encontrarte con la empresa adecuada. Recibirás apoyo durante el proceso de entrevista, se te asignará un supervisor para monitorear su desempeño y asegurarse de lograr los mejores resultados. Te proporcionaremos el acuerdo de aprendizaje y toda la ayuda que necesites antes y durante tus prácticas.",
+            "we-offer": {
+              "title": "Descubre los sectores profesionales que ofrecemos",
+              "IT": {
+                "title": "Profesiones IT y multimedia",
+                "description": "IT: la tecnología de la información (TI) es el uso de computadoras, almacenamiento, redes y otros dispositivos, infraestructuras y procesos físicos para crear, procesar, almacenar, proteger e intercambiar todas las formas de datos electrónicos.<br></br>Multimedia es un campo en crecimiento que forma parte del sector tecnológico e incluye oportunidades profesionales como diseño gráfico, marketing, desarrollo de productos, diseñador multimedia, etc."
+              },
+              "business": {
+                "title": "Administración de Empresas",
+                "description": "La administración de empresas es un campo amplio que incluye muchos roles, entornos profesionales y oportunidades de crecimiento diferentes. En términos simples, la administración de empresas es el trabajo de gestionar los recursos, el tiempo y las personas de una organización. Este sector profesional incluye salidas profesionales como trabajar en el departamento comercial, financiero o administrativo."
+              },
+              "tourism": {
+                "title": "Turismo e industria hotelera",
+                "description": "La industria del turismo y la hostelería es una industria amplia que incluye muchos sectores, incluidos hoteles, restaurantes, agencias de viajes, parques temáticos, museos, etc. El turismo y la hostelería son industrias gratificantes con crecientes oportunidades laborales. Una pasantía en este campo permitirá al aprendiz mejorar el servicio al cliente y sus habilidades de comunicación, practicar un idioma extranjero y aprender nuevas técnicas."
+              },
+              "beauty": {
+                "title": "Profesiones de belleza",
+                "description": "Este sector incluye diversas profesiones relacionadas con la estética, peluquería, cosmética y uñas. Oportunidades profesionales en este sector abarcan trabajos en salones de belleza, peluquerías, salones de uñas, centros de spa, tiendas de cosméticos, entre otros. Realizar una pasantía en este campo permitirá al aprendiz descubrir nuevas técnicas en un idioma extranjero."
+              }
+            },
+            "know-more": "¿Quieres saber más?"
+          },
+          "job-shadowing": {
+            "title": "Observación de profesionales",
+            "description": "El programa de observación de profesionales ofrece a los participantes la<br></br>oportunidad de pasar un período de tiempo en una organización anfitriona en otro país.<br></br>El objetivo de este programa es aprender nuevas prácticas y recopilar nuevas ideas a<br></br>través de la observación e interacción con profesores, expertos u otros profesionales en<br></br>su trabajo diario en la organización anfitriona. Los participantes elegibles incluyen a<br></br>docentes, formadores y todos los demás expertos y personal no docente en educación<br></br>para adultos. El personal no docente elegible incluye al personal que trabaja en<br></br>educación para adultos, ya sea en proveedores de educación para adultos u otras<br></br>organizaciones activas en educación para adultos. Los participantes adquieren nuevas<br></br>técnicas de enseñanza y descubren recursos que pueden aplicar a sus metodologías<br></br>de enseñanza.",
+            "with": "Observación <br></br>profesionales <br></br>con <br></br>LEA 4 Int.",
+            "message": "En LEA 4 International colaboramos con un gran número de escuelas anfitrionas que han sido cuidadosamente seleccionadas. Estas escuelas abarcan desde educación primaria, secundaria y bachillerato hasta escuelas de formación profesional y régimen especial, así como escuelas con necesidades especiales.Hay diferentes temas para elegir para el seguimiento laboral, que incluyen, entre otros, inclusión, diversidad, digitalización en las escuelas, enseñanza de la sostenibilidad y promoción de STEM. Al final del programa de seguimiento laboral, los participantes quedan expuestos a varias prácticas docentes centradas en los temas elegidos. También proporcionamos a las organizaciones de envío el acuerdo de aprendizaje necesario."
+          },
+          "school-exchange": {
+            "title": "Intercambio escolar",
+            "description": "El intercambio escolar permite a un grupo de alumnos de diferentes países pasar<br></br>tiempo aprendiendo junto con sus compañeros en otro país. Maestros u otras personas<br></br>autorizadas de la escuela de origen acompañarán al grupo durante toda la duración de<br></br>la actividad. La movilidad del grupo de alumnos de la escuela puede durar hasta un mes,<br></br>excluyendo el tiempo de viaje. Colaboramos con un gran número de escuelas anfitrionas cuidadosamente<br></br>seleccionadas para el intercambio escolar, que incluyen escuelas de educación<br></br>primaria, secundarias y bachillerato. El programa de intercambio escolar brinda a los<br></br>estudiantes extranjeros una excelente oportunidad para participar en una amplia<br></br>variedad de actividades, como presentaciones de países, talleres culturales o sesiones<br></br>de idiomas con estudiantes locales. Además, brindamos apoyo logístico y local durante<br></br>todo el programa de intercambio escolar.",
+            "with": "Intercambio escolar <br></br>con <br></br>LEA 4 Int.",
+            "message": "En LEA 4 International colaboramos con un gran número de escuelas anfitrionas para intercambio escolar que han sido cuidadosamente seleccionadas, estas escuelas incluyen escuelas primarias, secundarias y preparatorias. El intercambio escolar es una gran oportunidad para que los estudiantes extranjeros realicen una amplia gama de actividades que incluyen presentaciones de países, talleres culturales o sesiones de idiomas con estudiantes locales.<br></br>En LEA 4 International también brindamos apoyo logístico y local a través del programa de intercambio escolar."
+          },
+          "erasmus-mundus": {
+            "title": "Erasmus Mundus",
+            "description": "Esta acción tiene como objetivo fomentar la excelencia y la internacionalización mundial de las instituciones de educación superior a través de programas de estudio (a nivel de maestría) impartidos y reconocidos conjuntamente por instituciones de educación superior (IES) establecidas en Europa y abiertos a instituciones de otros países del mundo.",
+            "with": "Erasmus <br></br>Mundus <br></br>con <br></br>LEA 4 Int.",
+            "message": "Entendemos los desafíos que enfrentan los estudiantes internacionales al buscar un nuevo hogar en el extranjero. En LEA 4 International, ayudamos a los estudiantes a encontrar alojamiento que cumpla con sus expectativas y se ajuste a su presupuesto.<br></br>Brindamos asistencia con preguntas y ofrecemos asesoramiento general. Además, organizamos seminarios de Orientación Previa a la Partida para proporcionar apoyo e información útil a los estudiantes internacionales."
+          },
+          "KA-2": {
+            "title": "KA2 - Buscamos socios colaboradores",
+            "description": "Los proyectos de acción KA2 son una combinación de proyectos descentralizados dirigidos por las Agencias Nacionales y actividades centralizadas gestionadas por la Agencia Ejecutiva de la Comisión Europea.<br></br>La Acción Clave 2 (KA2) es un componente del programa Erasmus+, que es una iniciativa de la Unión Europea destinada a promover la educación, la formación, la juventud y el deporte en los países europeos. KA2 se enfoca específicamente en \"Cooperación para la Innovación y el Intercambio de Buenas Prácticas\".<br></br>Dentro del marco de Erasmus+, KA2 apoya asociaciones estratégicas entre organizaciones de diferentes países participantes. Estas asociaciones tienen como objetivo fomentar la innovación, compartir buenas prácticas y mejorar la calidad y relevancia de la educación, la formación y el trabajo juvenil.<br></br>Las características clave de los proyectos KA2 incluyen la colaboración entre organizaciones, el desarrollo de resultados o prácticas innovadoras y el potencial para impactos a largo plazo en las instituciones participantes y sus partes interesadas. Los proyectos pueden cubrir diversos campos, incluyendo la educación, la formación profesional, la educación de adultos y el trabajo juvenil.<br></br>Se espera que los proyectos KA2 aborden las necesidades y desafíos de las organizaciones participantes y contribuyan a los objetivos generales de Erasmus+, como promover la movilidad, mejorar las habilidades y la empleabilidad, y fomentar la cooperación y los valores europeos.",
+            "priority-topics": {
+              "title": "Temas prioritarios",
+              "description": "<li>Educación y entrenamiento</li><li>Empleo</li><li>Investigación, Desarrollo Tecnológico e Innovación</li><li>Deportes</li><li>Juventud</li>"
+            },
+            "eligible": {
+              "title": "Quién es puede aplicar?",
+              "description": "<li>Instituciones educacionales</li><li>Autoridades locales</li><li>Organizaciones sin ánimo de lucro</li><li>Pequeñas y medianas empresas (PYMES)</li><li>Empresas de propiedad estatal</li>"
+            }
+          }
+        }
+      },
+      "language-courses": {
+        "title": "Cursos de idiomas y formaciones",
+        "sub-title": "Cursos de idiomas",
+        "description": "En LEA 4 International, puedes aprender inglés o español con nuestros profesores nativos calificados. Clases atractivas y dinámicas te harán sentir cómodo desde el principio. Aprende y mejora tus habilidades lingüísticas mientras te diviertes.",
+        "overview": "Descripción general",
+        "categories": {
+          "english-courses": {
+            "title": "Curso de inglés conversacional",
+            "description": "¿Has pasado años aprendiendo inglés en la escuela pero aún te falta fluidez y confianza para hablar inglés? <br></br><br></br> Entonces este es el curso adecuado para ti.",
+            "we-offer": {
+              "focus": {
+                "title": "Durante este curso nuestros profesores de inglés se centrarán en:",
+                "description": "<li>Identificar tus dificultades al hablar y los desafíos de pronunciación.</li><li>Eliminar cualquier error gramatical o de pronunciación.</li><li>Proporcionar temas para practicar conversación.</li><li>Expandir tu vocabulario.</li>"
+              },
+              "help": {
+                "title": "Este curso te ayudará a:",
+                "description": "<li>Mejorar tu fluidez al hablar inglés.</li><li>Aumentar tu confianza al hablar inglés.</li><li>Mejorar tu pronunciación y acento.</li><li>Amplíar tu vocabulario en inglés.</li>"
+              },
+              "details": {
+                "title": "Detalles:",
+                "description": "<li>Horario flexible: cursos de mañana, tarde y fin de semana.</li><li>Tamaño del grupo: máximo 10 estudiantes por clase</li><li>Duración: de 1 a 20 semanas.</li><li>Precio: ¡Si quieres conocer nuestros precios, <contact>¡contáctanos!</contact></li>"
+              }
+            }
+          },
+          "business-english-courses": {
+            "title": "Curso de inglés de negocios",
+            "description": "¿Sientes que te falta confianza y vocabulario cuando tienes que hablar inglés en tu lugar de trabajo?<br></br><br></br>Entonces este es el curso adecuado para ti.",
+            "we-offer": {
+              "focus": {
+                "title": "Durante este curso nuestros profesores de inglés <br>Se centrarán en:</br>",
+                "description": "<li>Eliminar cualquier error gramatical o de pronunciación.</li><li>Mejorar la fluidez con escenarios de la vida real en el lugar de trabajo.</li><li>Ampliar vocabulario empresarial.</li><li>Redacción de diferentes tipos de documentos empresariales.</li>"
+              },
+              "help": {
+                "title": "Este curso te ayudará a:",
+                "description": "<li>Mejorar tu fluidez al hablar inglés.</li><li>Aumentar tu confianza al hablar español.</li><li>Mejorar tu pronunciación y acento.</li><li>Ampliar tu vocabulario en inglés.</li>"
+              },
+              "details": {
+                "title": "Detalles:",
+                "description": "<li>Horario flexible: cursos de mañana, tarde y fin de semana.</li><li>Tamaño del grupo: máximo 10 estudiantes por clase.</li><li>Duración: de 1 a 20 semanas.</li><li>Precio: Si quieres conocer nuestros precios, <contact>¡contáctanos!</contact></li>"
+              }
+            }
+          },
+          "spanish-courses": {
+            "title": "Curso de español conversacional",
+            "description": "¿Has pasado años aprendiendo español en la escuela pero aún te falta fluidez y confianza para hablar español?<br></br><br></br>Entonces este es el curso adecuado para ti.",
+            "we-offer": {
+              "focus": {
+                "title": "Durante este curso nuestros profesores de español <br></br>Se centrarán en:",
+                "description": "<li>Identificar tus dificultades habladas y desafíos de pronunciación.</li><li>Eliminar cualquier error gramatical o de pronunciación.</li><li>Proporcionar temas para practicar conversación.</li><li>Expandir tu vocabulario.</li>"
+              },
+              "help": {
+                "title": "Este curso te ayudará a:",
+                "description": "<li>Mejorar tu fluidez al hablar español</li><li>Aumentar tu confianza al hablar español.</li><li>Mejorar tu pronunciación y acento.</li><li>Amplíar tu vocabulario en español.</li>"
+              },
+              "details": {
+                "title": "Detalles:",
+                "description": "<li>Horario flexible: cursos de mañana, tarde y fin de semana.</li><li>Tamaño del grupo: máximo 10 estudiantes por clase.</li><li>Duración: de 1 a 20 semanas.</li><li>Precio: ¡Si quieres conocer nuestros precios, <contact>¡contáctanos!</contact></li>"
+              }
+            }
+          },
+          "business-spanish-courses": {
+            "title": "Curso de español de negocios",
+            "description": "¿Sientes que te falta confianza y vocabulario cuando tienes que hablar español en tu lugar de trabajo?<br></br><br></br>Entonces este es el curso adecuado para ti.",
+            "we-offer": {
+              "focus": {
+                "title": "Durante este curso nuestros profesores de español <br></br>Se centrarán en:",
+                "description": "<li>Eliminar cualquier error gramatical o de pronunciación.</li><li>Mejorar la fluidez con escenarios de la vida real en el lugar de trabajo.</li><li>Ampliar vocabulario empresarial.</li><li>Redacción de diferentes tipos de documentos empresariales.</li>"
+              },
+              "help": {
+                "title": "Este curso te ayudará a:",
+                "description": "<li>Mejorar tu fluidez al hablar español</li><li>Aumentar tu confianza al hablar español.</li><li>Mejorar tu pronunciación y acento.</li><li>Ampliar tu vocabulario en español.</li>"
+              },
+              "details": {
+                "title": "Detalles:",
+                "description": "<li>Horario flexible: cursos de mañana, tarde y fin de semana.</li><li>Tamaño del grupo: máximo 10 estudiantes por clase</li><li>Duración: de 1 a 20 semanas.</li><li>Precio: Si quieres conocer nuestros precios, <contact>¡contáctanos!</contact></li>"
+              }
+            }
+          },
+          "ai-trainings": {
+            "title": "Formaciones",
+            "description": "La Inteligencia Artificial (IA) se define como la inteligencia exhibida por máquinas o software. Es un campo de estudio dentro de la informática que se centra en el desarrollo y estudio de máquinas inteligentes. La IA está transformando prácticamente todas las industrias y está lista para tener un impacto significativo en el mercado laboral y en la sociedad en los próximos años. En LEA 4 International, nuestro objetivo es ayudar a individuos y empresas a mejorar su comprensión y conocimiento de la IA. Ofrecemos capacitación en las siguientes áreas:"
+          },
+          "machine-learning": {
+            "title": "Machine Learning",
+            "description": "El aprendizaje automático es un subconjunto de la Inteligencia Artificial (IA) que se enfoca en el desarrollo de sistemas y algoritmos que permiten a las computadoras aprender y mejorar a partir de la experiencia. En lugar de programarse explícitamente para una tarea, estos sistemas utilizan técnicas estadísticas para analizar datos, identificar patrones y tomar decisiones con intervención humana mínima.<br></br>Ampliamente utilizado en aplicaciones como reconocimiento de imágenes y voz, sistemas de recomendación y vehículos autónomos, el aprendizaje automático es una parte crucial de la tecnología moderna, contribuyendo a avances en diversos campos."
+          },
+          "data-mining": {
+            "title": "Data Mining",
+            "description": "La minería de datos es el proceso de descubrir patrones, tendencias e información valiosa a partir de grandes conjuntos de datos. Implica analizar e interpretar grandes cantidades de datos para descubrir patrones y relaciones ocultos que pueden ser útiles para tomar decisiones comerciales informadas, predicciones y otras aplicaciones.<br></br><br></br>La minería de datos se aplica en diversas industrias, como finanzas, atención médica, marketing y comercio minorista, para extraer información significativa de vastos conjuntos de datos. Desempeña un papel crucial en los procesos de toma de decisiones y el desarrollo de estrategias comerciales. Las técnicas dentro de la minería de datos incluyen clasificación, agrupación, análisis de regresión, minería de reglas de asociación y más."
+          },
+          "business-ia": {
+            "title": "IA para Empresas",
+            "description": "La Inteligencia Artificial (IA) se ha convertido en una fuerza transformadora en el panorama empresarial, ofreciendo soluciones innovadoras y oportunidades para la eficiencia, la automatización y la toma de decisiones.<br></br>A continuación se detallan aspectos clave de cómo se utiliza la IA en los negocios:",
+            "sub-description": "Las empresas adoptan la IA para la eficiencia, la innovación y para mantenerse competitivas en la era digital. La exitosa integración de la IA en los negocios requiere una planificación cuidadosa, consideraciones éticas y monitoreo continuo. A medida que avanza la tecnología, las empresas aprovechan cada vez más la IA para obtener una ventaja competitiva y adaptarse al cambiante panorama digital.<br></br>Para más información <contact>contáctanos</contact>",
+            "we-offer": {
+              "automation": "<b>Automatización:</b> Agiliza las tareas, reduce costes y aumenta la productividad.",
+              "data-analysis": "<b>Análisis de datos:</b> extrae información para tomar decisiones informadas.",
+              "customer-service": "<b>Servicio al cliente:</b> mejora el soporte a través de chatbots con tecnología de inteligencia artificial.",
+              "predictive-analytics": "<b>Análisis predictivo:</b> Pronostica tendencias y comportamientos de los clientes.",
+              "personalization": "<b>Personalización:</b> experiencias personalizadas para los clientes.",
+              "supply-chain": "<b>Cadena de suministro:</b> Optimiza procesos, predice la demanda y gestiona el inventario.",
+              "fraud-detection": "<b>Detección de fraude:</b> Fortalece la ciberseguridad mediante la detección de anomalías.",
+              "human-resources": "<b>Recursos Humanos:</b> Mejora la contratación y la gestión del talento.",
+              "decision-support": "<b>Soporte de decisiones:</b> proporciona información para la planificación estratégica.",
+              "nlp": "<b>PNL:</b> Permite que las máquinas comprendan el lenguaje humano."
+            }
+          },
+          "business-development": {
+            "title": "Desarollo Empresarial",
+            "description": "El enfoque principal de nuestra formación en desarrollo empresarial es ayudar a las empresas a alcanzar un mayor éxito comercial mediante sesiones de formación en desarrollo empresarial. El modelo típico para esta asistencia es una sesión mensual o trimestral que se centra en un área específica de la formación en desarrollo empresarial. Una sesión estándar tiene una duración de tres horas, y el tamaño del grupo de asistentes suele ser de 10 a 20 personas (también es posible trabajar con grupos más grandes o más pequeños).<br></br>Para más información <contact>contáctanos</contact>"
+          }
+        }
+      },
+      "student-exchange": {
+        "title": "Programas de inmersión lingüística",
+        "overview": "Descripción general",
+        "categories": {
+          "immersion-program": {
+            "title": "Programa de inmersión lingüística",
+            "description": "Un programa de inmersión lingüística es una excelente oportunidad para explorar una<br></br>cultura diferente y practicar un nuevo idioma con hablantes nativos. Durante el<br></br>programa, los participantes vivirán inmersos en una nueva cultura, conviviendo con<br></br>una familia anfitriona que les enseñará más sobre su país y sus tradiciones.",
+            "includes": "El programa de immersión lingüística con LEA 4 International incluye:"
+          },
+          "exchange-program": {
+            "title": "Programa de intercambio de estudiantes",
+            "description": "Un programa de intercambio de estudiantes es una gran oportunidad para estudiar en el extranjero, descubrir una nueva cultura y practicar un nuevo idioma. Participar en un programa de intercambio de estudiantes es un paso importante en tu educación que puede cambiar tu vida. Esta experiencia te hará crecer y te ayudará a adquirir habilidades que utilizarás más adelante en la vida.",
+            "includes": "Programa de Intercambio de Estudiantes en LEA 4 International Incluye:"
+          }
+        },
+        "services": {
+          "round-trip": "Encuentro y bienvenida a la llegada",
+          "airport": "Traslado al aeropuerto de ida y vuelta",
+          "local-transport": "Transporte local",
+          "accommodation": "Alojamiento y Pensión Completa",
+          "cultural": "Apoyo lingüístico."
+        }
+      },
+      "concierge": {
+        "title": "Servicios de apoyo a estudiantes",
+        "description": "Estudiar en el extranjero es una experiencia emocionante, pero puede ser un viaje preocupante para muchos estudiantes internacionales. Los participantes, así como sus familias, a menudo están preocupados y un poco estresados por la incertidumbre de la nueva experiencia en el extranjero. Nuestro compromiso es ayudar a los estudiantes y sus familias a familiarizarse con el nuevo país y sus costumbres. Ofrecemos soporte de emergencia las 24 horas, los 7 días de la semana, a nuestros estudiantes.",
+        "includes": "Nuestros servicios incluyen:",
+        "services": {
+          "meeting-greeting": "Encuentro y saludo a la llegada.",
+          "airport-transfer": "Transferencia de aeropuerto",
+          "local-transport": "Boletos de transporte local",
+          "immigration-services": "Servicios de inmigración",
+          "city-tour": "Tours y guías locales de la ciudad.",
+          "emergency-support": "Soporte de emergencia 24 horas al día, 7 días a la semana",
+          "language-support": "Ayuda de idioma"
+        }
+      }
+    }
+  },
+  "about-us-page": {
+    "title": "Sobre nosotros",
+    "role": {
+      "director": "Director",
+      "partner": "Partner"
+    },
+    "description": "Mi nombre es Lucía Soto, fundadora y Directora General de LEA 4 International. Fundé esta empresa inspirada por las numerosas experiencias que viví en el extranjero y cómo enriquecieron mi vida. Mi primera experiencia internacional fue bajo el programa Erasmus. Durante mis estudios universitarios, tuve la oportunidad de ser estudiante Erasmus durante un año en la Facultad de Derecho de la Universidad La Sapienza de Roma. Fue una experiencia maravillosa que me enseñó que la esencia del programa Erasmus va más allá de estudiar en un país diferente y aprender un nuevo idioma. También se trata de los vínculos que creas con las personas cuando estás fuera de tu zona de confort, la tolerancia que desarrollas hacia personas de otras culturas y la apertura a nuevos desafíos que adquieres.<br></br>Erasmus fue solo el comienzo para mí; ahora puedo decir que he vivido en varios países y que he conocido gente de todo el mundo. Mi experiencia profesional previa trabajando como coordinadora de proyectos Erasmus+ me ha proporcionado las herramientas de aprendizaje necesarias para la implementación exitosa de este tipo de proyectos.<br></br>El objetivo principal de mi empresa es promover la importancia de la educación a nivel mundial, alentar a las personas, especialmente a los estudiantes jóvenes, a salir de su zona de confort y explorar lo que hay afuera, y ayudarlos a tener experiencias de vida memorables en el extranjero y, al mismo tiempo, contribuir a mejorar la educación y la comprensión entre culturas.",
+    "quote": "No se puede encontrar pasión jugando en pequeño - <br></br> <b>Conformarse con una vida que es menos <br></br> de la que eres capaz de vivir</b>",
+    "values": {
+      "title": "Nuestros valores",
+      "inclusion": "Inclusión",
+      "diversity": "Diversidad",
+      "respect": "Respeto",
+      "quality": "Calidad",
+      "honesty": "Honestidad",
+      "innovation": "Innovación",
+      "sustainability": "Sostenibilidad",
+      "collaboration": "Colaboración"
+    }
+  },
+  "destinations-page": {
+    "title": "Destinos populares",
+    "message": "Selecciona y descubre nuestros destinos populares para saber más sobre ellos.",
+    "contact-us": "Contáctanos",
+    "see-more": "Ver más",
+    "back-to-destinations": "Volver a destinos populares",
+    "inspired": {
+      "title": "¿Te sientes inspirado?",
+      "description": "Descubre infinitas posibilidades: <br></br><br></br> Tu puerta de entrada a experiencias y conexiones inolvidables",
+      "join": "Quiero unirme",
+      "accommodations": "Alojamientos"
+    },
+    "destinations": {
+      "prague": {
+        "title": "Praga",
+        "country": "República Checa",
+        "destinations": "Destinos",
+        "choose": "¿Por qué elegir Praga?",
+        "reason": "Hay numerosas razones para elegir la capital de la República Checa para tu experiencia internacional. Algunas de estas incluyen viviendas asequibles, un sistema de transporte público confiable y económico, y una ciudad llena de expatriados y estudiantes internacionales, ofreciendo oportunidades para conectar con personas de diferentes países. Praga es la ciudad perfecta para mejorar tu inglés y también brinda la oportunidad de hablar otros idiomas europeos, gracias al significativo número de expatriados que viven aquí.<br></br>Ubicada en Europa Central, Praga sirve como una ubicación estratégica para explorar países y ciudades cercanas, facilitando los viajes y la exploración. La ciudad es conocida por su seguridad, proporcionando un entorno seguro para que los estudiantes se centren en sus estudios y disfruten de su tiempo en el extranjero. Con su ambiente internacional, Praga se ha convertido en un centro de interacciones globales, lo que la convierte en una excelente opción para una experiencia internacional.",
+        "know": "Conoce Praga"
+      },
+      "madrid": {
+        "title": "Madrid",
+        "country": "España",
+        "destinations": "Destinos",
+        "choose": "Por que escoger Madrid?",
+        "reason": "Hay numerosas razones para elegir la capital de España para tu experiencia internacional. Algunos de estos factores incluyen opciones de vivienda asequibles, un extenso y confiable sistema de transporte público, la oportunidad de vivir en una ciudad multicultural y vibrante con muchas actividades, una animada vida nocturna que ofrece diversas opciones, un clima agradable y una deliciosa gastronomía. La ubicación céntrica de Madrid en España brinda la oportunidad de viajar fácilmente por el país. La ciudad también alberga algunas de las mejores universidades de España, mejorando aún más la experiencia en general. Es la ciudad perfecta para mejorar tus habilidades en español, y el significativo número de expatriados que viven aquí ofrece una excelente oportunidad para hablar otros idiomas europeos también.",
+        "know": "Conoce Madrid"
+      },
+      "malaga": {
+        "title": "Málaga",
+        "country": "España",
+        "destinations": "Destinos",
+        "choose": "¿Por que escoger Málaga?",
+        "reason": "Hay diversas razones para elegir Málaga para tu experiencia internacional. Algunas de ellas incluyen viviendas asequibles, transporte público económico, exquisita gastronomía y un clima agradable durante la mayor parte del año. Junto con el carácter abierto y alegre de los lugareños, esto crea una ciudad con una atmósfera vibrante. Málaga es reconocida por la cálida hospitalidad de su gente, lo que hace que los estudiantes se sientan bienvenidos y como en casa. Es un destino ideal para mejorar tus habilidades en español y practicar otros idiomas europeos. Las calles siempre están llenas de gente, contribuyendo al ambiente animado. Málaga cuenta con una vida nocturna vibrante y un rico trasfondo histórico.",
+        "know": "Conoce Málaga"
+      },
+      "krakow": {
+        "title": "Cracovia",
+        "country": "Polonia",
+        "destinations": "Destinos",
+        "choose": "¿Por que escoger Cracovia?",
+        "reason": "Existen varias razones para elegir Cracovia como tu experiencia internacional. Conocida por su asequibilidad y seguridad, la ciudad presume de una rica historia destacada por su prestigiosa universidad y arquitectura cautivadora. En reconocimiento de su importancia histórica, la UNESCO designó el casco antiguo de Cracovia como Patrimonio de la Humanidad en 1978. Situada en Europa Central, Cracovia sirve como una ubicación estratégica para explorar países y ciudades cercanas, facilitando los viajes y la exploración. El compromiso de la ciudad con la seguridad proporciona un entorno seguro, permitiendo a los estudiantes centrarse en sus estudios y disfrutar plenamente de su tiempo en el extranjero. Además, Cracovia es un centro para estudiantes internacionales, ofreciendo una experiencia multicultural. La presencia de estudiantes de diversos orígenes enriquece el paisaje cultural de la ciudad, brindándote amplias oportunidades para interacciones y experiencias diversas.",
+        "know": "Conoce Cracovia"
+      },
+      "dublin": {
+        "title": "Dublin",
+        "country": "Irlanda",
+        "destinations": "Destinos",
+        "choose": "¿Por que escoger Dublin?",
+        "reason": "Descubre diversas razones para elegir la capital de Irlanda para tu experiencia internacional. Dublín, una ciudad acogedora y vibrante, repleta de museos, galerías, bares y restaurantes. Renombrada por su ambiente amigable, Dublín garantiza que los estudiantes internacionales se sientan como en casa desde el momento en que llegan.<br></br>La ciudad alberga universidades de prestigio e instituciones educativas que ofrecen programas académicos de alta calidad en un entorno propicio para el aprendizaje. Dublín proporciona un entorno ideal para mejorar tus habilidades inglés, aprovechando su entorno de habla inglesa nativa y diversos acentos.<br></br>A pesar de su bullicioso carácter, Dublín está cerca de paisajes naturales, incluyendo zonas costeras y pintorescos campos, ofreciendo una armoniosa mezcla de experiencias urbanas y naturales. Notablemente, Dublín ostenta el distinguido título de ser una de las seis Ciudades de la Literatura de la UNESCO.",
+        "know": "Conoce Dublin"
+      },
+      "ghent": {
+        "title": "Gante",
+        "country": "Bélgica",
+        "destinations": "Destinos",
+        "choose": "¿Por que escoger Gante?",
+        "reason": "Descubre diversas razones para elegir Gante para una experiencia internacional inmersiva, donde su ambiente multicultural y vibrante comunidad estudiantil internacional se cruzan con el prestigio de albergar una de las mejores universidades de Europa. Gante destaca por su asequibilidad, un transporte público eficiente y un entorno propicio para la bicicleta, creando una ciudad accesible e inclusiva.<br></br>Aprovecha la diversidad lingüística con las tres lenguas oficiales de Bélgica: neerlandés, francés y alemán, ofreciendo una oportunidad única para perfeccionar las habilidades lingüísticas. Situada en el centro de Europa, Gante sirve como puerta de entrada para la exploración, fomentando el intercambio cultural y facilitando los viajes a ciudades vecinas. Su constante alta clasificación en términos de calidad de vida asegura un entorno cómodo y seguro para que los estudiantes prosperen. Reconocida por su infraestructura amigable con las bicicletas, Gante promueve el transporte sostenible, permitiendo a los estudiantes explorar la ciudad de manera conveniente. Como una de las ciudades históricas de Bélgica, Gante cuenta con numerosos hitos culturales, fusionando sin problemas el encanto histórico con la excelencia académica.",
+        "know": "Conoce Gante"
+      }
+    },
+    "services": {
+      "title": "Servicios disponibles en {city}",
+      "see-more": "Saber más sobre este servicio",
+      "work-experience": "Prácticas profesionales",
+      "job-shadowing": "Observación de profesionales",
+      "language-courses": "Cursos de Idiomas y formaciones",
+      "student-exchange": "Programas de inmersión lingüística",
+      "concierge": "Servicios de apoyo a estudiantes"
+    }
+  },
+  "accommodations-page": {
+    "title": "Alojamientos",
+    "description": "¿Cuál es la mejor opción de alojamiento para mi experiencia en el extranjero? Elegir el tipo de alojamiento para tu experiencia en el extranjero puede ser una decisión desafiante, aquí te brindamos información útil y consejos para ayudarte a elegir el alojamiento adecuado para ti.",
+    "contact-us": "Contáctanos",
+    "accommodations": {
+      "apartment": {
+        "title": "Apartamento",
+        "description": "Elegir un apartamento suele ser una de las mejores opciones para una experiencia a largo plazo en el extranjero. Tendrás un lugar al que llamar hogar en un apartamento totalmente equipado, al mismo tiempo que tendrás la oportunidad de convivir con estudiantes de otras nacionalidades y aprender sobre sus culturas. Optar por tener tu propio espacio y, al mismo tiempo, compartir tiempo y espacio con tus compañeros de piso en las áreas comunes es una gran elección."
+      },
+      "student-residence": {
+        "title": "Residencia de Estudiantes",
+        "description": "Elegir una residencia de estudiantes es adecuado tanto para experiencias cortas como largas en el extranjero. Algunos estudiantes prefieren esta opción solo para estancias cortas, ya que después de un tiempo pueden sentir que pierden la libertad de vivir en un apartamento. Uno de los beneficios de residir en una es que podrás conocer a estudiantes de diferentes países, disfrutarás de una recepción abierta las 24 horas y de comodidades comunes que te brindarán un sentido de comunidad. Algunos campus incluso cuentan con instalaciones deportivas convenientes para algunos estudiantes."
+      },
+      "host-family": {
+        "title": "Familia anfitriona",
+        "description": "Vivir con una familia anfitriona es una oportunidad única para sumergirse en la cultura local. Puedes experimentar un ambiente acogedor y de apoyo, creando un sentido de familia. Tus anfitriones estarán allí para ayudarte en momentos difíciles o cuando sientas nostalgia, y podrías formar un vínculo especial que dure toda la vida. Aunque tendrás tu propio espacio si eliges una habitación privada, las familias anfitrionas son una excelente opción para experiencias cortas y largas en el extranjero."
+      },
+      "hotel": {
+        "title": "Hotel",
+        "description": "Alojarse en un hotel es ideal para experiencias cortas en el extranjero. Disfrutarás de servicios de limpieza diaria, recepción las 24 horas y la opción de servicio de cocina. Aunque es más costoso, es una excelente elección para estancias breves."
+      },
+      "hostel": {
+        "title": "Hostal",
+        "description": "Optar por un albergue es una excelente opción para experiencias cortas en el extranjero. Es más económico que un hotel y aún ofrece servicios de recepción las 24 horas, así como acceso a todas las comodidades esenciales. Es ideal para conocer gente nueva y disfrutar de un ambiente social."
+      },
+      "airbnb": {
+        "title": "Airbnb",
+        "description": "Elegir un Airbnb es una excelente opción tanto para experiencias cortas como largas en el extranjero. Generalmente más económico que un hotel, tiene la ventaja de contar con una cocina equipada para cocinar tus propias comidas y lavar la ropa. Sin embargo, es importante tener en cuenta que carece de una recepción abierta las 24 horas."
+      }
+    }
+  },
+  "faq-page": {
+    "title": "Preguntas frecuentes",
+    "categories": {
+      "erasmus": "Programas Erasmus+",
+      "language-courses": "Cursos de idiomas y formaciónes",
+      "language-immersion": "Programas de immersión lingüística",
+      "concierge": "Servicios de apoyo"
+    }
+  },
+  "contact-page": {
+    "title": "Contacto",
+    "message": "La forma más sencilla de comenzar es iniciando contacto.",
+    "who-are-you": "¿Quién eres?",
+    "roles": {
+      "individual": "Individual",
+      "host-family": "Familia anfitriona",
+      "institutions": "Escuela o Institución",
+      "partner": "Conviértete en socio colaborador"
+    }
+  },
+  "privacy-policy-page": {
+    "title": "Politica de privacidad Y Protección de datos",
+    "content": "<b>AVISO LEGAL & POLÍTICA DE PRIVACIDAD Y PROTECCIÓN DE DATOS</b> <br></br><br></br>En cumplimiento del Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos, y de la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales, los usuarios expresan su consentimiento para que LEA 4 International utilice sus datos personales con fines informativos relacionados con su blog personal. Los usuarios interesados pueden ejercer libremente sus derechos de acceso, rectificación, supresión, limitación del tratamiento, portabilidad de datos, oposición y el derecho a no ser objeto de decisiones automatizadas con respecto a datos personales, incluida la creación de perfiles, cuando corresponda, escribiendo al responsable y/o a LEA 4 International a <email>info@lea4int.com</email>.<br></br><br></br><b>1. Deber de Información</b><br></br>En cumplimiento del deber de información establecido en la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos y garantía de los derechos digitales, se proporciona la siguiente información: LEA 4 International (en adelante, \"el Propietario\") es el titular del sitio web <link>www.lea4int.com</link>.<br></br><br></br><b>2. Derechos de Autor</b><br></br>El usuario del sitio web reconoce y acepta que todo el contenido integrado en él está protegido por derechos de autor, propiedad intelectual y leyes industriales. La propiedad de estos contenidos corresponde exclusivamente al Propietario. El usuario declara y garantiza que sabe que no está autorizado para reproducir, comunicar, distribuir o transformar el contenido incluido en el sitio web sin el consentimiento previo del Propietario. En caso de incumplimiento de esta obligación, las consecuencias recaerán únicamente sobre el usuario infractor.<br></br><br></br><b>3. Restricciones de Uso</b><br></br>No se permite al usuario utilizar los servicios ofrecidos por el Propietario para actividades contrarias a la ley, la moral, el orden público y, en general, debe utilizarlos de acuerdo con las condiciones presentes. El usuario también tiene la obligación de abstenerse de realizar actividades publicitarias o de explotación comercial, enviar cualquier tipo de mensaje utilizando una identidad falsa, así como ocultar de cualquier manera el origen del mensaje o enviar publicidad no solicitada.<br></br><br></br><b>4. Privacidad y Protección de Datos Personales</b><br></br>De acuerdo con la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales, se informa a los usuarios del sitio web que los datos personales recopilados a través de formularios se incluirán en un archivo de datos personales propiedad de LEA 4 International. El propósito de este archivo es llevar a cabo acciones informativas en nombre del sitio web <link>www.lea4int.com</link>. El Propietario garantiza los derechos de acceso, rectificación, cancelación y oposición de los datos proporcionados y, en cuanto al uso de los datos incluidos en ellos, se compromete a respetar su confidencialidad y utilizarlos de acuerdo con su propósito, como se indica en la sección anterior. Para ejercer estos derechos, el interesado debe ponerse en contacto indicando 'Sección de Usuarios', ya sea a través de la página de registro o por correo electrónico a <email>info@lea4int.com</email>. El almacenamiento de los datos proporcionados por los usuarios se realiza de acuerdo con todas las garantías de seguridad requeridas por la legislación vigente.<br></br><br></br><b>5. Uso de Cookies en este Sitio Web</b><br></br>Las cookies son pequeños archivos de texto que se almacenan en los dispositivos de los usuarios y ayudan a rastrear y analizar el comportamiento del usuario. Permiten que un sitio web almacene y recupere información sobre los hábitos de navegación de un usuario o una computadora y, según la información que contienen y cómo es utilizada por el equipo, se pueden utilizar para reconocer al usuario. Las cookies no contienen información personal específica y la mayoría de ellas se borran del disco duro al cerrar el navegador (cookies de sesión). La mayoría de los navegadores aceptan cookies como estándar y, independientemente de ellas, los ajustes de seguridad permiten o bloquean cookies temporales o guardadas. Estas cookies se utilizan para recopilar datos para analizar el tráfico y el comportamiento del usuario en el sitio web con el fin de mejorar el sitio web y la experiencia del usuario. Sin su consentimiento expreso, mediante la activación de las cookies en su navegador, LEA 4 International no vinculará sus datos personales proporcionados en el momento del registro o la compra con las cookies. Los usuarios tienen la opción de optar por no participar en el seguimiento de Google Analytics. Aquí están los pasos generales para optar por no participar en el seguimiento de Google Analytics mediante el complemento del navegador:<br></br><br></br><li>Visite la página del Complemento del Navegador para Optar por no Participar en Google Analytics proporcionada por Google.</li><li>Siga las instrucciones en la página para instalar el complemento del navegador para su navegador específico. Una vez instalado, el complemento evitará que el JavaScript de Google Analytics recopile datos sobre las visitas al sitio web del usuario. Es importante tener en cuenta que optar por no participar mediante este método es específico del navegador y del dispositivo donde se instala el complemento. Si los usuarios acceden al sitio web desde un navegador o dispositivo diferente, deberán instalar el complemento en cada uno para garantizar la continuación de la exclusión. Nuestra política de cookies cumple con la normativa de la LSSI-CE (Ley de Servicios de la Sociedad de la Información y el Comercio Electrónico) así como con las normativas de protección de datos, es decir, el RGPD y la LOPDGDD.</li><br></br><b>6. Modificaciones a las Condiciones Generales de Uso</b><br></br>El Propietario se reserva el derecho de modificar o cancelar estas Condiciones Generales en cualquier momento, comprometiéndose a comunicar las nuevas condiciones o la cancelación definitiva.<br></br><br></br><b>7. Responsabilidad del Usuario</b><br></br>El usuario es responsable de cualquier posible reclamación debida al incumplimiento de cualquiera de las manifestaciones de este documento y se compromete a indemnizar al Propietario por cualquier incumplimiento.<br></br><br></br><b>8. Jurisdicción</b><br></br>En caso de discrepancias entre ambas partes con respecto a la interpretación, el cumplimiento y los efectos de estas Condiciones Generales, y en caso de no llegar a un acuerdo para resolverlas, las partes se someten a la jurisdicción de los tribunales de Valladolid (España), renunciando a cualquier otra jurisdicción que les pueda corresponder.<br></br>El Usuario acepta que acceder o utilizar el sitio web implica su adhesión a las condiciones generales que están presentes cada vez que accede al sitio web y que están disponibles para otros usuarios. En consecuencia, el Usuario debe leer cuidadosamente estas condiciones generales. En este sentido, el Usuario se considera una persona que accede, navega o utiliza los servicios de este sitio web.<br></br><br></br><b>9. Preguntas</b><br></br> Si tienes alguna duda o pregunta sobre el tratamiento de tus datos personales, no dudes en escribirnos a la dirección de correo electrónico <email>info@lea4int.com</email>."
+  },
+  "blog-page": {
+    "title": "Nuestro blog de vídeos",
+    "visit-chanel": "Visita nuestro canal"
+  },
+  "not-found-page": {
+    "back-to-home": "Vuelta a casa"
+  },
+  "top-destinations": {
+    "title": "Nuestros destinos más populares",
+    "see-all": "Ver todos los destinos",
+    "destinations": {
+      "prague": {
+        "title": "Praga",
+        "country": "República Checa"
+      },
+      "madrid": {
+        "title": "Madrid",
+        "country": "España"
+      },
+      "malaga": {
+        "title": "Málaga",
+        "country": "España"
+      },
+      "krakow": {
+        "title": "Cracovia",
+        "country": "Polonia"
+      },
+      "dublin": {
+        "title": "Dublin",
+        "country": "Irlanda"
+      },
+      "ghent": {
+        "title": "Gante",
+        "country": "Bélgica"
+      }
+    }
+  },
+  "contact-us": {
+    "text": "Contáctanos"
+  },
+  "forms": {
+    "input": {
+      "service": {
+        "label": "¿Qué tipo de servicio está interesado?",
+        "placeholder": "Selecciona uno",
+        "options": {
+          "erasmus": "Proyectos Erasmus+",
+          "language-courses": "Cursos de idiomas",
+          "conversational-english-course": "Curso Inglés conversacional",
+          "business-english-course": "Curso Inglés empresarial",
+          "conversational-spanish-course": "Curso Español conversacional",
+          "business-spanish-course": "Curso Español empresarial",
+          "machine-learning": "Machine learning",
+          "data-mining": "Data mining",
+          "business-ai": "IA para empresas",
+          "concierge": "Servicios de apoyo a estudiantes"
+        },
+        "error": "Por favor selecciona un servicio en el que esté interesado"
+      },
+      "name": {
+        "label": "Nombre",
+        "placeholder": "Introduzca su Nombre",
+        "error": "Por favor proporcione un nombre"
+      },
+      "lastname": {
+        "label": "Apellido",
+        "placeholder": "Introduzca su apellido",
+        "error": "Por favor proporcione un apellido"
+      },
+      "email": {
+        "label": "Dirección de correo electrónico",
+        "placeholder": "Introduzca su dirección de correo electrónico",
+        "error": "Por favor proporcione un correo electrónico válido"
+      },
+      "phone": {
+        "label": "Teléfono",
+        "placeholder": "Introduzca su teléfono",
+        "error": "Por favor proporcione un teléfono válido"
+      },
+      "nationality": {
+        "label": "Nacionalidad",
+        "placeholder": "Introduzca su nacionalidad",
+        "error": "Por favor selecciona una nacionalidad"
+      },
+      "message": {
+        "label": "Cuéntanos más, ¿qué te gustaría saber?",
+        "placeholder": "Introduzca su mensaje",
+        "error": "Por favor proporcione un mensaje"
+      },
+      "terms": {
+        "label": "Acepto reconocer que he leído y acepto las <policy>políticas de privacidad</policy> antes de enviar el formulario",
+        "error": "Debe aceptar los <policy>Términos y Condiciones</policy>"
+      },
+      "city": {
+        "label": "Ciudad donde vives",
+        "placeholder": "Introduzca su ciudad",
+        "error": "Por favor proporcione una ciudad"
+      },
+      "zipCode": {
+        "label": "Código postal",
+        "placeholder": "Introduzca su código postal",
+        "error": "Por favor proporcione un código postal"
+      },
+      "hostSize": {
+        "label": "¿Cuántos estudiantes puedes alojar?",
+        "placeholder": "Añadir un número",
+        "error": "Por favor proporcione su capacidad de estudiantes"
+      },
+      "institutionName": {
+        "label": "Nombre de tu escuela/institución",
+        "placeholder": "Introduzca su nombre",
+        "error": "Por favor proporcione un nombre"
+      },
+      "dateRange": {
+        "label": "Fechas previstas",
+        "placeholder": "00/00/0000 - 00/00/0000",
+        "error": "Por favor proporcione un rango válido"
+      },
+      "supervisorNumber": {
+        "label": "Número de supervisores",
+        "placeholder": "Introduzca su numero",
+        "error": "Por favor proporcione la cantidad de supervisores"
+      },
+      "accommodationType": {
+        "label": "Tipo de alojamiento",
+        "placeholder": "Selecciona uno",
+        "error": "Por favor especifique el tipo de alojamiento",
+        "options": {
+          "apartment": "Apartamento",
+          "student-residence": "Residencia de estudiantes",
+          "hotel": "Hotel",
+          "hostel": "Hostal",
+          "host-family": "Familia anfitriona",
+          "airbnb": "Airbnb"
+        }
+      },
+      "roomType": {
+        "label": "Tipo de habitación",
+        "placeholder": "a uno",
+        "error": "Por favor especifique el tipo de habitación",
+        "options": {
+          "single": "Habitación individual",
+          "double": "Habitación doble",
+          "triple": "Habitación triple",
+          "quadruple": "Habitación quadruple"
+        }
+      },
+      "boardType": {
+        "label": "Régimen",
+        "placeholder": "Selecciona uno",
+        "error": "Por favor especifique el régimen",
+        "options": {
+          "self-catering": "Sin servicio de comidas",
+          "Breakfast": "Desayuno incluido",
+          "half-board": "Media pensión",
+          "full-board": "Pensión complete"
+        }
+      },
+      "roundTripIncluded": {
+        "label": "¿Le gustaría incluir un traslado de ida y vuelta al aeropuerto en su cotización?",
+        "placeholder": "Selecciona uno",
+        "error": "Por favor especifica si el transporte está incluido.",
+        "options": {
+          "yes": "Llegada y salida incluidas",
+          "arrival": "Llegada incluida",
+          "departure": "Salida incluida",
+          "no": "No incluido"
+        }
+      },
+      "culturalActivitiesIncluded": {
+        "label": "¿Quieres incluir algún tipo de actividades culturales?",
+        "placeholder": "Selecciona uno",
+        "error": "Por favor especifique si se incluyen actividades culturales.",
+        "options": {
+          "yes": "Sí",
+          "no": "No"
+        }
+      },
+      "applicantName": {
+        "label": "Nombre del solicitante",
+        "placeholder": "Introduzca el nombre del solicitante",
+        "error": "Por favor proporcione un nombre válido"
+      },
+      "projectDescription": {
+        "label": "Descripción del proyecto",
+        "placeholder": "Describa su proyecto",
+        "error": "Por favor propocione una descripción de su proyecto"
+      }
+    },
+    "feedback": {
+      "success": {
+        "title": "Gracias",
+        "description": "¡Gracias por contactarnos! Tu consulta ha sido recibida con éxito.<br></br>Nuestro equipo la revisará y te responderá lo antes posible.",
+        "sub-description": "También puedes escribirnos a <email>info@lea4int.com</email>"
+      },
+      "error": {
+        "title": "Hubo un error",
+        "description": "Disculpe, ocurrió un error. Gracias por tu tiempo. Si quieres puedes contactar con nosotros por email",
+        "sub-description": "<email>info@lea4int.com</email>"
+      },
+      "close": "Cerrar"
+    },
+    "loading": {
+      "title": "Procesando..",
+      "description": "Por favor, espera un momento."
+    },
+    "submit": "Enviar el formulario"
+  },
+  "locale-switcher": {
+    "en": "Inglés",
+    "es": "Español"
+  },
+  "commitments-carousel": {
+    "standards": {
+      "title": "Los más altos estándares de calidad",
+      "description": "<b>Trabajamos duro para brindar la más alta calidad</b> en cada proyecto que entregamos. Creemos firmemente que brindar servicios de alta calidad conducirá a la satisfacción del cliente."
+    },
+    "team": {
+      "title": "Equipo dedicado",
+      "description": "Nuestro equipo siempre se asegurará de <b>comprender completamente tus necesidades</b>, superar tus expectativas y garantizar los <b>mejores resultados</b> en tu proyecto."
+    },
+    "approach": {
+      "title": "Enfoque personalizado",
+      "description": "No todos los proyectos son iguales y lo sabemos, en LEA 4 International recibirás un trato totalmente personalizado. <b>Trabajamos duro para que puedas disfrutar de los resultados.</b>"
+    }
+  },
+  "cookie-banner": {
+    "message": "Este sitio web utiliza cookies para mejorar tu experiencia de navegación y analizar el tráfico del sitio. Al hacer clic en \"Aceptar\", aceptas el uso de cookies de acuerdo con nuestra <policy>Política de Cookies.</policy>",
+    "accept": "Aceptar",
+    "reject": "Rechazar"
+  },
+  "more-info": {
+    "title": "¿Buscas más información?",
+    "questions": "Estamos aquí para responder a todas tus preguntas. </br></br> ¡Contáctanos hoy!",
+    "more-info": "Más Información",
+    "request-quote": "Solicitar una cotización",
+    "host-family": "Conviértete en una familia anfitriona",
+    "contact-us": "Contáctanos"
+  },
+  "our-partners": {
+    "title": "Nuestros socios colaboradores",
+    "partners": {
+      "name": "Erasmus+"
+    }
+  },
+  "become-partner": {
+    "title": "Convertirse en un socio colaborador",
+    "description": "Estamos aquí para responder a todas tus preguntas. <br></br><br></br>¡Contáctanos hoy!",
+    "button": {
+      "title": "Conviértete en socio colaborador",
+      "caption": "Contacta con nosotros"
+    }
+  },
+  "faqs": {
+    "erasmus": {
+      "what-is-erasmus-plus": {
+        "title": "Que es Erasmus+?",
+        "description": "Erasmus+ es el programa de la UE para apoyar la educación, la formación, la juventud y el deporte en Europa. Este programa ofrece oportunidades de movilidad en países de la Unión Europea y países socios, permitiéndote tener una experiencia única en el extranjero."
+      },
+      "how-to-erasmus-plus": {
+        "title": "¿Cómo establecer un proyecto de movilidad Erasmus+ con una agencia de movilidad colaboradora?",
+        "description": "Contáctanos ahora para descubrir más sobre nuestros servicios, las empresas de acogida y escuelas con las que colaboramos y cómo podemos ayudarte a realizar tu proyecto de movilidad Erasmus+. Puedes solicitar tu presupuesto gratuito en nuestra web."
+      },
+      "how-to-organize": {
+        "title": "¿Qué pasos debo seguir para organizar una movilidad Erasmus+ con una agencia de movilidad colaboradora?",
+        "description": "El primer paso es contactar con nosotros, evaluaremos tu proyecto de movilidad Erasmus+ con un enfoque personalizado para satisfacer tus necesidades y expectativas. Nuestro equipo de expertos en movilidad te apoyará durante todo el proceso."
+      },
+      "why-erasmus-plus": {
+        "title": "¿Por qué contactar con una agencia de movilidad colaboradora para organizar mi movilidad Erasmus+?",
+        "description": "LEA 4 International garantiza un proyecto de movilidad Erasmus+ exitoso en diversos sectores profesionales y destinos. Colaboramos con una variedad de empresas, escuelas, instituciones y servicios de alojamiento que han sido cuidadosamente seleccionados para brindarte una experiencia Erasmus+ de alta calidad. Además, organizamos transporte, actividades culturales y brindamos apoyo local y servicios de tutoría para garantizar que los participantes se sientan apoyados."
+      },
+      "how-to-become-partner": {
+        "title": "¿Cómo ser socio colaborador para proyectos de categoría KA2 con LEA 4 International?",
+        "description": "Si desea convertirse en socio colaborador de proyectos de categoría KA2, simplemente complete nuestro formulario, nos comunicaremos con usted lo antes posible para debatir su propuesta de proyecto."
+      },
+      "hot-to-become-host-family": {
+        "title": "¿Cómo convertirse en familia de acogida?",
+        "description": "Si desea convertirse en una familia anfitriona, simplemente complete nuestro formulario, nos comunicaremos con usted lo antes posible para analizar su solicitud"
+      }
+    },
+    "language-courses": {
+      "language-courses-offer": {
+        "title": "¿Qué tipo de cursos de idiomas ofrecemos?",
+        "description": "Ofrecemos una variedad de cursos de idiomas personalizados. Evaluamos su nivel de idioma y lo ubicamos en el nivel correcto desde el principio para garantizar que sus habilidades lingüísticas mejoren. Trabajamos con un equipo de profesores nativos apasionados que se asegurarán de que obtengas los mejores resultados."
+      }
+    },
+    "language-immersion": {
+      "what-it-is": {
+        "title": "¿Qué es un programa de inmersión lingüística?",
+        "description": "Un programa de inmersión lingüística sumerge completamente a los estudiantes en un idioma y cultura distintos. Este enfoque los rodea con el idioma que están aprendiendo tanto dentro como fuera del aula. Esta experiencia inmersiva acelera el dominio del idioma y mejora la comprensión cultural. Los programas pueden variar en duración e intensidad, desde programas de corta duración hasta semestres académicos completos o períodos más largos inmersos en el idioma y la cultura."
+      }
+    },
+    "concierge": {
+      "what-included": {
+        "title": "¿Qué está incluido en los servicios de apoyo para estudiantes?",
+        "description": "Brindamos servicios de apoyo personalizados para estudiantes internacionales que estudian en un país extranjero. Nuestro objetivo es brindar al estudiante la mejor y más cómoda experiencia de vida en el extranjero. Sabemos que dejar que su hijo vaya al extranjero para estudiar en un país extranjero puede ser estresante, para facilitar este proceso nos mantendremos conectados con el estudiante durante toda su estancia."
+      }
+    }
+  },
+  "footer": {
+    "follow-us": "Síguenos en",
+    "copyright": "Copyright © 2024. LEA 4 International. Todos los derechos reservados.",
+    "privacy-policy": "Aviso legal y Política de privacidad"
+  }
+}

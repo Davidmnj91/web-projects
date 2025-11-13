@@ -1,0 +1,76 @@
+{
+  "en": {
+    "admin-mail": {
+      "subject": "New contact from ",
+      "preview": "wants to know more",
+      "title": "has contacted you",
+      "description": "Below you can find the contact details:"
+    },
+    "client-email": {
+      "subject": "LEA 4 International Contact confirmation",
+      "preview": "Thanks for your message",
+      "title": "Thanks for your message",
+      "description": "We confirm receipt of your details and then provide you with a summary of the information you have submitted to us.",
+      "working-on": "We are reviewing all information and will contact you soon for any additional clarification or to inform you of next steps.<br/><br/>We appreciate your interest and patience.<br/><br/>Best regards from the team,<br/>LEA 4 International."
+    },
+    "fields": {
+      "name": "Name",
+      "lastname": "Last name",
+      "email": "Email address",
+      "phone": "Phone",
+      "nationality": "Nationality",
+      "message": "Message",
+      "service": "What type of service are you interested in?",
+      "city": "City where you live",
+      "zipCode": "ZIP code",
+      "hostSize": "How many students can you host?",
+      "institutionName": "Name of your school / institution",
+      "dateRange": "Expected date",
+      "supervisorNumber": "Number of accompanying persons",
+      "accommodationType": "Type of accommodation",
+      "roomType": "Type of room",
+      "boardType": "Type of board",
+      "roundTripIncluded": "Would you like to include a round trip airport transfer in your quote?",
+      "culturalActivitiesIncluded": "Do you want to include any type of cultural activities?",
+      "applicantName": "Name of the applicant",
+      "projectDescription": "Project proposal"
+    }
+  },
+  "es": {
+    "admin-mail": {
+      "subject": "Nuevo contacto de ",
+      "preview": "quiere saber mas",
+      "title": "Te ha contactado",
+      "description": "Aqui tienes los datos de contacto:"
+    },
+    "client-email": {
+      "subject": "LEA 4 International Confirmación de contacto",
+      "preview": "Gracias por tu mensaje",
+      "title": "Gracias por tu mensaje",
+      "description": "Confirmamos la recepción de tus detalles y a continuación, te proporcionamos un resumen de la información que nos has enviado:",
+      "working-on": "Estamos revisando toda la información y nos pondremos en contacto contigo pronto para cualquier aclaración adicional o para informarte sobre los próximos pasos.<br/><br/>Apreciamos tu interés y paciencia.<br/><br/>Saludos cordiales del equipo,<br/>LEA 4 International."
+    },
+    "fields": {
+      "name": "Nombre",
+      "lastname": "Apellidos",
+      "email": "Email",
+      "phone": "Teléfono",
+      "nationality": "Nacionalidad",
+      "message": "Mensaje",
+      "service": "En que servicio estas interesado?",
+      "city": "Ciudad donde vive",
+      "zipCode": "Codigo postal",
+      "hostSize": "Cuantos estudiantes puede acoger",
+      "institutionName": "Nombre de la escuela o institucion",
+      "dateRange": "Fechas esperadas",
+      "supervisorNumber": "Numero de supervisores",
+      "accommodationType": "Tipo de hospedaje",
+      "roomType": "Tipo de habitacion",
+      "boardType": "Tipo de alojamiento",
+      "roundTripIncluded": "Necesita translado al aeropuerto",
+      "culturalActivitiesIncluded": "Quiere incluir actividades culturales",
+      "applicantName": "Nombre del aplicante",
+      "projectDescription": "Descripcion del projecto"
+    }
+  }
+}

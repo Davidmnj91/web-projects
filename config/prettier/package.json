@@ -1,0 +1,26 @@
+{
+  "name": "@web-projects/prettier",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A package to share prettier configurations around the workspace",
+  "author": "David Manja",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.js",
+      "types": "./src/index.d.ts"
+    }
+  },
+  "scripts": {
+    "clean": "rimraf -g *.tsbuildinfo",
+    "lint": "eslint .  --max-warnings 0",
+    "lint:fix": "eslint . --fix --max-warnings 0",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@web-projects/eslint": "workspace:*",
+    "@web-projects/tsconfig": "workspace:*",
+    "prettier": "catalog:prettier",
+    "prettier-plugin-packagejson": "catalog:prettier"
+  }
+}

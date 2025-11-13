@@ -1,0 +1,52 @@
+name: Versioning
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  version-and-release:
+    if: |
+      startsWith(github.event.head_commit.message, 'feat:') ||
+      startsWith(github.event.head_commit.message, 'fix:')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      packages: write
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js and pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: version packages
+        run: pnpm changeset version
+
+      - name: create tags
+        shell: bash
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "chore: version bumps" --no-verify
+          NEW_TAG=v$(node -p "require('./root/package.json').version")
+          git tag $NEW_TAG
+          git push origin main --no-verify
+          git push origin $NEW_TAG --no-verify

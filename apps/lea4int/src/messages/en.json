@@ -1,0 +1,736 @@
+{
+  "pages": {
+    "home": "Welcome",
+    "services": {
+      "main": "Services",
+      "erasmus": "Erasmus+ Projects",
+      "language-courses": "English & Spanish courses",
+      "student-exchange": "Language Immersion Programs",
+      "concierge": "Student concierge services"
+    },
+    "about-us": "About us",
+    "destinations": "Destinations",
+    "accommodations": "Accommodations",
+    "faq": "FAQ",
+    "blog": "Blog",
+    "contact": "Contact",
+    "404": "FOUR ZERO FOUR"
+  },
+  "home-page": {
+    "language": "Language.",
+    "education": "Education.",
+    "travel": "Travel.",
+    "slogan": "LEA 4 International promotes Leading Education Abroad through the planification, implementation and coordination of a variety of educational projects. We work in collaboration with funding programs such as Erasmus+ in different European countries.",
+    "request-more-info": "Request more information",
+    "who-we-are": {
+      "title": "Who We Are",
+      "description": "LEA 4 International is a project management and consulting company <b>that specializes in</b> planning, organizing and delivering a variety of educational projects."
+    },
+    "our-focus": {
+      "title": "Our Focus",
+      "description": " Our main goal is to <b>assist individuals gaining</b> meaningful life experiences abroad that will help them grow, both professionally and personally."
+    },
+    "our-principles": {
+      "title": "Our Principles",
+      "description": "We <b>firmly</b> believe that having an experience abroad is <b>an excellent</b> opportunity to <b>broaden one's mind</b>, explore different cultures and speak other languages. Thanks to globalization we live in a connected world that offers many opportunities to travel and explore <b>beyond our</b> home country."
+    },
+    "coming-challenges": {
+      "title": "Overcoming Challenges",
+      "description": "<b>Venturing beyond</b> your comfort zone and going abroad can be stressful and challenging. This is why, at LEA 4 International, <b>we aim to facilitate</b> your experience abroad. We provide comprehensive support for your project by making all the necessary arrangements."
+    },
+    "our-commitment": {
+      "title": "Our Commitment"
+    },
+    "top-destinations": {
+      "title": "Our Top destinations",
+      "see-all": "See all destinations",
+      "destinations": {
+        "madrid": "Madrid",
+        "prague": "Prague",
+        "malaga": "Málaga",
+        "czech": "Czech Republic",
+        "spain": "Spain"
+      }
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "see-more": "See more questions"
+    },
+    "help-you": "<b>We are eager to assist you in enjoying </b> your educational adventure.",
+    "see-more": "See more"
+  },
+  "services-page": {
+    "title": "Our Services",
+    "message": "Select & discover from our services to learn <br></br>more about them.",
+    "services": {
+      "see-more": "See More",
+      "back-to-services": "Back to our services",
+      "other-services": {
+        "title": "Other services",
+        "description": "Select & discover from our services to learn <br></br>more about them."
+      },
+      "erasmus": {
+        "title": "Erasmus+ projects",
+        "overview": "Overview",
+        "categories": {
+          "work-experience": {
+            "title": "Work Experience",
+            "description": "Erasmus+ can help you gain valuable work experience abroad. By participating in the Erasmus+ traineeship program you will improve your interpersonal and foreign language skills, and you will develop intercultural skills that will help you find a job after your studies. Erasmus+ supports work placements or study periods abroad for students currently enrolled in vocational education and training (VET) and for recent graduates.",
+            "with": "Work <br></br>experience <br></br>with <br></br>LEA 4 Int.",
+            "message": "We offer a diverse range of professional sectors in which you can do your internship experience. We understand the significance of gaining valuable professional work experience that is why we offer high quality internships tailored to each individual's needs. Our team of experts is dedicated to reviewing and analyzing your CV and motivational letter, ensuring a precise match with the right company. Throughout the process, you'll receive support during interviews, be assigned a supervisor to monitor your performance, and guarantee optimal results. We are committed to providing you with a learning agreement and comprehensive assistance both before and during your internship.<br></br>Discover the array of professional sectors we offer and take the first step towards a rewarding internship experience.",
+            "we-offer": {
+              "title": "Find out what professional sectors we offer",
+              "IT": {
+                "title": "IT and Multimedia Professions",
+                "description": "IT - Information technology (IT) is the use of computers, storage, networking and other physical devices, infrastructure and processes to create, process, store, secure and exchange all forms of electronic data.<br></br>Multimedia is a growing field that is part of the technology sector and includes professional opportunities as graphic design, marketing, product development, multimedia designer etc."
+              },
+              "business": {
+                "title": "Business Administration",
+                "description": "Business administration is a broad field that includes many different roles, professional settings and opportunities for growth. In simple terms, business administration is the work of managing an organization's resources, time and people.<br></br>Opportunities within this sector include positions in sales, finance, and administration."
+              },
+              "tourism": {
+                "title": "Tourism & Hospitality Industry",
+                "description": "The Tourism and Hospitality industry is a broad industry that includes many sectors, including hotels, restaurants, travel agencies, theme parks, museums, etc. Tourism and hospitality are rewarding industries with growing job opportunities. An internship in this field will allow the apprentice to improve customer service and communication skills, practice a foreign language and learn new techniques."
+              },
+              "beauty": {
+                "title": "Beauty Professions",
+                "description": "This sector includes various professions related to aesthetics, hairdressing, cosmetics and nails. This professional sector includes opportunities such as working in a beauty salon, hair salon, nail salon, spa center, cosmetics store etc. An internship in this field provides the apprentice with the chance to explore and learn new techniques in a foreign language."
+              }
+            },
+            "know-more": "Do you want to know more?"
+          },
+          "job-shadowing": {
+            "title": "Job Shadowing",
+            "description": "Job shadowing programme offers participants the chance to spend a period of time at a hosting organization in another country. The aim of this programme is to learn new practices and gather new ideas through observation and interaction with peers, experts or other practitioners in their daily work at the hosting organization.<br></br>Eligible participants include teachers, trainers, and all other non-teaching experts and staff in adult education.<br></br>Eligible non-teaching staff includes staff working in adult education, either in adult education providers or in other organizations active in adult education.",
+            "with": "Job <br></br>shadowing <br></br>with <br></br>LEA 4 Int.",
+            "message": "We collaborate with a large number of hosting schools that have been carefully selected. These schools include primary, secondary and high schools. Additionally, we collaborate with technical and vocational schools as well as schools with special needs. <br></br>There are different topics to choose from for job shadowing, including but not limited to inclusion, diversity, digitalization in schools, teaching sustainability, promoting STEM. <br></br>By the end of the job shadowing programme, participants are exposed to several teaching practices focused on the chosen topics. <br></br>We also provide the sending organizations with the necessary learning agreement."
+          },
+          "school-exchange": {
+            "title": "School Exchange",
+            "description": "School exchange allows a group of pupils from different countries to spend time learning together with peers in another country. Teachers or other authorized persons from the sending school will accompany you for the entire duration of the activity. A group mobility of school pupils can last up to 1 month. This excludes traveling time.",
+            "with": "School <br></br>Exchange <br></br>with <br></br>LEA 4 Int.",
+            "message": "We collaborate with a large number of carefully selected hosting schools for school exchange, including primary, secondary and high schools. <br></br>The School Exchange offers foreign students a great opportunity to engage in a wide range of activities that include country presentations, cultural workshops, or language sessions with local students.<br></br>We also provide logistic and local support through the school exchange programme."
+          },
+          "erasmus-mundus": {
+            "title": "Erasmus Mundus",
+            "description": "This action aims at fostering excellence and worldwide internationalization of higher education institutions through study programmes at Master course level jointly delivered and recognised by higher education institutions (HEIs) established in Europe. These programmes are also open to institutions in other countries around the world.",
+            "with": "Erasmus <br></br>Mundus <br></br>with <br></br>LEA 4 Int.",
+            "message": "We understand the challenges international students face when finding a new home abroad. We help international students to find accommodation that meets their expectations and is suitable with their budget. We assist international students with questions and provide general advice. Additionally, we provide support and useful information to international students by organizing Pre-Departure Orientation seminars."
+          },
+          "KA-2": {
+            "title": "KA2 - We look for partners",
+            "description": "KA2 action projects are a combination of decentralized projects run by the National Agencies and centralized activities managed by the European Commission’s Executive Agency.<br></br>Key Action 2 (KA2) is a component of the Erasmus+ programme, which is an initiative of the European Union aimed at promoting education, training, youth, and sport across European countries. KA2 specifically focuses on \"Cooperation for Innovation and the Exchange of Good Practices.\"<br></br>Within the Erasmus+ framework, KA2 supports strategic partnerships between organizations from different participating countries. These partnerships are intended to foster innovation, share good practices, and improve the quality and relevance of education, training, and youth work.<br></br>Key features of KA2 projects include collaboration among organizations, the development of innovative outputs or practices, and the potential for long-term impact on the participating institutions and their stakeholders. Projects may cover various fields, including education, vocational training, adult education, and youth work.<br></br>KA2 projects are expected to address the needs and challenges of the participating organizations and contribute to the overall goals of Erasmus+, such as promoting mobility, enhancing skills and employability, and fostering cooperation and European values.",
+            "priority-topics": {
+              "title": "Priority topics",
+              "description": "<li>Education and training</li><li>Employment</li><li>Research, Technological Development and Innovation</li><li>Sports</li><li>Youth</li>"
+            },
+            "eligible": {
+              "title": "Who is eligible to apply?",
+              "description": "<li>Educational Institutions</li><li>Local Authorities</li><li>Non Profit Organisations</li><li>Small and Medium Enterprises (SMEs)</li><li>State-owned Enterprises</li>"
+            }
+          }
+        }
+      },
+      "language-courses": {
+        "title": "Language courses and trainings",
+        "sub-title": "Language courses",
+        "description": "At LEA 4 International, you can learn English or Spanish with our qualified native teachers. Engaging and dynamic lessons will make you feel comfortable from the beginning. Learn and improve your language skills while having fun.",
+        "overview": "Overview",
+        "categories": {
+          "english-courses": {
+            "title": "Conversational English course",
+            "description": "Have you spent years learning English at school but still lack fluency and confidence to speak English? <br></br><br></br> Then this is the right course for you.",
+            "we-offer": {
+              "focus": {
+                "title": "During this course our English teachers will<br></br>focus on:",
+                "description": "<li>Identifying your spoken difficulties and pronunciation challenges.</li><li>Eliminating any grammatical or pronunciation mistakes.</li><li>Giving you topics to practice conversation.</li><li>Expanding your vocabulary, teaching you common phrases.</li>"
+              },
+              "help": {
+                "title": "This course will help you:",
+                "description": "<li>Improve your fluency speaking English</li><li>Increase your confidence in speaking English.</li><li>Improve your pronunciation and accent.</li><li>Expand your vocabulary in English.</li>"
+              },
+              "details": {
+                "title": "Details:",
+                "description": "<li>Flexible schedule: morning, afternoon, evening, weekend courses.</li><li>Group size: max 10 students per class.</li><li>Duration: from 1 to 20 weeks.</li><li>Price: If you want to know about our prices <contact>contact us!</contact></li>"
+              }
+            }
+          },
+          "business-english-courses": {
+            "title": "Business English course",
+            "description": "Do you feel like you lack confidence and vocabulary when you have to speak English at your workplace?<br></br><br></br>Then this is the right course for you.",
+            "we-offer": {
+              "focus": {
+                "title": "During this course our English teachers will <br></br>focus on:",
+                "description": "<li>Eliminating any grammatical or pronunciation mistakes.</li><li>Giving you real life scenarios at the workplace to practice conversation.</li><li>Expanding your business vocabulary.</li><li>Writing business reports and memos.</li>"
+              },
+              "help": {
+                "title": "This course will help you:",
+                "description": "<li>Improve your fluency in speaking English at the workplace.</li><li>Increase your confidence in speaking English at the workplace.</li><li>Improve your pronunciation and accent.</li><li>Expand your business related vocabulary in English.</li>"
+              },
+              "details": {
+                "title": "Details:",
+                "description": "<li>Flexible schedule: morning, afternoon, evening, weekend courses.</li><li>Group size: maximum 10 students per class.</li><li>Duration: from 1 to 20 weeks.</li><li>Price: If you want to know about our prices <contact>contact us!</contact></li>"
+              }
+            }
+          },
+          "spanish-courses": {
+            "title": "Conversational Spanish course",
+            "description": "Have you spent years learning Spanish at school but still lack fluency and confidence to speak Spanish?<br></br><br></br>Then this is the right course for you",
+            "we-offer": {
+              "focus": {
+                "title": "During this course our Spanish teachers will <br></br>focus on:",
+                "description": "<li>Identifying your spoken difficulties and pronunciation challenges.</li><li>Eliminating any grammatical or pronunciation mistakes.</li><li>Giving you topics to practice conversation.</li><li>Expanding your vocabulary, teaching you common phrases.</li>"
+              },
+              "help": {
+                "title": "This course will help you:",
+                "description": "<li>Improve your fluency speaking Spanish</li><li>Increase your confidence in speaking Spanish.</li><li>Improve your pronunciation and accent.</li><li>Expand your vocabulary in Spanish.</li>"
+              },
+              "details": {
+                "title": "Details:",
+                "description": "<li>Flexible schedule: morning, afternoon, evening, weekend courses.</li><li>Group size: max 10 students per class.</li><li>Duration: from 1 to 20 weeks.</li><li>Price: If you want to know about our prices <contact>contact us!</contact></li>"
+              }
+            }
+          },
+          "business-spanish-courses": {
+            "title": "Business Spanish course",
+            "description": "Do you feel like you lack confidence and vocabulary when you have to speak Spanish at your workplace?<br></br><br></br>Then this is the right course for you.",
+            "we-offer": {
+              "focus": {
+                "title": "During this course our Spanish teachers will <br></br>focus on:",
+                "description": "<li>Eliminating any grammatical or pronunciation mistakes.</li><li>Giving you real life scenarios at the workplace to practice conversation.</li><li>Expanding your business vocabulary.</li><li>Writing business reports and memos.</li>"
+              },
+              "help": {
+                "title": "This course will help you:",
+                "description": "<li>Improve your fluency in speaking Spanish at the workplace.</li><li>Increase your confidence in speaking Spanish at the workplace.</li><li>Improve your pronunciation and accent.</li><li>Expand your business related vocabulary in Spanish.</li>"
+              },
+              "details": {
+                "title": "Details:",
+                "description": "<li>Flexible schedule: morning, afternoon, evening, weekend courses.</li><li>Group size: max 10 students per class</li><li>Duration: from 1 to 20 weeks.</li><li>Price: If you want to know about our prices <contact>contact us!</contact></li>"
+              }
+            }
+          },
+          "ai-trainings": {
+            "title": "Trainings",
+            "description": "Artificial Intelligence (AI) can be defined as the intelligence of machines or software. It is a field of study in computer science which develops and studies intelligent machines.<br></br>AI is reshaping  nearly every industry and is poised to have a significant impact in the labor market and society in the upcoming years. <br></br>At LEA 4 International, we aim to assist individuals and companies to enhance their understanding and knowledge of AI. We offer the following trainings:"
+          },
+          "machine-learning": {
+            "title": "Machine Learning",
+            "description": "Machine learning refers to a subset of artificial intelligence (AI) that focuses on developing systems and algorithms that enable computers to learn and improve from experience. Instead of being explicitly programmed to perform a task, these systems use statistical techniques to analyze data, identify patterns, and make decisions with minimal human intervention.<br></br><br></br>Machine learning is widely used in various applications, including image and speech recognition, recommendation systems, autonomous vehicles, and many more. It has become a crucial part of modern technology, contributing to advancements in various fields."
+          },
+          "data-mining": {
+            "title": "Data Mining",
+            "description": "Data Mining is the process of discovering patterns, trends, and valuable insights from large sets of data. It involves analyzing and interpreting large amounts of data to uncover hidden patterns and relationships that can be useful for making informed business decisions, predictions, and other applications.<br></br><br></br>Data mining is applied in various industries, such as finance, healthcare, marketing, and retail, to extract meaningful information from vast datasets. It plays a crucial role in decision-making processes and business strategy development. Techniques within data mining include classification, clustering, regression analysis, association rule mining, and more."
+          },
+          "business-ia": {
+            "title": "AI for business",
+            "description": "Artificial Intelligence (AI) has become a transformative force in the business landscape, offering innovative solutions and opportunities for efficiency, automation, and decision-making.<br></br>Here are key aspects of how AI is utilized in business:",
+            "sub-description": "Businesses embrace AI for efficiency, innovation, and staying competitive in the digital era.<br></br>The successful integration of AI in business requires thoughtful planning, ethical considerations, and ongoing monitoring. As technology advances, businesses are increasingly leveraging AI to gain a competitive edge and adapt to the evolving digital landscape.<br></br>For more information <contact>contact us</contact>",
+            "we-offer": {
+              "automation": "<b>Automation:</b> Streamlines tasks, cuts costs, and boosts productivity.",
+              "data-analysis": "<b>Data Analysis:</b> Extracts insights for informed decision-making.",
+              "customer-service": "<b>Customer Service:</b> Enhances support through AI-powered chatbots.",
+              "predictive-analytics": "<b>Predictive Analytics:</b> Forecasts trends and customer behaviors.",
+              "personalization": "<b>Personalization:</b> Tailors experiences for customers.",
+              "supply-chain": "<b>Supply Chain:</b> Optimizes processes, predicts demand, and manages inventory.",
+              "fraud-detection": "<b>Fraud Detection:</b> Strengthens cyber-security through anomaly detection.",
+              "human-resources": "<b>Human Resources:</b> Improves recruitment and talent management.",
+              "decision-support": "<b>Decision Support:</b> Provides insights for strategic planning.",
+              "nlp": "<b>NLP:</b> Enables machines to understand human language."
+            }
+          },
+          "business-development": {
+            "title": "Business Development",
+            "description": "The main focus of our business development training is assisting companies to reach greater commercial success through Business Development training sessions. The typical model for this assistance is a monthly, or quarterly, session focusing on one area of Business Development training. A standard session lasts three hours and the group size of attendees is usually from 10-20 (larger and smaller groups are possible).<br></br>For more information <contact>contact us</contact>"
+          }
+        }
+      },
+      "student-exchange": {
+        "title": "Language immersion programs",
+        "overview": "Overview",
+        "categories": {
+          "immersion-program": {
+            "title": "Language immersion program",
+            "description": "A language immersion program is a great opportunity for students to explore a different culture and practice a new language with native speakers. During the language immersion program learners will live fully immersed in a new culture, they will live with a host family that will teach them more about their country and traditions.",
+            "includes": "Language immersion program at LEA 4 International Includes:"
+          },
+          "exchange-program": {
+            "title": "Student exchange program",
+            "description": "A Student Exchange Program is a great opportunity to study abroad,discover a new culture and practice a new language. Participating in a Student Exchange Program is an important step in your education that can change your life. This experience will make you grow, and will help you gain skills that you will use later in life.",
+            "includes": "Student Exchange Program at LEA 4 International Includes:"
+          }
+        },
+        "services": {
+          "round-trip": "Round-trip airfare.",
+          "airport": "Round-trip airport transfer.",
+          "local-transport": "Local transportation.",
+          "accommodation": "Accommodation & Full board.",
+          "cultural": "Cultural trips and activities."
+        }
+      },
+      "concierge": {
+        "title": "Student concierge services",
+        "description": "Studying abroad is an exciting experience but can be a worrying journey for many international students. Participants, as well as their families, are often concerned and a bit stressed about the uncertainty of the new experience abroad.<br></br>Our commitment is to help students and their families to get familiar with the new country and its customs. We offer 24/7 emergency support to our students.",
+        "includes": "Our services include:",
+        "services": {
+          "meeting-greeting": "Meeting and greeting at arrival",
+          "airport-transfer": "Airport transfer",
+          "local-transport": "Local transportation tickets",
+          "immigration-services": "Immigration services",
+          "city-tour": "Local city tours and guides",
+          "emergency-support": "24/7 emergency support",
+          "language-support": "Language support"
+        }
+      }
+    }
+  },
+  "about-us-page": {
+    "title": "About us",
+    "role": {
+      "director": "Director",
+      "partner": "Partner"
+    },
+    "description": "My name is Lucia Soto, the Founder and Managing Director of LEA 4 International. The inspiration behind establishing this company stems from the profound impact of my experiences abroad, which significantly enriched my life.<br></br>My initial venture into international experiences occurred through the Erasmus program. Throughout my university studies, I seized the opportunity to be an Erasmus student for a year at the Faculty of Law at La Sapienza University in Rome. This transformative experience went beyond merely studying in a different country and acquiring a new language. It illuminated the essence of the Erasmus program fostering connections with people outside one's comfort zone, developing tolerance towards diverse cultures, and embracing new challenges.<br></br>Erasmus marked just the beginning of my international journey. Since then, I've had the privilege of living in various countries and interacting with people from around the world. My professional background, particularly as a project coordinator for Erasmus+ projects, equipped me with the essential tools for the successful implementation of such initiatives.<br></br>The primary objective of my company is to globally promote the significance of education. I aspire to encourage individuals, especially young students, to step out of their comfort zones, explore the world beyond, and create memorable life experiences abroad. Simultaneously, I aim to contribute to the enhancement of education and cross-cultural understanding.",
+    "quote": "There is no passion to be found playing small - <br></br> <b>In settling for a life that is less <br></br> than the one you are capable of living</b>",
+    "values": {
+      "title": "Our Values",
+      "inclusion": "Inclusion",
+      "diversity": "Diversity",
+      "respect": "Respect",
+      "quality": "Quality",
+      "honesty": "Honesty",
+      "innovation": "Innovation",
+      "sustainability": "Sustainability",
+      "collaboration": "Collaboration"
+    }
+  },
+  "destinations-page": {
+    "title": "Popular destinations",
+    "message": "Explore and discover our popular destinations to learn more about them.",
+    "contact-us": "Contact Us",
+    "see-more": "See more",
+    "back-to-destinations": "Back to popular destinations",
+    "inspired": {
+      "title": "Feeling inspired?",
+      "description": "Discover Endless Possibilities: <br></br><br></br> Your Gateway to Unforgettable Experiences and Connections",
+      "join": "I want to join",
+      "accommodations": "Accommodations"
+    },
+    "destinations": {
+      "prague": {
+        "title": "Prague",
+        "country": "Czech Republic",
+        "destinations": "Destinations",
+        "choose": "Why choose Prague?",
+        "reason": "There are numerous reasons to choose the capital of the Czech Republic for your international experience. Some of these include affordable housing, a reliable and inexpensive public transportation system, and a city teeming with expats and international students, offering opportunities to connect with people from different countries. Prague is the perfect city to improve your English and also provides the chance to speak other European languages, thanks to the significant number of expats living here. Positioned in Central Europe, Prague serves as a strategic location for exploring nearby countries and cities, facilitating travel and exploration. The city is renowned for its safety, providing a secure environment for students to focus on their studies and enjoy their time abroad. With its international atmosphere, Prague has become a hub for global interactions, making it an excellent choice for an international experience.",
+        "know": "Know Prague"
+      },
+      "madrid": {
+        "title": "Madrid",
+        "country": "Spain",
+        "destinations": "Destinations",
+        "choose": "Why choose Madrid?",
+        "reason": "There are numerous compelling reasons to choose the capital of Spain for your international experience. Some of these factors include affordable housing options, an extensive and reliable public transport system, the opportunity to live in a multicultural and vibrant city with plenty of activities, a lively nightlife offering diverse options, pleasant weather, and delectable cuisine. Madrid's central location in Spain provides the opportunity to travel around the country easily. The city is also home to some of the best universities in Spain, further enhancing the overall experience. It's the perfect city to enhance your Spanish language skills, and the significant number of expats living here provides an excellent opportunity to speak other European languages as well.",
+        "know": "Know Madrid"
+      },
+      "malaga": {
+        "title": "Málaga",
+        "country": "Spain",
+        "destinations": "Destinations",
+        "choose": "Why choose Málaga?",
+        "reason": "There are various reasons to choose Málaga for your international experience. Some of these include affordable housing, inexpensive public transport, delectable cuisine, and pleasant weather throughout most of the year. Coupled with the open and cheerful character of the locals, this creates a city with a vibrant atmosphere. Málaga is renowned for the warm hospitality of its people, and engaging with the friendly locals enhances the overall experience, making students feel welcome and at home. It's an ideal destination for improving your Spanish language skills and practicing other European languages. The streets are always bustling with people, contributing to the lively atmosphere. Málaga boasts a vibrant nightlife and a rich historical background.",
+        "know": "Know Málaga"
+      },
+      "krakow": {
+        "title": "Krakow",
+        "country": "Poland",
+        "destinations": "Destinations",
+        "choose": "Why choose Krakow?",
+        "reason": "There are several compelling reasons to choose Krakow for your international experience. Known for its affordability and safety, the city boasts a rich history, highlighted by its prestigious university and captivating architecture. In recognition of its historical significance, UNESCO designated Krakow's old town area as a World Heritage site in 1978. Positioned in Central Europe, Krakow serves as a strategic location for exploring nearby countries and cities, facilitating travel and exploration. The city's commitment to safety provides a secure environment, allowing students to focus on their studies and fully enjoy their time abroad. Moreover, Krakow is a hub for international students, offering a multicultural experience. The presence of students from various backgrounds enriches the city's cultural landscape, providing you with a lot of opportunities for diverse interactions and experiences.",
+        "know": "Know Krakow"
+      },
+      "dublin": {
+        "title": "Dublin",
+        "country": "Ireland",
+        "destinations": "Destinations",
+        "choose": "Why choose Dublin?",
+        "reason": "There are various compelling reasons to choose the capital of Ireland for your international experience. Dublin, a welcoming and vibrant city, is replete with museums, galleries, bars, and restaurants. Renowned for its friendly atmosphere, Dublin ensures that international students feel at home from the moment they arrive. The city is home to prestigious universities and educational institutions, offering high-quality academic programs in a conducive learning environment. Dublin provides an ideal setting for improving English language skills, benefiting from its native English-speaking environment and diverse accents. Despite its bustling nature, Dublin is in proximity to natural landscapes, including coastal areas and scenic countryside, offering a harmonious blend of urban and natural experiences. Notably, Dublin holds the distinguished title of being one of the six UNESCO Cities of Literature.",
+        "know": "Know Dublin"
+      },
+      "ghent": {
+        "title": "Ghent",
+        "country": "Belgium",
+        "destinations": "Destinations",
+        "choose": "Why choose Ghent?",
+        "reason": "Discover diverse reasons to choose Ghent for an immersive international experience, where its multicultural atmosphere and vibrant international student community intersect with the prestige of hosting one of Europe's top universities. Ghent stands out with affordability, efficient public transport, and a bicycle-friendly environment, creating an accessible and inclusive city. Embrace linguistic diversity with Belgium's three official languages—Dutch, French, and German—offering a unique opportunity to refine language skills. Centrally located in Europe, Ghent serves as a gateway for exploration, fostering cultural exchange and easy travel to neighboring cities.Its consistent high ranking in terms of quality of life ensures a comfortable and secure environment for students to thrive. Recognized for its bike-friendly infrastructure, Ghent promotes sustainable transportation, enabling students to conveniently explore the city. As one of Belgium's historic cities, Ghent boasts numerous cultural landmarks, seamlessly blending historical charm with academic excellence.",
+        "know": "Know Ghent"
+      }
+    },
+    "services": {
+      "title": "Services available in {city}",
+      "work-experience": "Work Experience",
+      "job-shadowing": "Job Shadowing",
+      "language-courses": "Language courses & Trainings",
+      "student-exchange": "Language Immersions Programs",
+      "concierge": "Student concierge Services",
+      "see-more": "See more about this service"
+    }
+  },
+  "accommodations-page": {
+    "title": "Accommodations",
+    "description": "What is the best accommodation option for my experience abroad? Choosing the right type of housing can be a challenging decision. Here, we provide useful information and tips to help you pick the accommodation that suits you best.",
+    "contact-us": "Contact us",
+    "accommodations": {
+      "apartment": {
+        "title": "Apartment",
+        "description": "Opting for an apartment is often one of the best choices for a long-term experience abroad. It provides you with a fully equipped home where you can have your own space, yet also offers the opportunity to live with students from different nationalities, enriching your experience by learning about their cultures. Choosing an apartment allows you to strike a balance between enjoying your personal space and sharing common areas with flatmates"
+      },
+      "student-residence": {
+        "title": "Student Residence",
+        "description": "Opting for a student residence is a suitable choice for both short and long-term experiences abroad. Some students prefer this option for short-term mobility, as they may miss the freedom of living in an apartment after some time. Living in a student residence offers several benefits, including the opportunity to meet students from various countries, access to a 24-hour reception desk, and shared amenities that foster a sense of community. Additionally, some campuses provide convenient sports facilities for interested students."
+      },
+      "host-family": {
+        "title": "Host Family",
+        "description": "Opting to live with a host family is a unique opportunity to immerse yourself in the local culture. A host family offers a welcoming and supportive environment, providing you with a sense of family. Your hosts can assist you during challenging times or when you're feeling homesick, fostering a special bond that may last a lifetime. Even with the option to have a private room, living with a host family is a great choice for both short and long-term experiences abroad."
+      },
+      "hotel": {
+        "title": "Hotel",
+        "description": "Opting to stay in a hotel is an excellent choice for a short-term experience abroad. Enjoy the comfort of daily cleaning services, a 24-hour reception desk, and the convenience of optional cooking services. It's worth noting that this option is more expensive, making it ideal for shorter durations."
+      },
+      "hostel": {
+        "title": "Hostel",
+        "description": "Opting to stay in a hostel is an excellent choice for a short-term experience abroad. It's a more budget-friendly option compared to a hotel, yet it still provides services like a 24-hour reception desk and access to essential amenities. Hostels offer a social environment, providing a great opportunity to meet new people during your stay."
+      },
+      "airbnb": {
+        "title": "Airbnb",
+        "description": "Opting to stay in an Airbnb is a great choice for both short and long-term experiences abroad. It is generally more cost-effective than a hotel and offers the advantage of having an equipped kitchen for preparing your meals and access to laundry facilities. However, it's important to note that Airbnb lacks a 24-hour reception desk."
+      }
+    }
+  },
+  "faq-page": {
+    "title": "Frequently Asked Questions",
+    "categories": {
+      "erasmus": "Erasmus Program",
+      "language-courses": "Language courses & Training",
+      "language-immersion": "Language immersion programs",
+      "concierge": "Concierge services"
+    }
+  },
+  "contact-page": {
+    "title": "Contact",
+    "message": "The simplest way to commence is by initiating contact.",
+    "who-are-you": "Who are you?",
+    "roles": {
+      "individual": "Individual",
+      "host-family": "Host family",
+      "institutions": "School or Institution",
+      "partner": "Become a partner"
+    }
+  },
+  "privacy-policy-page": {
+    "title": "Privacy Policy & Terms and Conditions",
+    "content": "<b>LEGAL WARNING & PRIVACY POLICY AND PROTECTION OF PERSONAL DATA</b> <br></br><br></br>In compliance with Regulation (EU) 2016/679 of the European Parliament and the Council of April 27, 2016, on the protection of natural persons regarding the processing of personal data and the free movement of such data, and Organic Law 3/2018 of December 5, for the Protection of Personal Data and Guarantee of Digital Rights, users expressly consent for LEA 4 International to use their personal data for informational purposes related to its personal blog. Users interested may freely exercise their rights of access, rectification, deletion, limitation of processing, data portability, opposition, and the right not to be subject to automated decision-making of personal data, including profile creation, where appropriate, by writing to the person responsible and/or to LEA 4 International at <email>info@lea4int.com</email>.<br></br><br></br><b>1. Duty of Information.</b> <br></br>In compliance with the duty of information contained in Organic Law 3/2018 of December 5, on Data Protection and guarantee of digital rights, the following information is provided: LEA 4 International (hereinafter “the Owner”) is the owner of the website <link>www.lea4int.com</link>.<br></br><br></br><b>2. Copyright.</b> <br></br>The user of the Website acknowledges and accepts that all contents integrated within it are protected by copyright, intellectual property, and industrial laws. The ownership of these contents corresponds exclusively to the Owner. The user declares and guarantees that they know that they are not authorized to reproduce, communicate, distribute, or transform content included in the Website without the Owner’s prior consent. Should the user fail to do so, the consequences of the infringement of this obligation will fall solely and exclusively on the offending user.<br></br><br></br><b>3. Restrictions on Use</b><br></br>The user is not allowed to use the services offered by the Owner for activities against the law, morality, public order, and, in general, must use them in accordance with the present conditions. The user is also obliged to refrain from advertising or practicing commercial exploitation activities, sending any type of message using a false identity, as well as hiding in any way the origin of the message or sending unsolicited advertising.<br></br><br></br><b>4. Privacy and Protection of Personal Data</b><br></br>In accordance with Organic Law 3/2018 of December 5, Protection of Personal Data and Guarantee of Digital Rights, users of the Website are informed that personal data collected through forms will be included in a personal data file owned by LEA 4 International. The purpose of this file is as follows: (i) carrying out informative actions on behalf of the web <link>www.lea4int.com</link>. The Owner guarantees rights of access, rectification, cancellation, and opposition of the data provided and, regarding the use of the data included therein, commits to respect their confidentiality and use them in accordance with their purpose, referred to in the previous section. To exercise these rights, individuals must contact us by indicating 'Users Section,' either through the registration page or by email at <email>info@lea4int.com</email>. The storage of user-provided data is carried out in accordance with all the security guarantees mandated by current legislation.<br></br><br></br><b>5. Use of Cookies on this Website</b><br></br>Cookies are small text files stored on users' devices that help track and analyze user behavior. They allow a website to store and recover information on a user’s or computer’s browsing habits and can be used to recognize the user. Cookies do not contain specific personal information and are mostly erased when the browser is closed (session cookies). Most browsers accept cookies as standard, and security adjustments allow or block temporary or saved cookies. These cookies are used to collect data for analyzing website traffic and user behavior to improve the website and user experience. Without express consent – by activating cookies on the browser – LEA 4 International will not link personal data provided at the time of registration or purchase with cookies. Users have the option to opt-out of Google Analytics tracking. Here are the general steps for opting out of Google Analytics tracking using the browser add-on:<br></br><br></br><li>Visit the Google Analytics Opt-out Browser Add-on page provided by Google.</li><li>Follow the instructions on the page to install the browser add-on for your specific browser. Once installed, the add-on will prevent the Google Analytics JavaScript from collecting data about your website visits. It's important to note that opting out using this method is specific to the browser and device where the add-on is installed. If users access the website from a different browser or device, they would need to install the add-on on each one to ensure continued opt-out. Our cookie policy complies with the regulations of the LSSI-CE (Law of Services of the Information Society and Electronic Commerce) as well as data protection regulations, namely, the GDPR and the LOPDGDD.</li><br></br><b>6. Modifications to General Conditions of Use</b><br></br>The Owner reserves the right to modify or cancel these General Conditions at any time, committing to communicate the new conditions or definitive cancellation.<br></br><br></br><b>7. The User’s Responsibility</b><br></br>The user is responsible for any possible complaint due to a breach of any of the manifestations of this document and commits to indemnify the Owner for any breach.<br></br><br></br><b>8. Jurisdiction</b><br></br> In case of discrepancies between both parties regarding the interpretation, compliance, and effects of these General Conditions, if an agreement is not reached by both parties to resolve them, said parties submit to the jurisdiction of the courts of Valladolid (Spain), renouncing any other jurisdiction that may correspond to them. The User accepts that accessing or using the Website implies their adhesion to the general conditions that are present every time they access the Website and which are available to other users. Consequently, the User must carefully read these general conditions. In this sense, the User is considered a person who accesses, navigates, or uses the services of this Website.<br></br><br></br><b>9. Questions</b><br></br>If you have any doubts or questions regarding the processing of your personal data, feel free to write to us at the email address <email>info@lea4int.com</email>."
+  },
+  "blog-page": {
+    "title": "Our Video Blog",
+    "visit-chanel": "Visit our channel"
+  },
+  "not-found-page": {
+    "back-to-home": "Back to home"
+  },
+  "top-destinations": {
+    "title": "Our Top destinations",
+    "see-all": "See all destinations",
+    "destinations": {
+      "prague": {
+        "title": "Prague",
+        "country": "Czech Republic"
+      },
+      "madrid": {
+        "title": "Madrid",
+        "country": "Spain"
+      },
+      "malaga": {
+        "title": "Málaga",
+        "country": "Spain"
+      },
+      "krakow": {
+        "title": "Krakow",
+        "country": "Poland"
+      },
+      "dublin": {
+        "title": "Dublin",
+        "country": "Ireland"
+      },
+      "ghent": {
+        "title": "Ghent",
+        "country": "Belgium"
+      }
+    }
+  },
+  "contact-us": {
+    "text": "Contact us"
+  },
+  "forms": {
+    "input": {
+      "service": {
+        "label": "What type of service are you interested in?",
+        "placeholder": "Choose one",
+        "options": {
+          "erasmus": "Erasmus+ Projects",
+          "conversational-english-course": "Conversational English course",
+          "business-english-course": "Business English course",
+          "conversational-spanish-course": "Conversational Spanish course",
+          "business-spanish-course": "Business Spanish course",
+          "machine-learning": "Machine learning",
+          "data-mining": "Data mining",
+          "business-ai": "AI for business",
+          "concierge": "Concierge & Tutoring Services"
+        },
+        "error": "Please select a service you are interested of"
+      },
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter Name",
+        "error": "Please provide a name"
+      },
+      "lastname": {
+        "label": "Last name",
+        "placeholder": "Enter your last name",
+        "error": "Please provide a last name"
+      },
+      "email": {
+        "label": "Email address",
+        "placeholder": "Enter Email address",
+        "error": "Please provide a valid email"
+      },
+      "phone": {
+        "label": "Phone",
+        "placeholder": "Enter Phone",
+        "error": "Please provide a valid phone"
+      },
+      "nationality": {
+        "label": "Nationality",
+        "placeholder": "Enter Nationality",
+        "error": "Please select a nationality"
+      },
+      "message": {
+        "label": "Tell us more, what would you like to know?",
+        "placeholder": "Enter your message",
+        "error": "Please provide a message"
+      },
+      "terms": {
+        "label": "I accept to acknowledge that I have read and agree to the <policy>privacy policies</policy> before submitting the form",
+        "error": "You must accept the <policy>terms and conditions</policy>"
+      },
+      "city": {
+        "label": "City where you live",
+        "placeholder": "Enter city name",
+        "error": "Please provide a city"
+      },
+      "zipCode": {
+        "label": "ZIP code",
+        "placeholder": "Enter ZIP code",
+        "error": "Please provide a ZIP code"
+      },
+      "hostSize": {
+        "label": "How many students can you host?",
+        "placeholder": "Add a number",
+        "error": "Please provide your student capacity"
+      },
+      "institutionName": {
+        "label": "Name of your school / institution",
+        "placeholder": "Enter Name",
+        "error": "Please provide a name"
+      },
+      "dateRange": {
+        "label": "Expected date",
+        "placeholder": "00/00/0000 - 00/00/0000",
+        "error": "Please provide a valid range"
+      },
+      "supervisorNumber": {
+        "label": "Number of accompanying persons",
+        "placeholder": "Enter a number",
+        "error": "Please provide your supervisor amount"
+      },
+      "accommodationType": {
+        "label": "Type of accommodation",
+        "placeholder": "Choose one",
+        "error": "Please specify the accommodation type",
+        "options": {
+          "apartment": "Apartment",
+          "student-residence": "Student residence",
+          "hotel": "Hotel",
+          "hostel": "Hostel",
+          "host-family": "Host Family",
+          "airbnb": "Airbnb"
+        }
+      },
+      "roomType": {
+        "label": "Type of room",
+        "placeholder": "Choose one",
+        "error": "Please specify the room type",
+        "options": {
+          "single": "Single room",
+          "double": "Double room",
+          "triple": "Triple room",
+          "quadruple": "Quadruple room"
+        }
+      },
+      "boardType": {
+        "label": "Type of board",
+        "placeholder": "Choose one",
+        "error": "Please specify the board type",
+        "options": {
+          "self-catering": "Self-catering",
+          "Breakfast": "Breakfast included",
+          "half-board": "Half-board",
+          "full-board": "Full-board"
+        }
+      },
+      "roundTripIncluded": {
+        "label": "Would you like to include a round trip airport transfer in your quote?",
+        "placeholder": "Choose one",
+        "error": "Please specify if transport is included",
+        "options": {
+          "yes": "Arrival & departure included",
+          "arrival": "Arrival included",
+          "departure": "Departure included",
+          "no": "None included"
+        }
+      },
+      "culturalActivitiesIncluded": {
+        "label": "Would you like to include any type of cultural activities?",
+        "placeholder": "Choose one",
+        "error": "Please specify if cultural activities are included",
+        "options": {
+          "yes": "Yes",
+          "no": "No"
+        }
+      },
+      "applicantName": {
+        "label": "Name of the applicant",
+        "placeholder": "Enter applicant name",
+        "error": "Please provide a valid name"
+      },
+      "projectDescription": {
+        "label": "Project proposal",
+        "placeholder": "Enter a description of your project",
+        "error": "Please provide a description of your project"
+      }
+    },
+    "feedback": {
+      "success": {
+        "title": "Thank You",
+        "description": "Thank you for contacting us! Your inquiry has been successfully received.. <br></br>Our team will review it and get back to you as soon as possible.",
+        "sub-description": "You can also write us on <email>info@lea4int.com</email>"
+      },
+      "error": {
+        "title": "Error Ocurred",
+        "description": "Sorry, an error occurred. Thank you for your time. If you want you can contact us by email",
+        "sub-description": "<email>info@lea4int.com</email>"
+      },
+      "close": "Close"
+    },
+    "loading": {
+      "title": "Processing..",
+      "description": "Please wait a moment."
+    },
+    "submit": "Send form"
+  },
+  "locale-switcher": {
+    "en": "English",
+    "es": "Spanish"
+  },
+  "commitments-carousel": {
+    "standards": {
+      "title": "Highest quality standards",
+      "description": "We <b>work hard to provide the highest quality</b>  in every project we deliver. We firmly believe that delivering high quality services will lead to customer satisfaction."
+    },
+    "team": {
+      "title": "Dedicated team",
+      "description": "Our team will always make sure to fully <b>understand your needs</b>, exceed your expectations and ensure the <b>best results</b> in your project."
+    },
+    "approach": {
+      "title": "Personalized approach",
+      "description": "Not every project is the same and we know it, at LEA 4 International you will receive a fully customized approach. <b>We work hard for you to enjoy the results.</b>"
+    }
+  },
+  "cookie-banner": {
+    "message": "This website uses cookies to improve your browsing experience and analyze site traffic. By clicking \"Accept\", you agree to the use of cookies in accordance with our <policy>Cookie Policy.</policy>",
+    "accept": "Accept",
+    "reject": "Reject"
+  },
+  "more-info": {
+    "title": "Looking For More Information?",
+    "questions": "We are here to answer all your questions. <br></br> Contact us today!",
+    "more-info": "More Information",
+    "request-quote": "Request A Quote",
+    "host-family": "Become A Host Family",
+    "contact-us": "Contact Us"
+  },
+  "our-partners": {
+    "title": "Our Partners",
+    "partners": {
+      "name": "Erasmus+"
+    }
+  },
+  "become-partner": {
+    "title": "Become A Partner",
+    "description": "We are here to answer all your questions. <br></br><br></br>Contact us today!",
+    "button": {
+      "title": "Become a Partner",
+      "caption": "Contact Us"
+    }
+  },
+  "faqs": {
+    "erasmus": {
+      "what-is-erasmus-plus": {
+        "title": "What is Erasmus+?",
+        "description": "Erasmus+ is the EU's programme to support education, training, youth and sport in Europe. This program offers mobility opportunities in European Union countries and partner countries, allowing you to have a unique experience abroad."
+      },
+      "how-to-erasmus-plus": {
+        "title": "How to establish an Erasmus+ mobility project with a partner mobility agency?",
+        "description": "Contact us now to discover more about our services, the host companies and schools we collaborate with and how we can help you achieve your Erasmus+ mobility project. You can request your free quote on our website."
+      },
+      "how-to-organize": {
+        "title": "What steps do I need to take to organize an Erasmus+ mobility with a partner mobility agency?",
+        "description": "The first step is to contact us, we will evaluate your Erasmus+ mobility project with a customized approach to meet your needs and expectations. Our team of mobility experts will support you throughout the entire process."
+      },
+      "why-erasmus-plus": {
+        "title": "Why contact a partner mobility agency to organize my Erasmus+ mobility?",
+        "description": "LEA 4 International guarantees a successful Erasmus+ mobility project in various professional sectors and destinations. We collaborate with a variety of companies, schools, institutions and accommodation services that have been carefully selected to provide you with a high quality Erasmus+ experience. Additionally, we arrange transportation, cultural activities and we provide local support and tutoring services to ensure the participants are feeling supported."
+      },
+      "how-to-become-partner": {
+        "title": "How to become a KA2 project partner with LEA 4 International?",
+        "description": "If you want to become a KA2 project partner simply fill out our form, we will contact you as soon as possible to discuss your project proposal."
+      },
+      "hot-to-become-host-family": {
+        "title": "How to become a host family?",
+        "description": "If you want to become a host family simply fill out our form, we will contact you as soon as possible to discuss your application."
+      }
+    },
+    "language-courses": {
+      "language-courses-offer": {
+        "title": "What kind of language courses do we offer?",
+        "description": "We offer a variety of personalized language courses. We assess your language level and put you at the correct level from the start to ensure that your language skills will improve. We work with a team of passionate native teachers that will make sure you will get the best results."
+      }
+    },
+    "language-immersion": {
+      "what-it-is": {
+        "title": "What is a language immersion program?",
+        "description": "A language immersion program is an educational approach where students are fully immersed in a target language and culture. In this type of program, students are surrounded by the language they are learning both inside and outside the classroom.<br></br><br></br>This immersion helps students develop language proficiency more rapidly and gain a deeper understanding of the culture associated with the language. Language immersion programs can vary in duration and intensity, ranging from short-term programs to full academic semesters or years spent immersed in the language and culture."
+      }
+    },
+    "concierge": {
+      "what-included": {
+        "title": "What is included in concierge services for students?",
+        "description": "Student Concierge Services provides personalized support services for international students studying in a foreign country. Our aim is to provide the student with the best and most comfortable living abroad experience. We know letting your child go abroad to study in a foreign country can be stressful, to ease this process we stay connected with the student."
+      }
+    }
+  },
+  "footer": {
+    "follow-us": "Follow us on",
+    "copyright": "Copyright © 2024. LEA 4 International. All right reserved.",
+    "privacy-policy": "Legal warning & Privacy policy"
+  }
+}
