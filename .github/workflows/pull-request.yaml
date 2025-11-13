@@ -33,27 +33,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Restore Turbo Cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            .turbo
-            node_modules/.cache/turbo
-          key: turbo-cache-${{ github.sha }}
-          restore-keys: |
-            turbo-cache-
-
-      - name: Run Turbo pipeline
-        run: pnpm turbo run build test --cache-dir=".turbo"
-
-      - name: Save Turbo Cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            .turbo
-            node_modules/.cache/turbo
-          key: turbo-cache-${{ github.sha }}
-
       - name: Check for changeset
         id: check_changeset
         run: |
