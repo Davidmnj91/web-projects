@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+pnpm exec lint-staged
+
+# Run changeset check
+bash "$(dirname "$0")/_/check-changeset.sh"
