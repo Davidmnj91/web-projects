@@ -10,7 +10,6 @@
   "dependencyDashboard": true,
   "rangeStrategy": "bump",
   "enabledManagers": ["npm"],
-  "schedule": ["on the first day of the month"],
   "prConcurrentLimit": 5,
   "prHourlyLimit": 2
 }
