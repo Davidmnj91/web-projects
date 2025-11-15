@@ -1,4 +1,4 @@
-# @web-projects/tsconfig
+# @web-projects/eslint
 
 ## 1.0.0
 
