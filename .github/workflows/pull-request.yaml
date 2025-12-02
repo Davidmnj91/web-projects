@@ -9,30 +9,17 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
-  changeset:
+  check-changesets:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
+    name: 🛡️ Check Changesets
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Setup Node.js and pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          run_install: false
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
 
       - name: Check for changeset
         id: check_changeset
@@ -40,80 +27,115 @@ jobs:
           labels="${{ toJson(github.event.pull_request.labels) }}"
           title="${{ github.event.pull_request.title }}"
 
-          # bypass if label exists
+          # 1. Bypass si existe la etiqueta
           if echo "$labels" | grep -q '"name": *"no-changeset-needed"'; then
-            echo "status=bypass" >> $GITHUB_OUTPUT
-            exit 0
+          echo "status=bypass" >> $GITHUB_OUTPUT
+          echo "⏩ Bypass: Label found."
+          exit 0
           fi
 
-          # bypass if PR title starts with chore: or docs:
+          # 2. Bypass si el título es chore o docs
           if echo "$title" | grep -Eiq '^(chore|docs)'; then
-            echo "status=bypass" >> $GITHUB_OUTPUT
-            exit 0
+          echo "status=bypass" >> $GITHUB_OUTPUT
+          echo "⏩ Bypass: Title is chore/docs."
+          exit 0
           fi
 
-          # check for changeset
+          # 3. Buscar archivo .changeset
+          # Nota: Ajustado para asegurar que comparamos correctamente las ramas
+          git fetch origin ${{ github.base_ref }}
           if git diff --name-only origin/${{ github.base_ref }} | grep -q '^.changeset/.*\.md$'; then
-            echo "status=found" >> $GITHUB_OUTPUT
+          echo "✅ Changeset found."
+          echo "status=found" >> $GITHUB_OUTPUT
           else
-            echo "status=missing" >> $GITHUB_OUTPUT
-            exit 1
+          echo "❌ Changeset missing."
+          echo "status=missing" >> $GITHUB_OUTPUT
+          # No hacemos exit 1 aquí todavía para permitir que el paso del comentario se ejecute
           fi
 
-      - name: Manage PR comment
-        if: always()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const status = "${{ steps.check_changeset.outputs.status }}";
-            const issue_number = context.issue.number;
+          - name: Manage PR comment
+            if: always() # Se ejecuta siempre, incluso si falló el paso anterior (aunque aquí controlamos el fallo manualmente)
+            uses: actions/github-script@v7
+            with:
+              script: |
+                const status = "${{ steps.check_changeset.outputs.status }}";
+                const issue_number = context.issue.number;
 
-            const { data: comments } = await github.rest.issues.listComments({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number,
-            });
-
-            const botComments = comments.filter(c =>
-              c.user.type === "Bot" &&
-              c.body.includes("This PR is missing a **Changeset**")
-            );
-
-            if (status === "missing") {
-              if (botComments.length === 0) {
-                await github.rest.issues.createComment({
+                const { data: comments } = await github.rest.issues.listComments({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number,
-                  body: "⚠️ This PR is missing a **Changeset**.\n\n" +
-                        "Please run `pnpm changeset` and commit the generated file under `.changeset/`.\n\n" +
-                        "➡️ Maintainers can bypass this check by adding the `no-changeset-needed` label.\n" +
-                        "ℹ️ PRs titled with `chore:` or `docs:` also skip this check automatically."
                 });
-              }
-            } else {
-              for (const comment of botComments) {
-                await github.rest.issues.deleteComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  comment_id: comment.id,
-                });
-              }
-            }
-          github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check PR Title
+                const botComments = comments.filter(c =>
+                  c.user.type === "Bot" &&
+                  c.body.includes("This PR is missing a **Changeset**")
+                );
+
+                if (status === "missing") {
+                  if (botComments.length === 0) {
+                    await github.rest.issues.createComment({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number,
+                      body: "⚠️ This PR is missing a **Changeset**.\n\n" +
+                            "Please run `pnpm changeset` and commit the generated file under `.changeset/`.\n\n" +
+                            "➡️ Maintainers can bypass this check by adding the `no-changeset-needed` label.\n" +
+                            "ℹ️ PRs titled with `chore:` or `docs:` also skip this check automatically."
+                    });
+                  }
+                  // Hacemos fallar el job AHORA, después de comentar
+                  core.setFailed("Changeset missing");
+                } else {
+                  // Si ya existe o bypass, borramos el comentario del bot si existe
+                  for (const comment of botComments) {
+                    await github.rest.issues.deleteComment({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      comment_id: comment.id,
+                    });
+                  }
+                }
+              github-token: ${{ secrets.GITHUB_TOKEN }}
+
+
+  deploy-preview:
+    runs-on: ubuntu-latest
+    name: 🚀 Deploy Preview
+    if: github.event.action != 'labeled'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check PR Title (Deploy Logic)
         id: check_title
         env:
           TITLE: ${{ github.event.pull_request.title }}
         run: |
           if [[ "$TITLE" =~ ^(fix|feat)(\(.*\))?:.+ ]]; then
-            echo "✅ PR title matches semantic release, starting deploy."
+            echo "✅ Título válido para deploy."
             echo "should_deploy=true" >> $GITHUB_OUTPUT
           else
-            echo "⚠️ PR title '$TITLE' does not match 'fix' o 'feat'. Skipping deploy."
+            echo "Running validation only (no deploy for chore/docs/etc)."
             echo "should_deploy=false" >> $GITHUB_OUTPUT
           fi
+
+      - name: Setup Node & Pnpm
+        if: steps.check_title.outputs.should_deploy == 'true'
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        if: steps.check_title.outputs.should_deploy == 'true'
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Detect Affected Apps (Turbo)
         if: steps.check_title.outputs.should_deploy == 'true'
@@ -134,6 +156,7 @@ jobs:
             echo "AFFECTED_PATHS=${APPS_ARRAY[*]}" >> $GITHUB_ENV
             echo "✅ Affected apps detected: ${APPS_ARRAY[*]}"
           fi
+
       - name: Deploy to Vercel
         if: steps.check_title.outputs.should_deploy == 'true' && env.AFFECTED_PATHS != ''
         env:
@@ -156,7 +179,7 @@ jobs:
 
             PROJECT_ID=$(jq -r '.relatedProjects[0]' "$app/vercel.json")
             if [ "$PROJECT_ID" == "null" ] || [ -z "$PROJECT_ID" ]; then
-               echo "❌ Error: No se pudo leer el projectId de $app/vercel.json"
+               echo "❌ Error: Cannot read projectId from $app/vercel.json"
                exit 1
             fi
             echo "🔗 Linked to Project ID: $PROJECT_ID"
