@@ -31,6 +31,9 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Check for changeset
         id: check_changeset
         run: |
@@ -98,9 +101,6 @@ jobs:
               }
             }
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
 
       - name: Check PR Title
         id: check_title
