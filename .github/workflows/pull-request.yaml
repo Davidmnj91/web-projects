@@ -52,7 +52,7 @@ jobs:
         id: affected
         run: |
           RAW_OUTPUT=$(npx turbo ls --filter="...[origin/main]" --filter="./apps/*" --output=json)
-          CHANGED_APPS=$(echo "$RAW_OUTPUT" | jq -r '.packages[].path')
+          CHANGED_APPS=$(echo "$RAW_OUTPUT" | jq -r '.packages.items[].path')
 
           if [ -z "$CHANGED_APPS" ] || [ "$CHANGED_APPS" == "null" ]; then
             echo "No apps affected."
