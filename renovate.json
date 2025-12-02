@@ -2,13 +2,10 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:base",
-    ":semanticCommits",
-    ":preserveSemverRanges",
-    "group:allNonMajor",
+    "group:allNonMajor"
   ],
   "dependencyDashboard": true,
-  "rangeStrategy": "bump",
-  "enabledManagers": ["npm"],
+  "rangeStrategy": "replace",
   "prConcurrentLimit": 5,
   "prHourlyLimit": 2
 }
