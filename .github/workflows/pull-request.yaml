@@ -1,6 +1,7 @@
 name: Pull Request
 
 on:
+  workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
@@ -29,9 +30,6 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
 
       - name: Check for changeset
         id: check_changeset
@@ -100,3 +98,75 @@ jobs:
               }
             }
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check PR Title
+        id: check_title
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          if [[ "$TITLE" =~ ^(fix|feat)(\(.*\))?:.+ ]]; then
+            echo "✅ PR title matches semantic release, starting deploy."
+            echo "should_deploy=true" >> $GITHUB_OUTPUT
+          else
+            echo "⚠️ PR title '$TITLE' does not match 'fix' o 'feat'. Skipping deploy."
+            echo "should_deploy=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Detect Affected Apps (Turbo)
+        if: steps.check_title.outputs.should_deploy == 'true'
+        id: affected
+        run: |
+          RAW_OUTPUT=$(npx turbo ls --filter="...[origin/main]" --filter="./apps/*" --output=json)
+          CHANGED_APPS=$(echo "$RAW_OUTPUT" | jq -r '.packages[].path')
+
+          if [ -z "$CHANGED_APPS" ] || [ "$CHANGED_APPS" == "null" ]; then
+            echo "No apps affected."
+            echo "AFFECTED_PATHS=" >> $GITHUB_ENV
+          else
+            APPS_ARRAY=()
+            while IFS= read -r line; do
+              APPS_ARRAY+=("$line")
+            done <<< "$CHANGED_APPS"
+
+            echo "AFFECTED_PATHS=${APPS_ARRAY[*]}" >> $GITHUB_ENV
+            echo "✅ Affected apps detected: ${APPS_ARRAY[*]}"
+          fi
+      - name: Deploy to Vercel
+        if: steps.check_title.outputs.should_deploy == 'true' && env.AFFECTED_PATHS != ''
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        run: |
+          npm i -g vercel
+
+          read -ra APPS <<< "$AFFECTED_PATHS"
+
+          for app in "${APPS[@]}"; do
+            echo "------------------------------------------------"
+            echo "🚀 Processing: $app"
+
+            cd "$app"
+
+            if [ ! -f "vercel.json" ]; then
+              echo "⚠️ Cannot find vercel.json in $app. Skipping..."
+              cd - > /dev/null
+              continue
+            fi
+
+            PROJECT_ID=$(jq -r '.relatedProjects[0]' vercel.json)
+            if [ "$PROJECT_ID" == "null" ] || [ -z "$PROJECT_ID" ]; then
+               echo "❌ Error: No se pudo leer el projectId de vercel.json"
+               exit 1
+            fi
+            echo "🔗 Linked to Project ID: $PROJECT_ID"
+
+            VERCEL_PROJECT_ID=$PROJECT_ID vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
+            VERCEL_PROJECT_ID=$PROJECT_ID vercel build --token=$VERCEL_TOKEN
+            DEPLOY_URL=$(VERCEL_PROJECT_ID=$PROJECT_ID vercel deploy --prebuilt --token=$VERCEL_TOKEN)
+            echo "✅ Deployed at: $DEPLOY_URL"
+
+            cd - > /dev/null
+          done

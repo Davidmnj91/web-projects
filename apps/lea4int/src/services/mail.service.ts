@@ -18,6 +18,7 @@ const transportFactory = (accessToken: string): SMTPTransport.Options => ({
     rejectUnauthorized: false,
   },
 })
+
 export const sendMail = async (subject: string, to: string, template: string) => {
   try {
     let transport: SMTPTransport.Options
