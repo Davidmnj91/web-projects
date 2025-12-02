@@ -80,17 +80,15 @@ jobs:
             echo "------------------------------------------------"
             echo "🚀 Processing: $app"
 
-            cd "$app"
-
-            if [ ! -f "vercel.json" ]; then
+            if [ ! -f "$app/vercel.json" ]; then
               echo "⚠️ Cannot find vercel.json in $app. Skipping..."
               cd - > /dev/null
               continue
             fi
 
-            PROJECT_ID=$(jq -r '.relatedProjects[0]' vercel.json)
+            PROJECT_ID=$(jq -r '.relatedProjects[0]' "$app/vercel.json")
             if [ "$PROJECT_ID" == "null" ] || [ -z "$PROJECT_ID" ]; then
-               echo "❌ Error: No se pudo leer el projectId de vercel.json"
+               echo "❌ Error: No se pudo leer el projectId de $app/vercel.json"
                exit 1
             fi
             echo "🔗 Linked to Project ID: $PROJECT_ID"
@@ -98,6 +96,7 @@ jobs:
             VERCEL_PROJECT_ID=$PROJECT_ID vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
             VERCEL_PROJECT_ID=$PROJECT_ID vercel build --token=$VERCEL_TOKEN
             DEPLOY_URL=$(VERCEL_PROJECT_ID=$PROJECT_ID vercel deploy --prebuilt --token=$VERCEL_TOKEN)
+
             echo "✅ Deployed at: $DEPLOY_URL"
 
             cd - > /dev/null
