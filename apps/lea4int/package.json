@@ -28,7 +28,7 @@
     "next-intl": "catalog:i18n",
     "nodemailer": "catalog:nodemailer",
     "react": "catalog:react",
-    "react-datepicker": "^8.9.0",
+    "react-datepicker": "^8.10.0",
     "react-dom": "catalog:react",
     "react-email": "catalog:react-email",
     "react-hook-form": "catalog:hookform",
