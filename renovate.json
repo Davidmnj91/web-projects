@@ -1,11 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": [
+    "mergeConfidence:all-badges",
+    "config:recommended"
+  ],
   "dependencyDashboard": true,
   "rangeStrategy": "replace",
-  "schedule": [
-    "on the first day of the month"
-  ],
   "prConcurrentLimit": 5,
   "prHourlyLimit": 2
 }
