@@ -2,6 +2,7 @@
   "$schema": "https://turborepo.com/schema.json",
   "ui": "tui",
   "tasks": {
+    "clean": {},
     "build": {
       "dependsOn": ["lint", "^build"],
       "outputs": [".next/**"]
@@ -16,14 +17,16 @@
     "NODE_ENV",
     "APP_DOMAIN",
     "BASE_URL",
-    "MAIL_USER",
+    "GA_ID",
     "MAIL_CLIENT_ID",
     "MAIL_CLIENT_SECRET",
-    "OAUTH_REFRESH_TOKEN",
+    "MAIL_USER",
     "OAUTH_ACCESS_TOKEN",
     "OAUTH_REDIRECT_URL",
+    "OAUTH_REFRESH_TOKEN",
     "YOUTUBE_API_KEY",
     "YOUTUBE_CHANEL_ID",
-    "GA_ID"
+    "NEXT_PUBLIC_RE_CAPTCHA_SITE_KEY",
+    "RE_CAPTCHA_PRIVATE_KEY"
   ]
 }

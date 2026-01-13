@@ -15,11 +15,12 @@ import { checkboxStyles, ErrorField, inputStyles, labelStyles } from '@/componen
 import { FormLoadingPopup } from '@/components/form/form-loading'
 import { FormResultPopup } from '@/components/form/form-result'
 import { SubmitButton } from '@/components/form/submit-button'
+import { useCaptcha } from '@/hooks/useCaptcha'
 import { defaultTranslationVales } from '@/i18n/translation-values'
 import { PartnerContactSchema } from '@/schemas/contactSchemas'
 
 export const PartnerForm = () => {
-  const [state, formAction, pending] = useActionState<ContactUsState, FormData>(getContactUs, null)
+  const [state, formAction, pending] = useActionState<ContactUsState, FormData>(useCaptcha(getContactUs), null)
   const [showPopup, setShowPopup] = useState(false)
   const [serverError, setServerError] = useState<boolean>(false)
 
