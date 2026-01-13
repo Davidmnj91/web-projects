@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import Script from 'next/script'
 import { useMessages } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import React, { use } from 'react'
@@ -119,6 +120,9 @@ export default function RootLayout({ params, children }: RootLayoutProps) {
         <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body className='bg-basics-white relative mx-auto'>
+        <Script
+          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RE_CAPTCHA_SITE_KEY}&badge=bottomleft`}
+        />
         <IntlClientProvider locale={locale} messages={messages} timeZone='Europe/Berlin' now={new Date()}>
           {children}
           <ContactUs />

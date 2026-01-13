@@ -16,11 +16,12 @@ import { checkboxStyles, ErrorField, inputStyles, labelStyles } from '@/componen
 import { FormLoadingPopup } from '@/components/form/form-loading'
 import { FormResultPopup } from '@/components/form/form-result'
 import { SubmitButton } from '@/components/form/submit-button'
+import { useCaptcha } from '@/hooks/useCaptcha'
 import { defaultTranslationVales } from '@/i18n/translation-values'
 import { HostFamilyContactSchema } from '@/schemas/contactSchemas'
 
 export const FamilyForm = () => {
-  const [state, formAction] = useActionState<ContactUsState, FormData>(getContactUs, null)
+  const [state, formAction] = useActionState<ContactUsState, FormData>(useCaptcha(getContactUs), null)
   const { pending } = useFormStatus()
   const [showPopup, setShowPopup] = useState(false)
   const [serverError, setServerError] = useState<boolean>(false)
