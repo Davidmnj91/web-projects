@@ -12,6 +12,7 @@ import type { Language } from '@/i18n/config'
 import type { ContactData, ContactEmailProps } from '@/types/contact'
 import type { Nullable, ValidationErrors } from '@/types/types'
 
+import { validateCaptcha } from '@/hooks/useCaptcha'
 import { defaultLanguage } from '@/i18n/config'
 import {
   HostFamilyContactSchema,
@@ -46,6 +47,11 @@ const partnerFormDataSchema = zfd.formData(PartnerContactSchema)
 
 export async function getContactUs(prevState: ContactUsState | null, data: FormData): Promise<ContactUsState> {
   try {
+    const token = data.get('token') as string
+    const isValid = await validateCaptcha(token)
+    if (!isValid) {
+      throw new Error('Invalid captcha')
+    }
     const language: Language = (data.get('language') ?? defaultLanguage) as Language
     let contactData: ContactData
 
