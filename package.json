@@ -5,7 +5,7 @@
   "author": "David Manja",
   "scripts": {
     "changeset:add": "changeset add",
-    "clean": "rimraf -g **/.turbo **/dist **/coverage **/*.tsbuildinfo",
+    "clean": "pnpm turbo clean && rimraf -g .turbo",
     "clean:modules": "rimraf -g node_modules **/node_modules",
     "commit": "git-cz",
     "format:check": "prettier \"**/*\" --list-different",
@@ -40,5 +40,5 @@
     "turbo": "catalog:default",
     "typescript": "catalog:typescript"
   },
-  "packageManager": "pnpm@10.20.0"
+  "packageManager": "pnpm@10.28.0"
 }

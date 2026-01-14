@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import React, { Fragment, useCallback, useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 
 import our_beliefs_bg from '../../../public/images/home/our_beliefs_bg.webp'
 import our_commitment_bg from '../../../public/images/home/our_commitment_bg.webp'
