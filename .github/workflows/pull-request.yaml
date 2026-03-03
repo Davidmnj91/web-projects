@@ -55,7 +55,7 @@ jobs:
 
           - name: Manage PR comment
             if: always() # Se ejecuta siempre, incluso si falló el paso anterior (aunque aquí controlamos el fallo manualmente)
-            uses: actions/github-script@v7
+            uses: actions/github-script@v8
             with:
               script: |
                 const status = "${{ steps.check_changeset.outputs.status }}";
