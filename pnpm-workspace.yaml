@@ -44,7 +44,7 @@ catalogs:
     markdownlint-cli: ^0.47.0
     typescript-eslint: ^8.53.0
   google:
-    googleapis: ^170.0.0
+    googleapis: ^171.0.0
   hookform:
     '@hookform/error-message': ^2.0.1
     '@hookform/resolvers': ^5.2.2
