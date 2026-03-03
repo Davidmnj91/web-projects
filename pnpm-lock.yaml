@@ -103,8 +103,8 @@ catalogs:
       version: 8.53.0
   google:
     googleapis:
-      specifier: ^170.0.0
-      version: 170.0.0
+      specifier: ^171.0.0
+      version: 171.4.0
   hookform:
     '@hookform/error-message':
       specifier: ^2.0.1
@@ -331,7 +331,7 @@ importers:
         version: 12.26.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       googleapis:
         specifier: catalog:google
-        version: 170.0.0
+        version: 171.4.0
       next:
         specifier: catalog:next
         version: 16.1.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -3235,8 +3235,8 @@ packages:
     resolution: {integrity: sha512-eCzNACUXPb1PW5l0ULTzMHaL/ltPRADoPgjBlT8jWsTbxkCp6siv+qKJ/1ldaybCthGwsYFYallF7u9AkU4L+A==}
     engines: {node: '>=18.0.0'}
 
-  googleapis@170.0.0:
-    resolution: {integrity: sha512-UJz71WZ3ubMr4NhkEU+CFTS0CMrrXq+ltrFnAQo8Llf9M3cy0AIfKLyFQdUJyhqIpJ4jPW4SRCcBBntrLQ72/A==}
+  googleapis@171.4.0:
+    resolution: {integrity: sha512-xybFL2SmmUgIifgsbsRQYRdNrSAYwxWZDmkZTGjUIaRnX5jPqR8el/cEvo6rCqh7iaZx6MfEPS/lrDgZ0bymkg==}
     engines: {node: '>=18'}
 
   gopd@1.2.0:
@@ -8641,7 +8641,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  googleapis@170.0.0:
+  googleapis@171.4.0:
     dependencies:
       google-auth-library: 10.5.0
       googleapis-common: 8.0.1
