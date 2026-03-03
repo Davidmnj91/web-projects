@@ -60,7 +60,7 @@ catalogs:
     '@types/node': ^22.19.1
   nodemailer:
     '@types/nodemailer': ^7.0.5
-    nodemailer: ^7.0.12
+    nodemailer: ^8.0.0
   prettier:
     prettier: ^3.7.4
     prettier-plugin-packagejson: ^2.5.21
