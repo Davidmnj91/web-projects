@@ -63,7 +63,7 @@ catalogs:
     nodemailer: ^8.0.0
   prettier:
     prettier: ^3.7.4
-    prettier-plugin-packagejson: ^2.5.21
+    prettier-plugin-packagejson: ^3.0.0
     prettier-plugin-tailwindcss: ^0.7.2
   react:
     '@types/react': ^19.2.8
