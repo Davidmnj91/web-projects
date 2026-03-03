@@ -141,8 +141,8 @@ catalogs:
       specifier: ^7.0.5
       version: 7.0.5
     nodemailer:
-      specifier: ^7.0.12
-      version: 7.0.12
+      specifier: ^8.0.0
+      version: 8.0.1
   prettier:
     prettier:
       specifier: ^3.7.4
@@ -340,7 +340,7 @@ importers:
         version: 4.7.0(@swc/helpers@0.5.17)(next@16.1.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(typescript@5.9.3)
       nodemailer:
         specifier: catalog:nodemailer
-        version: 7.0.12
+        version: 8.0.1
       react:
         specifier: catalog:react
         version: 19.2.3
@@ -4134,8 +4134,8 @@ packages:
   node-releases@2.0.27:
     resolution: {integrity: sha512-nmh3lCkYZ3grZvqcCH+fjmQ7X+H0OeZgP40OierEaAptX4XofMh5kwNbWh7lBduUzCcV/8kZ+NDLCwm2iorIlA==}
 
-  nodemailer@7.0.12:
-    resolution: {integrity: sha512-H+rnK5bX2Pi/6ms3sN4/jRQvYSMltV6vqup/0SFOrxYYY/qoNvhXPlYq3e+Pm9RFJRwrMGbMIwi81M4dxpomhA==}
+  nodemailer@8.0.1:
+    resolution: {integrity: sha512-5kcldIXmaEjZcHR6F28IKGSgpmZHaF1IXLWFTG+Xh3S+Cce4MiakLtWY+PlBU69fLbRa8HlaGIrC/QolUpHkhg==}
     engines: {node: '>=6.0.0'}
 
   noms@0.0.0:
@@ -9604,7 +9604,7 @@ snapshots:
 
   node-releases@2.0.27: {}
 
-  nodemailer@7.0.12: {}
+  nodemailer@8.0.1: {}
 
   noms@0.0.0:
     dependencies:
