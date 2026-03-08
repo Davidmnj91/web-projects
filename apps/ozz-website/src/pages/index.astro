@@ -1,0 +1,146 @@
+---
+import Logo from "../components/logo.astro";
+import Layout from '../layouts/Layout.astro'
+export const prerender = false
+---
+<Layout headerOffset={412} title="Selected Work" description="My selected work">
+  <div id="loader-overlay" class="fixed inset-0 z-100 flex items-center justify-center bg-white transition-opacity duration-1000">
+    <div class="absolute inset-0 z-0">
+      <img
+        id="hero-loader-img"
+        class="w-full h-full object-cover animate-focus-loop"
+        src="/loading_bg.png"
+        alt="loading"
+      />
+    </div>
+
+    <div id="loader-logo" class="relative z-10 text-center">
+      <Logo/>
+    </div>
+  </div>
+  <section id="main-content" class="opacity-0 translate-y-10 transition-all duration-1000 mx-auto">
+    <div
+      id="gallery"
+      class="hidden md:flex items-start gap-4 md:gap-8 w-full mx-auto py-10"
+    >
+      <div id="col-1" class="flex-1"></div>
+      <div id="col-2" class="flex-1"></div>
+    </div>
+    <div id="gallery-mobile" class="md:hidden p-4"></div>
+    <div id="sentinel" class="h-20 flex items-center justify-center mt-10">
+      <div id="loader" class="hidden loading-indicator text-xs uppercase tracking-widest text-gray-400">Loading more...</div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @keyframes focus-loop {
+    0%, 100% {
+      filter: blur(25px);
+      scale: 1.1;
+    }
+    50% {
+      filter: blur(5px);
+      scale: 1.02;
+    }
+  }
+  .animate-focus-loop { animation: focus-loop 1s infinite ease-in-out; }
+  .camera-shutter {
+    animation: none !important;
+    filter: blur(0);
+    scale: 1 !important;
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1) !important;
+    object-fit: contain !important;
+  }
+  .break-inside-avoid { break-inside: avoid; }
+</style>
+
+<script is:inline>
+  const overlay = document.getElementById('loader-overlay');
+  const content = document.getElementById('main-content');
+  const heroImg = document.getElementById('hero-loader-img')
+
+  const galleryMobile = document.getElementById("gallery-mobile")
+  const col1 = document.getElementById("col-1")
+  const col2 = document.getElementById("col-2")
+
+  const sentinel = document.getElementById('sentinel')
+  const loader = document.getElementById('loader')
+
+  let nextCursor = undefined
+  let isLoading = false
+  let heroAnimationExecuted = false
+
+  const checkFirstBatch = () => {
+    if (!heroAnimationExecuted) {
+      heroAnimationExecuted = true
+      heroImg.classList.toggle('camera-shutter')
+      setTimeout(() => {
+        overlay.style.opacity = '0'
+        overlay.style.pointerEvents = 'none'
+        content.classList.remove('opacity-0', 'translate-y-10')
+      }, 500);
+    }
+  }
+
+  const addImagesToDom = (data) => {
+    const getShortestColumn = () => (col1?.offsetHeight ?? 0) <= (col2?.offsetHeight ?? 0) ? col1 : col2
+    const createImageCard = img => {
+      const optimizedUrl = img.secure_url.replace('/upload/', '/upload/f_auto,q_auto,w_auto/')
+
+      const div = document.createElement("div")
+      div.className = "group relative overflow-hidden bg-gray-100 mb-4 md:mb-8 break-inside-avoid"
+
+      div.innerHTML = `
+    <img
+      src="${optimizedUrl}"
+      alt="Photography by Oscar Zamora"
+      width="${img.width}"
+      height="${img.height}"
+      loading="lazy"
+      decoding="async"
+      onload="checkFirstBatch()"
+      class="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+    />
+    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 pointer-events-none"></div>
+  `
+
+      return div
+    }
+
+    (data ?? []).forEach((img) => {
+      const card = createImageCard(img)
+      galleryMobile?.appendChild(card)
+
+      getShortestColumn()?.appendChild(card)
+    })
+  }
+
+
+  const observer = new IntersectionObserver(async (entries) => {
+    if (entries[0].isIntersecting && !isLoading) {
+      isLoading = true
+      try {
+        loader?.classList.remove('hidden')
+        const url = `/api/images${nextCursor ? `?next_cursor=${encodeURIComponent(nextCursor)}` : ''}`
+        const response = await fetch(url)
+        const {resources, next_cursor} = await response.json()
+
+        addImagesToDom(resources)
+        nextCursor = next_cursor
+      } catch (error) {
+        console.error('Error loading images:', error)
+      } finally {
+        isLoading = false
+        if (!nextCursor) {
+          observer.unobserve(sentinel)
+          sentinel.remove()
+        } else {
+          loader?.classList.add('hidden')
+        }
+      }
+    }
+  }, { rootMargin: "400px" })
+
+  if (sentinel) observer.observe(sentinel)
+</script>
