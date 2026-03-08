@@ -8,6 +8,12 @@ packages:
 catalogMode: prefer
 
 catalogs:
+  astro:
+    '@astrojs/sitemap': ^3.7.0
+    '@astrojs/vercel': ^9.0.4
+    astro: ^5.17.1
+  cloudinary:
+    cloudinary: ^2.9.0
   commit-hooks:
     '@changesets/cli': ^2.29.8
     '@commitlint/cli': ^20.3.1
@@ -32,6 +38,7 @@ catalogs:
     eslint: ^9.39.2
     eslint-config-next: 16.1.6
     eslint-config-prettier: ^10.1.8
+    eslint-plugin-astro: ^1.6.0
     eslint-plugin-import: ^2.32.0
     eslint-plugin-jsx-a11y: ^6.10.2
     eslint-plugin-react: ^7.37.5
@@ -76,7 +83,8 @@ catalogs:
     react-email: 4.3.2
   tailwind:
     '@tailwindcss/postcss': ^4.1.18
-    tailwindcss: ^4.1.18
+    '@tailwindcss/vite': ^4.2.1
+    tailwindcss: ^4.2.1
   typescript:
     typescript: ^5.9.3
   ui-kit:
