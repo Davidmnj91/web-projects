@@ -1,0 +1,64 @@
+---
+const menu = [
+  { href: '/', label: 'Selected Work' },
+  { href: '/contacto', label: 'About & Contact Me' },
+];
+const {pathname} = Astro.url
+console.log(pathname)
+---
+<header id="menu" class="w-full bg-white sticky top-0 z-50 transition-all duration-300">
+  <nav class="px-4 md:px-14 flex flex-col md:flex-row items-center md:items-baseline justify-between gap-6 md:gap-0 transition-all duration-300">
+      <a href="/" class="text-lg font-medium hover:opacity-70 transition-opacity">
+        OSCAR ZAMORA
+      </a>
+      <span class="text-base text-black font-normal">
+        Portrait & Still photographer
+      </span>
+
+    <div class="flex items-center gap-8 md:gap-12 text-xs uppercase tracking-widest font-medium">
+      {menu.map((item) => (
+          <a href={item.href} class={`relative hover:opacity-70 transition-all ${pathname === item.href ? 'active' : ''}`}>
+            {item.label}
+          </a>
+      ))}
+    </div>
+  </nav>
+</header>
+<style>
+  @reference "tailwindcss";
+  a.active {
+    @apply after:absolute after:-bottom-0.5 after:left-0 after:w-full after:h-px after:bg-black;
+  }
+  header {
+    @apply py-12 md:py-20
+  }
+  header.stuck {
+    @apply h-25 py-10 px-14 border-gray-100 flex items-center justify-center;
+  }
+
+  header.stuck > nav {
+    @apply p-0 m-0 max-w-none w-full;
+  }
+</style>
+
+<script>
+  const header = document.getElementById("menu")
+  const offset = parseInt(document.body.dataset.headerOffset ?? '0')
+  let isSticky = offset === 0
+
+  if (header) {
+    if (isSticky) {
+      header.classList.toggle('stuck')
+    } else {
+      header.style.marginTop = `${offset}px`
+      window.addEventListener("scroll", () => {
+        const shouldBeSticky = window.scrollY >= offset
+
+        if (shouldBeSticky === isSticky) return
+
+        isSticky = shouldBeSticky
+        header.classList.toggle("stuck")
+      }, { passive: true })
+    }
+  }
+</script>
