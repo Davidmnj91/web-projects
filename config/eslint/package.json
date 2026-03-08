@@ -21,6 +21,7 @@
     "@eslint/compat": "catalog:eslint",
     "@eslint/eslintrc": "catalog:eslint",
     "@eslint/js": "catalog:eslint",
+    "eslint-plugin-astro": "catalog:eslint",
     "@next/eslint-plugin-next": "catalog:eslint",
     "eslint-config-prettier": "catalog:eslint",
     "eslint-plugin-import": "catalog:eslint",
