@@ -88,10 +88,13 @@ export const prerender = false
     const createImageCard = img => {
       const optimizedUrl = img.secure_url.replace('/upload/', '/upload/f_auto,q_auto,w_auto/')
 
-      const div = document.createElement("div")
-      div.className = "group relative overflow-hidden bg-gray-100 mb-4 md:mb-8 break-inside-avoid"
+      const anchorElement = document.createElement("a")
+      anchorElement.href = img.secure_url
+      anchorElement.setAttribute('data-pswp-width', img.width)
+      anchorElement.setAttribute('data-pswp-height', img.height)
+      anchorElement.className = "block group relative overflow-hidden bg-gray-100 mb-4 md:mb-8 break-inside-avoid"
 
-      div.innerHTML = `
+      anchorElement.innerHTML = `
     <img
       src="${optimizedUrl}"
       alt="Photography by Oscar Zamora"
@@ -105,26 +108,28 @@ export const prerender = false
     <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 pointer-events-none"></div>
   `
 
-      return div
+      return anchorElement
     }
 
-    (data ?? []).forEach((img) => {
-      const card = createImageCard(img)
+    const cards = (data ?? []).map(createImageCard)
+    cards.forEach(card => {
       galleryMobile?.appendChild(card)
-
       getShortestColumn()?.appendChild(card)
     })
+    if (window.refreshLightbox) {
+      window.refreshLightbox(cards);
+    }
   }
 
 
-  const observer = new IntersectionObserver(async (entries) => {
-    if (entries[0].isIntersecting && !isLoading) {
+  async function loadNextBatch() {
+    if (!isLoading) {
       isLoading = true
       try {
         loader?.classList.remove('hidden')
         const url = `/api/images${nextCursor ? `?next_cursor=${encodeURIComponent(nextCursor)}` : ''}`
         const response = await fetch(url)
-        const {resources, next_cursor} = await response.json()
+        const { resources, next_cursor } = await response.json()
 
         addImagesToDom(resources)
         nextCursor = next_cursor
@@ -140,7 +145,108 @@ export const prerender = false
         }
       }
     }
+  }
+
+  const observer = new IntersectionObserver(async (entries) => {
+    if (entries[0].isIntersecting) {
+      await loadNextBatch(entries)
+    }
   }, { rootMargin: "400px" })
 
   if (sentinel) observer.observe(sentinel)
+
+  window.addEventListener('load-more-photos', loadNextBatch);
+</script>
+
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import 'photoswipe/style.css';
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '#main-content',
+    children: 'a',
+    pswpModule: () => import('photoswipe'),
+    padding: { top: 0, bottom: 0, left: 0, right: 0 },
+    initialZoomLevel: 'fill',
+    zoom: false,
+    counter: false,
+    arrowPrev: false,
+    arrowNext: false,
+    close: false,
+  });
+
+  // Detectar cuando el usuario pasa fotos dentro del Lightbox
+  lightbox.on('change', () => {
+    const pswp = lightbox.pswp;
+    const currIndex = pswp.currIndex;
+    const totalItems = pswp.getNumItems();
+
+    // Si faltan 2 fotos para llegar al final del batch actual...
+    if (currIndex >= totalItems - 2) {
+      // Disparamos el evento global para que el Infinite Scroll cargue más
+      window.dispatchEvent(new CustomEvent('load-more-photos'));
+    }
+  });
+
+  lightbox.on('uiRegister', function() {
+    // Botón de Cerrar Personalizado
+    lightbox.pswp?.ui?.registerElement({
+      name: 'author',
+      appendTo: 'wrapper',
+      html: '<div class="custom-name-col">OSCAR ZAMORA</div>',
+    });
+
+    lightbox.pswp?.ui?.registerElement({
+      name: 'custom_close',
+      appendTo: 'wrapper',
+      ariaLabel: 'Cerrar galería',
+      isButton: true,
+      html: `<span>CLOSE X</span>`,
+      onClick: (event, el, pswp) => {
+        pswp.close();
+      }
+    });
+
+    lightbox.pswp?.ui?.registerElement({
+      name: 'controls',
+      appendTo: 'wrapper',
+      html: `
+        <div class="custom-nav-col">
+          <div class="flex gap-2 text-sm tracking-tighter uppercase font-medium">
+            <button id="pswp-prev">« Prev</button>
+            <span class="opacity-30">-</span>
+            <button id="pswp-next">Next »</button>
+          </div>
+        </div>
+      `,
+      onInit: (el, pswp) => {
+        el.querySelector('#pswp-prev').onclick = () => pswp.prev();
+        el.querySelector('#pswp-next').onclick = () => pswp.next();
+      }
+    });
+
+    lightbox.pswp?.ui?.registerElement({
+      name: 'pagination',
+      appendTo: 'wrapper',
+      onInit: (el, pswp) => {
+        pswp.on('change', () => {
+          const curr = pswp.currIndex + 1;
+          const total = pswp.getNumItems();
+          el.innerText = `${curr < 10 ? '0' + curr : curr}/${total}`;
+        });
+      },
+      html: '<div class="pswp__previews-count"></div>'
+    });
+  });
+
+  lightbox.init();
+
+  // Función para inyectar fotos en el Lightbox abierto
+  window.refreshLightbox = (cards) => {
+    const pswp = lightbox.pswp
+    if (pswp) {
+      pswp.options.dataSource?.items.push(...cards)
+      pswp.refreshSlideContent(pswp.getNumItems() - 1);
+    }
+  };
 </script>
