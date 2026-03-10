@@ -25,71 +25,34 @@
 }
 
 .pswp__bg {
-  background-color: white !important;
-  opacity: 1 !important;
+  @apply bg-white! opacity-100!;
 }
-
-.pswp__scroll-wrap {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto 4fr auto auto;
-  grid-template-areas:
-      "author close"
-      "picture picture"
-      "controls controls"
-      "pagination pagination";
-  @apply px-6 py-10;
-}
-
-@media (width >= 48rem) {
-  .pswp__scroll-wrap {
-    display: grid;
-    grid-template-columns: 1fr 4fr auto;
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-areas:
-          "author picture close"
-          "author picture controls"
-          "author picture pagination";
-    @apply px-14 gap-6;
-  }
-}
-
-.pswp__container {
-  grid-area: picture;
-  @apply flex justify-center items-center h-full w-full;
-
-  .pswp__item {
-    @apply flex! justify-center! items-center!;
-  }
-
-  .pswp__item[aria-hidden="false"] {
-    .pswp__zoom-wrap {
-      @apply transform-none! h-full w-full relative flex items-center justify-end;
-    }
-  }
-
-  .pswp__img {
-    @apply relative! w-full! h-full! max-w-full! max-h-full! object-contain! overflow-hidden! m-auto;
-  }
-}
-
 
 .pswp__author {
-  grid-area: author;
-  @apply flex justify-start items-center h-auto md:justify-center md:h-full;
+  @apply absolute left-6 top-10 z-50 flex items-center uppercase tracking-tighter font-medium text-xl;
+  @apply md:left-14 md:top-0 md:bottom-0 md:w-[15%] md:justify-center;
 }
 
 .pswp__button.pswp__button--custom_close {
-  grid-area: close;
-  @apply w-full h-full flex justify-end items-center md:items-start md:justify-end md:pt-14 md:hover:pt-14! md:active:pt-14! md:focus:pt-14!;
+  @apply absolute w-auto right-6 top-10 z-50 flex uppercase tracking-tighter font-medium text-base bg-transparent border-none cursor-pointer;
+  @apply md:right-14 md:top-14;
 }
 
 .pswp__controls {
-  grid-area: controls;
-  @apply h-full w-full md:w-auto flex md:justify-end md:items-center;
+  @apply absolute bottom-16 -translate-y-1/2 z-50 px-6 w-full flex justify-between items-center text-sm;
+  @apply md:right-14 md:top-1/2 md:w-auto md:justify-end md:px-0;
 }
 
 .pswp__pagination {
-  grid-area: pagination;
-  @apply h-full flex justify-end items-start md:items-end pb-16;
+  @apply absolute right-6 bottom-10 z-50 flex items-center uppercase tracking-tighter font-medium text-xs ;
+  @apply md:right-14 md:bottom-14;
+}
+
+/* Ensure the image container doesn't have conflicting flex/grid styles */
+.pswp__container {
+  /* Restore default PhotoSwipe behavior */
+}
+
+.pswp__img {
+  @apply object-contain;
 }

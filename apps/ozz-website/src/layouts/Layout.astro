@@ -17,7 +17,7 @@ const {
 } = Astro.props
 ---
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -31,8 +31,8 @@ const {
 
     <link rel="canonical" href={canonicalURL} />
 
-    <title>{title}</title>
-    <meta name="title" content={title} />
+    <title>{title} | Oscar Zamora - Photographer</title>
+    <meta name="title" content={`${title} | Oscar Zamora - Photographer`} />
     <meta name="description" content={description} />
 
     <meta property="og:type" content="website" />
@@ -53,14 +53,18 @@ const {
         "@context": "https://schema.org",
         "@type": "PhotographyBusiness",
         "name": "Oscar Zamora",
+        "description": "Professional Portrait & Still Photographer based in Madrid",
         "image": "https://ozzphoto.com/loading_bg.png",
         "url": "https://ozzphoto.com",
-        "email": "oscar@ozzphoto.com",
+        "email": "ozzproducer@gmail.com",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Madrid",
           "addressCountry": "ES"
-        }
+        },
+        "sameAs": [
+          "https://www.instagram.com/ozz_photographer/"
+        ]
       }
     </script>
 	</head>
