@@ -21,6 +21,12 @@ cloudinary.config({
   api_secret: import.meta.env.CLOUDINARY_API_SECRET,
 })
 
+// const getRandomInt = (min: number, max: number): number => {
+//   const minCeiled = Math.ceil(min)
+//   const maxFloored = Math.floor(max)
+//   return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled)
+// }
+
 // const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
 
 export const getImages = async (
@@ -39,13 +45,17 @@ export const getImages = async (
   const result = (await query.execute()) as CloudinaryResponse
 
   // const result = {
-  //   resources: Array.from({ length: 10 }, (_, i) => ({
-  //     public_id: 'public_id',
-  //     secure_url: `https://picsum.photos/200/300?random=${i}.jpg`,
-  //     width: 200,
-  //     height: 300,
-  //     format: 'jpg',
-  //   })),
+  //   resources: Array.from({ length: 10 }, (_, i) => {
+  //     const width = getRandomInt(200, 600)
+  //     const height = getRandomInt(200, 600)
+  //     return {
+  //       public_id: 'public_id',
+  //       secure_url: `https://picsum.photos/${width}/${height}?random=${i}.jpg`,
+  //       width: width,
+  //       height: height,
+  //       format: 'jpg',
+  //     }
+  //   }),
   //   next_cursor: 'testt',
   // }
 

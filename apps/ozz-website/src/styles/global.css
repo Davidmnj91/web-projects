@@ -25,130 +25,71 @@
 }
 
 .pswp__bg {
-  background: white !important;
+  background-color: white !important;
   opacity: 1 !important;
 }
 
 .pswp__scroll-wrap {
   display: grid;
-  grid-template-columns: 2fr 4fr 1fr;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 4fr auto auto;
   grid-template-areas:
-        "author picture close"
-        "author picture controls"
-        "author picture pagination";
-  padding: 0 56px;
+      "author close"
+      "picture picture"
+      "controls controls"
+      "pagination pagination";
+  @apply px-6 py-10;
+}
+
+@media (width >= 48rem) {
+  .pswp__scroll-wrap {
+    display: grid;
+    grid-template-columns: 1fr 4fr auto;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+          "author picture close"
+          "author picture controls"
+          "author picture pagination";
+    @apply px-14 gap-6;
+  }
 }
 
 .pswp__container {
   grid-area: picture;
-  display: flex;
-  height: 100%;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-
-  .pswp__img {
-    position: relative !important;
-
-    width: auto !important;
-    height: auto !important;
-    max-width: 100% !important;
-    max-height: 100% !important;
-    object-fit: contain !important;
-    margin: auto;
-  }
-
-  .pswp__scroll-wrap {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 100% !important;
-  }
+  @apply flex justify-center items-center h-full w-full;
 
   .pswp__item {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
+    @apply flex! justify-center! items-center!;
   }
 
   .pswp__item[aria-hidden="false"] {
     .pswp__zoom-wrap {
-      transform: none !important;
-      height: 100%;
-      width: 100%;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: end;
+      @apply transform-none! h-full w-full relative flex items-center justify-end;
     }
+  }
+
+  .pswp__img {
+    @apply relative! w-full! h-full! max-w-full! max-h-full! object-contain! overflow-hidden! m-auto;
   }
 }
 
+
 .pswp__author {
   grid-area: author;
-  display: flex;
-  height: 100%;
-  justify-content: start;
-  align-items: center;
+  @apply flex justify-start items-center h-auto md:justify-center md:h-full;
 }
 
 .pswp__button.pswp__button--custom_close {
   grid-area: close;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: start;
-  justify-content: end;
-  padding: 54px 0 0;
-}
-
-.pswp__button.pswp__button--custom_close:active,
-.pswp__button.pswp__button--custom_close:focus,
-.pswp__button.pswp__button--custom_close:hover {
-  padding: 54px 0 0 !important;
+  @apply w-full h-full flex justify-end items-center md:items-start md:justify-end md:pt-14 md:hover:pt-14! md:active:pt-14! md:focus:pt-14!;
 }
 
 .pswp__controls {
   grid-area: controls;
-  height: 100%;
-  display: flex;
-  justify-content: end;
-  align-items: center;
+  @apply h-full w-full md:w-auto flex md:justify-end md:items-center;
 }
 
 .pswp__pagination {
   grid-area: pagination;
-  display: flex;
-  height: 100%;
-  justify-content: end;
-  align-items: end;
-  padding: 0 0 64px;
-}
-
-.custom-nav-col {
-  grid-column: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 20px;
-}
-
-@media (max-width: 768px) {
-  .pswp__ui {
-    grid-template-columns: 1fr; /* Una sola columna */
-    grid-template-rows: auto 1fr auto;
-    padding: 20px;
-  }
-
-  .custom-name-col {
-    display: none; /* Ocultamos el nombre para ganar espacio */
-  }
-
-  .custom-nav-col {
-    grid-row: 3;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
+  @apply h-full flex justify-end items-start md:items-end pb-16;
 }

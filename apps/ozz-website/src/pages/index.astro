@@ -3,7 +3,7 @@ import Logo from "../components/logo.astro";
 import Layout from '../layouts/Layout.astro'
 export const prerender = false
 ---
-<Layout headerOffset={412} title="Selected Work" description="My selected work">
+<Layout headerOffset="mt-0 md:mt-[412px]" title="Selected Work" description="My selected work">
   <div id="loader-overlay" class="fixed inset-0 z-100 flex items-center justify-center bg-white transition-opacity duration-1000">
     <div class="absolute inset-0 z-0">
       <img
@@ -21,12 +21,12 @@ export const prerender = false
   <section id="main-content" class="opacity-0 translate-y-10 transition-all duration-1000 mx-auto">
     <div
       id="gallery"
-      class="hidden md:flex items-start gap-4 md:gap-8 w-full mx-auto py-10"
+      class="hidden md:flex items-start gap-8 w-full mx-auto py-10"
     >
       <div id="col-1" class="flex-1"></div>
       <div id="col-2" class="flex-1"></div>
     </div>
-    <div id="gallery-mobile" class="md:hidden p-4"></div>
+    <div id="gallery-mobile" class="flex flex-col gap-4 md:hidden"></div>
     <div id="sentinel" class="h-20 flex items-center justify-center mt-10">
       <div id="loader" class="hidden loading-indicator text-xs uppercase tracking-widest text-gray-400">Loading more...</div>
     </div>
@@ -76,7 +76,7 @@ export const prerender = false
       heroAnimationExecuted = true
       heroImg.classList.toggle('camera-shutter')
       setTimeout(() => {
-        overlay.style.opacity = '0'
+        overlay.style.display = 'none'
         overlay.style.pointerEvents = 'none'
         content.classList.remove('opacity-0', 'translate-y-10')
       }, 500);
@@ -95,32 +95,30 @@ export const prerender = false
       anchorElement.className = "block group relative overflow-hidden bg-gray-100 mb-4 md:mb-8 break-inside-avoid"
 
       anchorElement.innerHTML = `
-    <img
-      src="${optimizedUrl}"
-      alt="Photography by Oscar Zamora"
-      width="${img.width}"
-      height="${img.height}"
-      loading="lazy"
-      decoding="async"
-      onload="checkFirstBatch()"
-      class="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-    />
-    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 pointer-events-none"></div>
-  `
-
+      <img
+        src="${optimizedUrl}"
+        alt="Photography by Oscar Zamora"
+        width="${img.width}"
+        height="${img.height}"
+        loading="lazy"
+        decoding="async"
+        class="w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+      />
+      <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 pointer-events-none"></div>
+    `
       return anchorElement
     }
 
     const cards = (data ?? []).map(createImageCard)
     cards.forEach(card => {
-      galleryMobile?.appendChild(card)
-      getShortestColumn()?.appendChild(card)
+      galleryMobile?.appendChild(card.cloneNode(true))
+      getShortestColumn()?.appendChild(card.cloneNode(true))
     })
     if (window.refreshLightbox) {
       window.refreshLightbox(cards);
     }
+    checkFirstBatch()
   }
-
 
   async function loadNextBatch() {
     if (!isLoading) {
@@ -167,7 +165,7 @@ export const prerender = false
     children: 'a',
     pswpModule: () => import('photoswipe'),
     padding: { top: 0, bottom: 0, left: 0, right: 0 },
-    initialZoomLevel: 'fill',
+    initialZoomLevel: 'fit',
     zoom: false,
     counter: false,
     arrowPrev: false,
@@ -175,15 +173,12 @@ export const prerender = false
     close: false,
   });
 
-  // Detectar cuando el usuario pasa fotos dentro del Lightbox
   lightbox.on('change', () => {
     const pswp = lightbox.pswp;
     const currIndex = pswp.currIndex;
     const totalItems = pswp.getNumItems();
 
-    // Si faltan 2 fotos para llegar al final del batch actual...
     if (currIndex >= totalItems - 2) {
-      // Disparamos el evento global para que el Infinite Scroll cargue más
       window.dispatchEvent(new CustomEvent('load-more-photos'));
     }
   });
@@ -202,7 +197,7 @@ export const prerender = false
       ariaLabel: 'Cerrar galería',
       isButton: true,
       html: `<span>CLOSE X</span>`,
-      onClick: (event, el, pswp) => {
+      onClick: (_, __, pswp) => {
         pswp.close();
       }
     });
@@ -211,12 +206,10 @@ export const prerender = false
       name: 'controls',
       appendTo: 'wrapper',
       html: `
-        <div class="custom-nav-col">
-          <div class="flex gap-2 text-sm tracking-tighter uppercase font-medium">
-            <button id="pswp-prev">« Prev</button>
-            <span class="opacity-30">-</span>
-            <button id="pswp-next">Next »</button>
-          </div>
+        <div class="w-full flex justify-between items-center gap-2 text-sm tracking-tighter uppercase font-medium">
+          <button id="pswp-prev">« Prev</button>
+          <span class="opacity-30">-</span>
+          <button id="pswp-next">Next »</button>
         </div>
       `,
       onInit: (el, pswp) => {
@@ -241,7 +234,6 @@ export const prerender = false
 
   lightbox.init();
 
-  // Función para inyectar fotos en el Lightbox abierto
   window.refreshLightbox = (cards) => {
     const pswp = lightbox.pswp
     if (pswp) {
