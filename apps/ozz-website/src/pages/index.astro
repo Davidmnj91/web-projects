@@ -19,6 +19,7 @@ export const prerender = false
     </div>
   </div>
   <section id="main-content" class="opacity-0 translate-y-10 transition-all duration-1000 mx-auto">
+    <h1 class="sr-only">Oscar Zamora - Portrait & Still Photographer in Madrid</h1>
     <div
       id="gallery"
       class="hidden md:flex items-start gap-8 w-full mx-auto py-10"
@@ -44,15 +45,14 @@ export const prerender = false
       scale: 1.02;
     }
   }
-  .animate-focus-loop { animation: focus-loop 1s infinite ease-in-out; }
-  .camera-shutter {
-    animation: none !important;
-    filter: blur(0);
-    scale: 1 !important;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1) !important;
-    object-fit: contain !important;
+
+  .animate-focus-loop {
+    animation: focus-loop 1s infinite ease-in-out;
   }
-  .break-inside-avoid { break-inside: avoid; }
+
+  .camera-shutter {
+    @apply animate-none! blur-none! scale-100! transition-all! duration-500! ease-[cubic-bezier(0.19,1,0.22,1)]! object-contain!;
+  }
 </style>
 
 <script is:inline>
@@ -97,7 +97,7 @@ export const prerender = false
       anchorElement.innerHTML = `
       <img
         src="${optimizedUrl}"
-        alt="Photography by Oscar Zamora"
+        alt="Photography by Oscar Zamora - ${img.public_id.split('/').pop() || 'Selected Work'}"
         width="${img.width}"
         height="${img.height}"
         loading="lazy"
@@ -161,10 +161,27 @@ export const prerender = false
   import 'photoswipe/style.css';
 
   const lightbox = new PhotoSwipeLightbox({
-    gallery: '#main-content',
+    gallery: '#gallery, #gallery-mobile',
     children: 'a',
     pswpModule: () => import('photoswipe'),
-    padding: { top: 0, bottom: 0, left: 0, right: 0 },
+    paddingFn: (viewportSize) => {
+      const isMobile = viewportSize.x < 768;
+      if (isMobile) {
+        return {
+          top: 120,
+          bottom: 120,
+          left: 20,
+          right: 20
+        };
+      }
+      return {
+        top: 100,
+        bottom: 100,
+        left: Math.max(200, viewportSize.x * 0.2),
+        right: Math.max(200, viewportSize.x * 0.2)
+      };
+    },
+    showHideAnimationType: 'fade',
     initialZoomLevel: 'fit',
     zoom: false,
     counter: false,
@@ -207,9 +224,9 @@ export const prerender = false
       appendTo: 'wrapper',
       html: `
         <div class="w-full flex justify-between items-center gap-2 text-sm tracking-tighter uppercase font-medium">
-          <button id="pswp-prev">« Prev</button>
+          <button id="pswp-prev">< PREV</button>
           <span class="opacity-30">-</span>
-          <button id="pswp-next">Next »</button>
+          <button id="pswp-next">NEXT ></button>
         </div>
       `,
       onInit: (el, pswp) => {

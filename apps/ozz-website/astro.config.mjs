@@ -4,7 +4,7 @@ import vercel from '@astrojs/vercel'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
 
-const websiteUrl = 'https://ozz-website.vercel.app/'
+const websiteUrl = 'https://ozzphoto.com'
 
 // https://astro.build/config
 export default defineConfig({
