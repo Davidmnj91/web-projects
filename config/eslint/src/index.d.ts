@@ -9,4 +9,5 @@ export declare const configs: {
   base: FlatConfig.ConfigArray
   next: FlatConfig.ConfigArray
   astro: FlatConfig.ConfigArray
+  react: FlatConfig.ConfigArray
 }

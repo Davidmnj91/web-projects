@@ -5,7 +5,7 @@
     "clean": {},
     "build": {
       "dependsOn": ["lint", "^build"],
-      "outputs": [".next/**"]
+      "outputs": [".next/**", "dist/**", ".vercel/output/**"]
     },
     "lint": {},
     "test": {

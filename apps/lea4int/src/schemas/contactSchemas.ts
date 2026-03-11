@@ -15,10 +15,10 @@ const checkboxValidation = z.union([
 ])
 
 export const IndividualContactSchema = z.object({
-  service: z.enum(ContactServices),
+  service: z.nativeEnum(ContactServices),
   name: z.string().min(1),
   lastname: z.string().min(1).optional().or(z.literal('')),
-  email: z.email().min(1),
+  email: z.string().email().min(1),
   phone: z.string().regex(phoneRegex).optional().or(z.literal('')),
   nationality: z.string().min(1),
   message: z.string().min(1).max(255).optional().or(z.literal('')),
@@ -28,7 +28,7 @@ export const IndividualContactSchema = z.object({
 export const HostFamilyContactSchema = z.object({
   name: z.string().min(1),
   lastname: z.string().min(1).optional().or(z.literal('')),
-  email: z.email().min(1),
+  email: z.string().email().min(1),
   phone: z.string().regex(phoneRegex).optional().or(z.literal('')),
   city: z.string().min(1),
   zipCode: z.string().min(1),
@@ -40,7 +40,7 @@ export const HostFamilyContactSchema = z.object({
 export const InstitutionsContactSchema = z.object({
   name: z.string().min(1),
   lastname: z.string().min(1).optional().or(z.literal('')),
-  email: z.email().min(1),
+  email: z.string().email().min(1),
   phone: z.string().regex(phoneRegex).optional().or(z.literal('')),
   nationality: z.string().min(1),
   institutionName: z.string().min(1),
@@ -60,7 +60,7 @@ export const PartnerContactSchema = z.object({
   name: z.string().min(1),
   lastname: z.string().min(1).optional().or(z.literal('')),
   applicantName: z.string().min(1).optional().or(z.literal('')),
-  email: z.email().min(1),
+  email: z.string().email().min(1),
   projectDescription: z.string().min(1).max(255).optional().or(z.literal('')),
   terms: checkboxValidation,
 })

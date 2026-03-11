@@ -6,6 +6,10 @@
     "astro": "astro",
     "build": "astro build",
     "dev": "astro dev",
+    "format:check": "prettier \"**/*.{js,mjs,ts,tsx,astro,json,md,css}\" --list-different",
+    "format:write": "prettier \"**/*.{js,mjs,ts,tsx,astro,json,md,css}\" --list-different --write",
+    "lint": "eslint .  --max-warnings 0",
+    "lint:fix": "eslint . --fix --max-warnings 0",
     "preview": "astro preview"
   },
   "dependencies": {
@@ -19,6 +23,8 @@
   },
   "devDependencies": {
     "@web-projects/eslint": "workspace:*",
-    "@web-projects/prettier": "workspace:*"
+    "@web-projects/prettier": "workspace:*",
+    "prettier-plugin-astro": "catalog:prettier",
+    "prettier-plugin-tailwindcss": "catalog:prettier"
   }
 }

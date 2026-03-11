@@ -14,6 +14,7 @@ export const base = defineConfig(
       'dist',
       'coverage',
       '.turbo',
+      '.vercel',
       'node_modules',
       '**/eslint.config.js',
       '**/eslint.config.mjs',
