@@ -22,7 +22,7 @@ import { FormSummary } from './components/form-summary'
 import type { ContactEmailProps } from '../types/contact'
 import type { TailwindConfig } from '@react-email/components'
 
-const baseUrl = process.env.BASE_URL
+const baseUrl = process.env.BASE_URL ?? ''
 
 export const AdminEmail = ({ props = previewProps }) => {
   const {

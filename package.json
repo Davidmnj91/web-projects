@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Personal web projects",
   "author": "David Manja",
+  "type": "module",
   "scripts": {
     "changeset:add": "changeset add",
     "clean": "pnpm turbo clean && rimraf -g .turbo",
