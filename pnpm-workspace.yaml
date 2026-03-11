@@ -28,7 +28,7 @@ catalogs:
     npm-run-all2: ^8.0.4
     photoswipe: ^5.4.4
     rimraf: ^6.1.2
-    turbo: ^2.7.4
+    turbo: ^2.8.16
   eslint:
     '@eslint/compat': ^2.0.1
     '@eslint/eslintrc': ^3.3.3
@@ -102,5 +102,5 @@ catalogs:
     react-player: ^3.4.0
     tailwind-merge: ^3.3.1
   zod:
-    zod: ^4.3.5
-    zod-form-data: ^3.0.1
+    zod: ^3.24.2
+    zod-form-data: ^2.0.5
