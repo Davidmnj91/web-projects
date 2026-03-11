@@ -1,0 +1,11 @@
+.vercel/
+dist/
+.env
+.turbo/
+node_modules/
+public/favicon/
+public/*.png
+public/*.ico
+public/*.svg
+public/*.txt
+public/*.xml

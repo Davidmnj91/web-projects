@@ -1,11 +1,11 @@
 ---
-import "../styles/global.css"
+import '../styles/global.css'
 import Navigation from '../components/Navigation.astro'
 interface Props {
-  title: string;
-  description: string;
-  image?: string;
-  canonicalURL?: URL;
+  title: string
+  description: string
+  image?: string
+  canonicalURL?: URL
   headerOffset?: string
 }
 const {
@@ -13,42 +13,43 @@ const {
   description,
   image = '/loading_bg.png',
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
-  headerOffset = 'top-0'
+  headerOffset = 'top-0',
 } = Astro.props
 ---
-<!doctype html>
-<html lang="es">
-	<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="Oscar Zamora" />
-    <link rel="manifest" href="/favicon/site.webmanifest" />
-    <meta name="generator" content={Astro.generator} />
 
-    <link rel="canonical" href={canonicalURL} />
+<!doctype html>
+<html lang='es'>
+  <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width,initial-scale=1' />
+    <link rel='icon' type='image/png' href='/favicon/favicon-96x96.png' sizes='96x96' />
+    <link rel='icon' type='image/svg+xml' href='/favicon/favicon.svg' />
+    <link rel='shortcut icon' href='/favicon/favicon.ico' />
+    <link rel='apple-touch-icon' sizes='180x180' href='/favicon/apple-touch-icon.png' />
+    <meta name='apple-mobile-web-app-title' content='Oscar Zamora' />
+    <link rel='manifest' href='/favicon/site.webmanifest' />
+    <meta name='generator' content={Astro.generator} />
+
+    <link rel='canonical' href={canonicalURL} />
 
     <title>{title} | Oscar Zamora - Photographer</title>
-    <meta name="title" content={`${title} | Oscar Zamora - Photographer`} />
-    <meta name="description" content={description} />
+    <meta name='title' content={`${title} | Oscar Zamora - Photographer`} />
+    <meta name='description' content={description} />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property='og:type' content='website' />
+    <meta property='og:url' content={Astro.url} />
+    <meta property='og:title' content={title} />
+    <meta property='og:description' content={description} />
+    <meta property='og:image' content={new URL(image, Astro.url)} />
 
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+    <meta property='twitter:card' content='summary_large_image' />
+    <meta property='twitter:url' content={Astro.url} />
+    <meta property='twitter:title' content={title} />
+    <meta property='twitter:description' content={description} />
+    <meta property='twitter:image' content={new URL(image, Astro.url)} />
 
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <script is:inline type="application/ld+json">
+    <link rel='sitemap' href='/sitemap-index.xml' />
+    <script is:inline type='application/ld+json'>
       {
         "@context": "https://schema.org",
         "@type": "PhotographyBusiness",
@@ -62,16 +63,14 @@ const {
           "addressLocality": "Madrid",
           "addressCountry": "ES"
         },
-        "sameAs": [
-          "https://www.instagram.com/ozz_photographer/"
-        ]
+        "sameAs": ["https://www.instagram.com/ozz_photographer/"]
       }
     </script>
-	</head>
-  <body class="bg-white text-black font-sans antialiased" data-header-offset={headerOffset}>
-    <Navigation/>
-    <main class="px-6 mt-4 md:px-14 md:mt-8 pb-20">
+  </head>
+  <body class='bg-white font-sans text-black antialiased' data-header-offset={headerOffset}>
+    <Navigation />
+    <main class='mt-4 px-6 pb-20 md:mt-8 md:px-14'>
       <slot />
     </main>
-	</body>
+  </body>
 </html>
