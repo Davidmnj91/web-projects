@@ -1,41 +1,46 @@
 ---
-import Logo from "../components/logo.astro";
+import Logo from '../components/logo.astro'
 import Layout from '../layouts/Layout.astro'
 export const prerender = false
 ---
-<Layout headerOffset="mt-0 md:mt-[412px]" title="Selected Work" description="My selected work">
-  <div id="loader-overlay" class="fixed inset-0 z-100 flex items-center justify-center bg-white transition-opacity duration-1000">
-    <div class="absolute inset-0 z-0">
+
+<Layout headerOffset='mt-0 md:mt-[412px]' title='Selected Work' description='My selected work'>
+  <div
+    id='loader-overlay'
+    class='fixed inset-0 z-100 flex items-center justify-center bg-white transition-opacity duration-1000'
+  >
+    <div class='absolute inset-0 z-0'>
       <img
-        id="hero-loader-img"
-        class="w-full h-full object-cover animate-focus-loop"
-        src="/loading_bg.png"
-        alt="loading"
+        id='hero-loader-img'
+        class='animate-focus-loop h-full w-full object-cover'
+        src='/loading_bg.png'
+        alt='loading'
       />
     </div>
 
-    <div id="loader-logo" class="relative z-10 text-center">
-      <Logo/>
+    <div id='loader-logo' class='relative z-10 text-center'>
+      <Logo />
     </div>
   </div>
-  <section id="main-content" class="opacity-0 translate-y-10 transition-all duration-1000 mx-auto">
-    <div
-      id="gallery"
-      class="hidden md:flex items-start gap-8 w-full mx-auto py-10"
-    >
-      <div id="col-1" class="flex-1"></div>
-      <div id="col-2" class="flex-1"></div>
+  <section id='main-content' class='mx-auto translate-y-10 opacity-0 transition-all duration-1000'>
+    <h1 class='sr-only'>Oscar Zamora - Portrait & Still Photographer in Madrid</h1>
+    <div id='gallery' class='mx-auto hidden w-full items-start gap-8 py-10 md:flex'>
+      <div id='col-1' class='flex-1'></div>
+      <div id='col-2' class='flex-1'></div>
     </div>
-    <div id="gallery-mobile" class="flex flex-col gap-4 md:hidden"></div>
-    <div id="sentinel" class="h-20 flex items-center justify-center mt-10">
-      <div id="loader" class="hidden loading-indicator text-xs uppercase tracking-widest text-gray-400">Loading more...</div>
+    <div id='gallery-mobile' class='flex flex-col gap-4 md:hidden'></div>
+    <div id='sentinel' class='mt-10 flex h-20 items-center justify-center'>
+      <div id='loader' class='loading-indicator hidden text-xs tracking-widest text-gray-400 uppercase'>
+        Loading more...
+      </div>
     </div>
   </section>
 </Layout>
 
 <style>
   @keyframes focus-loop {
-    0%, 100% {
+    0%,
+    100% {
       filter: blur(25px);
       scale: 1.1;
     }
@@ -44,25 +49,24 @@ export const prerender = false
       scale: 1.02;
     }
   }
-  .animate-focus-loop { animation: focus-loop 1s infinite ease-in-out; }
-  .camera-shutter {
-    animation: none !important;
-    filter: blur(0);
-    scale: 1 !important;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1) !important;
-    object-fit: contain !important;
+
+  .animate-focus-loop {
+    animation: focus-loop 1s infinite ease-in-out;
   }
-  .break-inside-avoid { break-inside: avoid; }
+
+  .camera-shutter {
+    @apply scale-100! animate-none! object-contain! blur-none! transition-all! duration-500! ease-[cubic-bezier(0.19,1,0.22,1)]!;
+  }
 </style>
 
 <script is:inline>
-  const overlay = document.getElementById('loader-overlay');
-  const content = document.getElementById('main-content');
+  const overlay = document.getElementById('loader-overlay')
+  const content = document.getElementById('main-content')
   const heroImg = document.getElementById('hero-loader-img')
 
-  const galleryMobile = document.getElementById("gallery-mobile")
-  const col1 = document.getElementById("col-1")
-  const col2 = document.getElementById("col-2")
+  const galleryMobile = document.getElementById('gallery-mobile')
+  const col1 = document.getElementById('col-1')
+  const col2 = document.getElementById('col-2')
 
   const sentinel = document.getElementById('sentinel')
   const loader = document.getElementById('loader')
@@ -79,25 +83,25 @@ export const prerender = false
         overlay.style.display = 'none'
         overlay.style.pointerEvents = 'none'
         content.classList.remove('opacity-0', 'translate-y-10')
-      }, 500);
+      }, 500)
     }
   }
 
   const addImagesToDom = (data) => {
-    const getShortestColumn = () => (col1?.offsetHeight ?? 0) <= (col2?.offsetHeight ?? 0) ? col1 : col2
-    const createImageCard = img => {
+    const getShortestColumn = () => ((col1?.offsetHeight ?? 0) <= (col2?.offsetHeight ?? 0) ? col1 : col2)
+    const createImageCard = (img) => {
       const optimizedUrl = img.secure_url.replace('/upload/', '/upload/f_auto,q_auto,w_auto/')
 
-      const anchorElement = document.createElement("a")
+      const anchorElement = document.createElement('a')
       anchorElement.href = img.secure_url
       anchorElement.setAttribute('data-pswp-width', img.width)
       anchorElement.setAttribute('data-pswp-height', img.height)
-      anchorElement.className = "block group relative overflow-hidden bg-gray-100 mb-4 md:mb-8 break-inside-avoid"
+      anchorElement.className = 'block group relative overflow-hidden bg-gray-100 mb-4 md:mb-8 break-inside-avoid'
 
       anchorElement.innerHTML = `
       <img
         src="${optimizedUrl}"
-        alt="Photography by Oscar Zamora"
+        alt="Photography by Oscar Zamora - ${img.public_id.split('/').pop() || 'Selected Work'}"
         width="${img.width}"
         height="${img.height}"
         loading="lazy"
@@ -110,12 +114,12 @@ export const prerender = false
     }
 
     const cards = (data ?? []).map(createImageCard)
-    cards.forEach(card => {
+    cards.forEach((card) => {
       galleryMobile?.appendChild(card.cloneNode(true))
       getShortestColumn()?.appendChild(card.cloneNode(true))
     })
     if (window.refreshLightbox) {
-      window.refreshLightbox(cards);
+      window.refreshLightbox(cards)
     }
     checkFirstBatch()
   }
@@ -145,51 +149,71 @@ export const prerender = false
     }
   }
 
-  const observer = new IntersectionObserver(async (entries) => {
-    if (entries[0].isIntersecting) {
-      await loadNextBatch(entries)
-    }
-  }, { rootMargin: "400px" })
+  const observer = new IntersectionObserver(
+    async (entries) => {
+      if (entries[0].isIntersecting) {
+        await loadNextBatch(entries)
+      }
+    },
+    { rootMargin: '400px' },
+  )
 
   if (sentinel) observer.observe(sentinel)
 
-  window.addEventListener('load-more-photos', loadNextBatch);
+  window.addEventListener('load-more-photos', loadNextBatch)
 </script>
 
 <script>
-  import PhotoSwipeLightbox from 'photoswipe/lightbox';
-  import 'photoswipe/style.css';
+  import PhotoSwipeLightbox from 'photoswipe/lightbox'
+  import 'photoswipe/style.css'
 
   const lightbox = new PhotoSwipeLightbox({
-    gallery: '#main-content',
+    gallery: '#gallery, #gallery-mobile',
     children: 'a',
     pswpModule: () => import('photoswipe'),
-    padding: { top: 0, bottom: 0, left: 0, right: 0 },
+    paddingFn: (viewportSize) => {
+      const isMobile = viewportSize.x < 768
+      if (isMobile) {
+        return {
+          top: 120,
+          bottom: 120,
+          left: 20,
+          right: 20,
+        }
+      }
+      return {
+        top: 100,
+        bottom: 100,
+        left: Math.max(200, viewportSize.x * 0.2),
+        right: Math.max(200, viewportSize.x * 0.2),
+      }
+    },
+    showHideAnimationType: 'fade',
     initialZoomLevel: 'fit',
     zoom: false,
     counter: false,
     arrowPrev: false,
     arrowNext: false,
     close: false,
-  });
+  })
 
   lightbox.on('change', () => {
-    const pswp = lightbox.pswp;
-    const currIndex = pswp.currIndex;
-    const totalItems = pswp.getNumItems();
+    const pswp = lightbox.pswp
+    const currIndex = pswp!.currIndex
+    const totalItems = pswp!.getNumItems()
 
     if (currIndex >= totalItems - 2) {
-      window.dispatchEvent(new CustomEvent('load-more-photos'));
+      window.dispatchEvent(new CustomEvent('load-more-photos'))
     }
-  });
+  })
 
-  lightbox.on('uiRegister', function() {
+  lightbox.on('uiRegister', function () {
     // Botón de Cerrar Personalizado
     lightbox.pswp?.ui?.registerElement({
       name: 'author',
       appendTo: 'wrapper',
       html: '<div class="custom-name-col">OSCAR ZAMORA</div>',
-    });
+    })
 
     lightbox.pswp?.ui?.registerElement({
       name: 'custom_close',
@@ -198,47 +222,47 @@ export const prerender = false
       isButton: true,
       html: `<span>CLOSE X</span>`,
       onClick: (_, __, pswp) => {
-        pswp.close();
-      }
-    });
+        pswp.close()
+      },
+    })
 
     lightbox.pswp?.ui?.registerElement({
       name: 'controls',
       appendTo: 'wrapper',
       html: `
         <div class="w-full flex justify-between items-center gap-2 text-sm tracking-tighter uppercase font-medium">
-          <button id="pswp-prev">« Prev</button>
+          <button id="pswp-prev">< PREV</button>
           <span class="opacity-30">-</span>
-          <button id="pswp-next">Next »</button>
+          <button id="pswp-next">NEXT ></button>
         </div>
       `,
       onInit: (el, pswp) => {
-        el.querySelector('#pswp-prev').onclick = () => pswp.prev();
-        el.querySelector('#pswp-next').onclick = () => pswp.next();
-      }
-    });
+        el.querySelector('#pswp-prev')!.onclick = () => pswp.prev()
+        el.querySelector('#pswp-next')!.onclick = () => pswp.next()
+      },
+    })
 
     lightbox.pswp?.ui?.registerElement({
       name: 'pagination',
       appendTo: 'wrapper',
       onInit: (el, pswp) => {
         pswp.on('change', () => {
-          const curr = pswp.currIndex + 1;
-          const total = pswp.getNumItems();
-          el.innerText = `${curr < 10 ? '0' + curr : curr}/${total}`;
-        });
+          const curr = pswp.currIndex + 1
+          const total = pswp.getNumItems()
+          el.innerText = `${curr < 10 ? '0' + curr : curr}/${total}`
+        })
       },
-      html: '<div class="pswp__previews-count"></div>'
-    });
-  });
+      html: '<div class="pswp__previews-count"></div>',
+    })
+  })
 
-  lightbox.init();
+  lightbox.init()
 
   window.refreshLightbox = (cards) => {
     const pswp = lightbox.pswp
     if (pswp) {
       pswp.options.dataSource?.items.push(...cards)
-      pswp.refreshSlideContent(pswp.getNumItems() - 1);
+      pswp.refreshSlideContent(pswp.getNumItems() - 1)
     }
-  };
+  }
 </script>

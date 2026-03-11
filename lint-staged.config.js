@@ -2,6 +2,7 @@
  * @type {import('lint-staged').Configuration}
  */
 export default {
-  '*': ['prettier --write --list-different', 'pnpm --filter ./... turbo run lint --parallel'],
-  '**/*.{md,mdx}': ['markdownlint'],
+  '**/*.{js,jsx,ts,tsx,astro}': ['eslint --fix'],
+  '**/*.{md,mdx}': ['markdownlint --fix'],
+  '**/*.{json,css,scss,html}': ['prettier --write'],
 }

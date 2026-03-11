@@ -21,6 +21,8 @@
     "@web-projects/eslint": "workspace:*",
     "@web-projects/tsconfig": "workspace:*",
     "prettier": "catalog:prettier",
-    "prettier-plugin-packagejson": "catalog:prettier"
+    "prettier-plugin-astro": "catalog:prettier",
+    "prettier-plugin-packagejson": "catalog:prettier",
+    "prettier-plugin-tailwindcss": "catalog:prettier"
   }
 }

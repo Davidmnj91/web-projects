@@ -58,8 +58,8 @@ catalogs:
       specifier: ^6.1.2
       version: 6.1.2
     turbo:
-      specifier: ^2.7.4
-      version: 2.7.4
+      specifier: ^2.8.16
+      version: 2.8.16
   eslint:
     '@eslint/compat':
       specifier: ^2.0.1
@@ -167,6 +167,9 @@ catalogs:
     prettier:
       specifier: ^3.7.4
       version: 3.7.4
+    prettier-plugin-astro:
+      specifier: ^0.14.1
+      version: 0.14.1
     prettier-plugin-packagejson:
       specifier: ^3.0.0
       version: 3.0.0
@@ -240,11 +243,11 @@ catalogs:
       version: 3.4.0
   zod:
     zod:
-      specifier: ^4.3.5
-      version: 4.3.5
+      specifier: ^3.24.2
+      version: 3.25.76
     zod-form-data:
-      specifier: ^3.0.1
-      version: 3.0.1
+      specifier: ^2.0.5
+      version: 2.0.8
 
 importers:
 
@@ -298,6 +301,9 @@ importers:
       prettier:
         specifier: catalog:prettier
         version: 3.7.4
+      prettier-plugin-astro:
+        specifier: catalog:prettier
+        version: 0.14.1
       prettier-plugin-packagejson:
         specifier: catalog:prettier
         version: 3.0.0(prettier@3.7.4)
@@ -309,7 +315,7 @@ importers:
         version: 6.1.2
       turbo:
         specifier: catalog:default
-        version: 2.7.4
+        version: 2.8.16
       typescript:
         specifier: catalog:typescript
         version: 5.9.3
@@ -390,10 +396,10 @@ importers:
         version: 4.7.0(react@19.2.3)
       zod:
         specifier: catalog:zod
-        version: 4.3.5
+        version: 3.25.76
       zod-form-data:
         specifier: catalog:zod
-        version: 3.0.1(zod@4.3.5)
+        version: 2.0.8(zod@3.25.76)
     devDependencies:
       '@tailwindcss/postcss':
         specifier: catalog:tailwind
@@ -453,6 +459,12 @@ importers:
       '@web-projects/prettier':
         specifier: workspace:*
         version: link:../../config/prettier
+      prettier-plugin-astro:
+        specifier: catalog:prettier
+        version: 0.14.1
+      prettier-plugin-tailwindcss:
+        specifier: catalog:prettier
+        version: 0.7.2(prettier-plugin-astro@0.14.1)(prettier@3.7.4)
 
   config/eslint:
     dependencies:
@@ -494,7 +506,7 @@ importers:
         version: 4.0.0
       eslint-plugin-turbo:
         specifier: catalog:eslint
-        version: 2.7.4(eslint@9.39.2(jiti@2.6.1))(turbo@2.7.4)
+        version: 2.7.4(eslint@9.39.2(jiti@2.6.1))(turbo@2.8.16)
       globals:
         specifier: catalog:eslint
         version: 17.0.0
@@ -523,9 +535,15 @@ importers:
       prettier:
         specifier: catalog:prettier
         version: 3.7.4
+      prettier-plugin-astro:
+        specifier: catalog:prettier
+        version: 0.14.1
       prettier-plugin-packagejson:
         specifier: catalog:prettier
         version: 3.0.0(prettier@3.7.4)
+      prettier-plugin-tailwindcss:
+        specifier: catalog:prettier
+        version: 0.7.2(prettier-plugin-astro@0.14.1)(prettier@3.7.4)
 
   config/tsconfig: {}
 
@@ -6243,38 +6261,38 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
-  turbo-darwin-64@2.7.4:
-    resolution: {integrity: sha512-xDR30ltfkSsRfGzABBckvl1nz1cZ3ssTujvdj+TPwOweeDRvZ0e06t5DS0rmRBvyKpgGs42K/EK6Mn2qLlFY9A==}
+  turbo-darwin-64@2.8.16:
+    resolution: {integrity: sha512-KWa4hUMWrpADC6Q/wIHRkBLw6X6MV9nx6X7hSXbTrrMz0KdaKhmfudUZ3sS76bJFmgArBU25cSc0AUyyrswYxg==}
     cpu: [x64]
     os: [darwin]
 
-  turbo-darwin-arm64@2.7.4:
-    resolution: {integrity: sha512-P7sjqXtOL/+nYWPvcDGWhi8wf8M8mZHHB8XEzw2VX7VJrS8IGHyJHGD1AYfDvhAEcr7pnk3gGifz3/xyhI655w==}
+  turbo-darwin-arm64@2.8.16:
+    resolution: {integrity: sha512-NBgaqBDLQSZlJR4D5XCkQq6noaO0RvIgwm5eYFJYL3bH5dNu8o0UBpq7C5DYnQI8+ybyoHFjT5/icN4LeUYLow==}
     cpu: [arm64]
     os: [darwin]
 
-  turbo-linux-64@2.7.4:
-    resolution: {integrity: sha512-GofFOxRO/IhG8BcPyMSSB3Y2+oKQotsaYbHxL9yD6JPb20/o35eo+zUSyazOtilAwDHnak5dorAJFoFU8MIg2A==}
+  turbo-linux-64@2.8.16:
+    resolution: {integrity: sha512-VYPdcCRevI9kR/hr1H1xwXy7QQt/jNKiim1e1mjANBXD2E9VZWMkIL74J1Huad5MbU3/jw7voHOqDPLJPC2p6w==}
     cpu: [x64]
     os: [linux]
 
-  turbo-linux-arm64@2.7.4:
-    resolution: {integrity: sha512-+RQKgNjksVPxYAyAgmDV7w/1qj++qca+nSNTAOKGOfJiDtSvRKoci89oftJ6anGs00uamLKVEQ712TI/tfNAIw==}
+  turbo-linux-arm64@2.8.16:
+    resolution: {integrity: sha512-beq8tgUVI3uwkQkXJMiOr/hfxQRw54M3elpBwqgYFfemiK5LhCjjcwO0DkE8GZZfElBIlk+saMAQOZy3885wNQ==}
     cpu: [arm64]
     os: [linux]
 
-  turbo-windows-64@2.7.4:
-    resolution: {integrity: sha512-rfak1+g+ON3czs1mDYsCS4X74ZmK6gOgRQTXjDICtzvR4o61paqtgAYtNPofcVsMWeF4wvCajSeoAkkeAnQ1kg==}
+  turbo-windows-64@2.8.16:
+    resolution: {integrity: sha512-Ig7b46iUgiOIkea/D3Z7H+zNzvzSnIJcLYFpZLA0RxbUTrbLhv9qIPwv3pT9p/abmu0LXVKHxaOo+p26SuDhzw==}
     cpu: [x64]
     os: [win32]
 
-  turbo-windows-arm64@2.7.4:
-    resolution: {integrity: sha512-1ZgBNjNRbDu/fPeqXuX9i26x3CJ/Y1gcwUpQ+Vp7kN9Un6RZ9kzs164f/knrjcu5E+szCRexVjRSJay1k5jApA==}
+  turbo-windows-arm64@2.8.16:
+    resolution: {integrity: sha512-fOWjbEA2PiE2HEnFQrwNZKYEdjewyPc2no9GmrXklZnTCuMsxeCN39aVlKpKpim03Zq/ykIuvApGwq8ZbfS2Yw==}
     cpu: [arm64]
     os: [win32]
 
-  turbo@2.7.4:
-    resolution: {integrity: sha512-bkO4AddmDishzJB2ze7aYYPaejMoJVfS0XnaR6RCdXFOY8JGJfQE+l9fKiV7uDPa5Ut44gmOWJL3894CIMeH9g==}
+  turbo@2.8.16:
+    resolution: {integrity: sha512-u6e9e3cTTpE2adQ1DYm3A3r8y3LAONEx1jYvJx6eIgSY4bMLxIxs0riWzI0Z/IK903ikiUzRPZ2c1Ph5lVLkhA==}
     hasBin: true
 
   twitch-video-element@0.1.6:
@@ -6696,10 +6714,10 @@ packages:
   youtube-video-element@1.8.1:
     resolution: {integrity: sha512-+5UuAGaj+5AnBf39huLVpy/4dLtR0rmJP1TxOHVZ81bac4ZHFpTtQ4Dz2FAn2GPnfXISezvUEaQoAdFW4hH9Xg==}
 
-  zod-form-data@3.0.1:
-    resolution: {integrity: sha512-uwSrDzpLDoXeAxePjPHrjjMelE5pk5zL5JcwLFISvqidGjtPl7hcheH584xGcS76c9IRHq6tqdGkf+A4eKO6Cw==}
+  zod-form-data@2.0.8:
+    resolution: {integrity: sha512-X31GkEc8uk5/L387L4TVI1z7obBbN/0MRHBHfHW3uMOWkVJeSsa+grvkTvY9qyFbNshKEnqK+jLJNlY+d7jpLw==}
     peerDependencies:
-      zod: '>= 3.25.0'
+      zod: '>= 3.11.0'
 
   zod-to-json-schema@3.25.1:
     resolution: {integrity: sha512-pM/SU9d3YAggzi6MtR4h7ruuQlqKtad8e9S0fmxcMi+ueAK5Korys/aWcV9LIIHTVbj01NdzxcnXSN+O74ZIVA==}
@@ -6720,9 +6738,6 @@ packages:
 
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
-
-  zod@4.1.13:
-    resolution: {integrity: sha512-AvvthqfqrAhNH9dnfmrfKzX5upOdjUVJYFqNSlkmGf64gRaTzlPwz99IHYnVs28qYAybvAlBV+H7pn0saFY4Ig==}
 
   zod@4.3.5:
     resolution: {integrity: sha512-k7Nwx6vuWx1IJ9Bjuf4Zt1PEllcwe7cls3VNzm4CQ1/hgtFUK2bRNG3rvnpPUhFjmqJKAKtjV576KnUkHocg/g==}
@@ -10468,8 +10483,8 @@ snapshots:
       '@babel/parser': 7.28.5
       eslint: 9.39.2(jiti@2.6.1)
       hermes-parser: 0.25.1
-      zod: 4.1.13
-      zod-validation-error: 4.0.2(zod@4.1.13)
+      zod: 4.3.5
+      zod-validation-error: 4.0.2(zod@4.3.5)
     transitivePeerDependencies:
       - supports-color
 
@@ -10503,11 +10518,11 @@ snapshots:
     dependencies:
       safe-regex: 2.1.1
 
-  eslint-plugin-turbo@2.7.4(eslint@9.39.2(jiti@2.6.1))(turbo@2.7.4):
+  eslint-plugin-turbo@2.7.4(eslint@9.39.2(jiti@2.6.1))(turbo@2.8.16):
     dependencies:
       dotenv: 16.0.3
       eslint: 9.39.2(jiti@2.6.1)
-      turbo: 2.7.4
+      turbo: 2.8.16
 
   eslint-scope@8.4.0:
     dependencies:
@@ -12581,7 +12596,6 @@ snapshots:
       '@astrojs/compiler': 2.13.1
       prettier: 3.7.4
       sass-formatter: 0.7.9
-    optional: true
 
   prettier-plugin-packagejson@3.0.0(prettier@3.7.4):
     dependencies:
@@ -12954,8 +12968,7 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  s.color@0.0.15:
-    optional: true
+  s.color@0.0.15: {}
 
   safe-array-concat@1.1.3:
     dependencies:
@@ -12989,7 +13002,6 @@ snapshots:
   sass-formatter@0.7.9:
     dependencies:
       suf-log: 2.5.3
-    optional: true
 
   sax@1.2.1: {}
 
@@ -13316,7 +13328,6 @@ snapshots:
   suf-log@2.5.3:
     dependencies:
       s.color: 0.0.15
-    optional: true
 
   super-media-element@1.4.2: {}
 
@@ -13431,32 +13442,32 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  turbo-darwin-64@2.7.4:
+  turbo-darwin-64@2.8.16:
     optional: true
 
-  turbo-darwin-arm64@2.7.4:
+  turbo-darwin-arm64@2.8.16:
     optional: true
 
-  turbo-linux-64@2.7.4:
+  turbo-linux-64@2.8.16:
     optional: true
 
-  turbo-linux-arm64@2.7.4:
+  turbo-linux-arm64@2.8.16:
     optional: true
 
-  turbo-windows-64@2.7.4:
+  turbo-windows-64@2.8.16:
     optional: true
 
-  turbo-windows-arm64@2.7.4:
+  turbo-windows-arm64@2.8.16:
     optional: true
 
-  turbo@2.7.4:
+  turbo@2.8.16:
     optionalDependencies:
-      turbo-darwin-64: 2.7.4
-      turbo-darwin-arm64: 2.7.4
-      turbo-linux-64: 2.7.4
-      turbo-linux-arm64: 2.7.4
-      turbo-windows-64: 2.7.4
-      turbo-windows-arm64: 2.7.4
+      turbo-darwin-64: 2.8.16
+      turbo-darwin-arm64: 2.8.16
+      turbo-linux-64: 2.8.16
+      turbo-linux-arm64: 2.8.16
+      turbo-windows-64: 2.8.16
+      turbo-windows-arm64: 2.8.16
 
   twitch-video-element@0.1.6: {}
 
@@ -13832,10 +13843,10 @@ snapshots:
 
   youtube-video-element@1.8.1: {}
 
-  zod-form-data@3.0.1(zod@4.3.5):
+  zod-form-data@2.0.8(zod@3.25.76):
     dependencies:
       '@rvf/set-get': 7.0.1
-      zod: 4.3.5
+      zod: 3.25.76
 
   zod-to-json-schema@3.25.1(zod@3.25.76):
     dependencies:
@@ -13846,13 +13857,11 @@ snapshots:
       typescript: 5.9.3
       zod: 3.25.76
 
-  zod-validation-error@4.0.2(zod@4.1.13):
+  zod-validation-error@4.0.2(zod@4.3.5):
     dependencies:
-      zod: 4.1.13
+      zod: 4.3.5
 
   zod@3.25.76: {}
-
-  zod@4.1.13: {}
 
   zod@4.3.5: {}
 
