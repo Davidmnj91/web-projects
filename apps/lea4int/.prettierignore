@@ -1,0 +1,14 @@
+.vercel/
+dist/
+.env*
+.turbo/
+.next/
+certificates/
+node_modules/
+**/*.ico
+**/*.png
+**/*.svg
+**/*.webp
+**/*.txt
+**/*.xml
+.prettierignore

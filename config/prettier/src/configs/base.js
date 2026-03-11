@@ -9,5 +9,13 @@ export const base = {
   arrowParens: 'always',
   jsxSingleQuote: true,
   printWidth: 120,
-  plugins: ['prettier-plugin-packagejson', 'prettier-plugin-tailwindcss'],
+  plugins: ['prettier-plugin-packagejson', 'prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
+  overrides: [
+    {
+      files: '*.astro',
+      options: {
+        parser: 'astro',
+      },
+    },
+  ],
 }
