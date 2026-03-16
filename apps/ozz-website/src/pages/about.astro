@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { getImages } from '../lib/cloudinary.ts'
+const { resources } = await getImages('partners')
+---
+
+<Layout headerOffset='mt-0' title='Contact' description='Contact Oscar Zamora, Portrait & Still photographer in Madrid'>
+  <section class='flex flex-col gap-16'>
+    <h2 class='mt-11 text-xl font-semibold'>About</h2>
+    <p class='text-xl'>
+      Oscar Zamora is a portrait photographer specializing in film sets and advertising.
+      <br />
+      His work draws from his experience in cinema and advertising, creating cinematic images that feel like movie frames
+      or posters.
+    </p>
+  </section>
+  <section class='mt-16 flex flex-col gap-16 border-t border-t-black pt-8'>
+    <h2 class='mt-11 text-xl font-semibold'>Brand Collaborations</h2>
+    <div class='flex flex-col gap-6 md:flex-row md:flex-wrap md:justify-between md:gap-4'>
+      {
+        resources.map((item) => (
+          <img
+            src={item.secure_url}
+            width={item.width}
+            height={item.height}
+            alt={`Brand Collaboration - ${item.public_id.split('/').pop()}`}
+          />
+        ))
+      }
+    </div>
+  </section>
+</Layout>

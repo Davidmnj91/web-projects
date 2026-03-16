@@ -2,6 +2,12 @@
 import Logo from '../components/logo.astro'
 import Layout from '../layouts/Layout.astro'
 export const prerender = false
+
+Astro.cache.set({
+  maxAge: 120,
+  swr: 60,
+  tags: ['home'],
+})
 ---
 
 <Layout headerOffset='mt-0 md:mt-[412px]' title='Selected Work' description='My selected work'>
@@ -75,9 +81,17 @@ export const prerender = false
   let isLoading = false
   let heroAnimationExecuted = false
 
+  // Check if animation has already played in this session
+  if (sessionStorage.getItem('heroAnimationPlayed')) {
+    heroAnimationExecuted = true
+    if (overlay) overlay.style.display = 'none'
+    if (content) content.classList.remove('opacity-0', 'translate-y-10')
+  }
+
   const checkFirstBatch = () => {
     if (!heroAnimationExecuted) {
       heroAnimationExecuted = true
+      sessionStorage.setItem('heroAnimationPlayed', 'true')
       heroImg.classList.toggle('camera-shutter')
       setTimeout(() => {
         overlay.style.display = 'none'
