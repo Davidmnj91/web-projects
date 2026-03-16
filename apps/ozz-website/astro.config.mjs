@@ -2,7 +2,7 @@
 import sitemap from '@astrojs/sitemap'
 import vercel from '@astrojs/vercel'
 import tailwindcss from '@tailwindcss/vite'
-import { defineConfig } from 'astro/config'
+import { defineConfig, memoryCache } from 'astro/config'
 
 const websiteUrl = 'https://ozzphoto.com'
 
@@ -11,6 +11,9 @@ export default defineConfig({
   site: websiteUrl,
   adapter: vercel(),
   integrations: [sitemap()],
+  experimental: {
+    cache: { provider: memoryCache() },
+  },
   vite: {
     plugins: [
       tailwindcss(),
