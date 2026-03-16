@@ -1,12 +1,13 @@
 ---
+import Contact from './contact.astro'
 const menu = [
   { href: '/', label: 'SELECTED WORK' },
-  { href: '/contacto', label: 'ABOUT & CONTACT ME' },
+  { href: '/about', label: 'ABOUT' },
 ]
 const { pathname } = Astro.url
 ---
 
-<header id='menu' class='sticky top-0 z-50 w-full bg-white py-8 transition-all duration-300 md:py-20'>
+<header id='menu' class='sticky top-0 z-40 w-full bg-white py-8 transition-all duration-300 md:py-20'>
   <nav class='flex w-full flex-row items-center justify-between px-6 transition-all duration-300 md:px-14'>
     <a href='/' class='text-xl font-medium transition-opacity hover:opacity-70'> OSCAR ZAMORA </a>
     <span class='hidden text-base font-normal text-black md:inline'> Portrait & Still photographer </span>
@@ -22,6 +23,7 @@ const { pathname } = Astro.url
           </a>
         ))
       }
+      <button id='contact-btn' class='relative cursor-pointer transition-all hover:opacity-70'> CONTACT </button>
     </div>
     <button id='menu-btn' class='flex flex-col gap-1.5 md:hidden' aria-label='Abrir menú'>
       <span class='h-0.5 w-6 origin-center bg-black transition-all duration-300' id='line-1'></span>
@@ -32,7 +34,7 @@ const { pathname } = Astro.url
 
 <div
   id='menu-overlay'
-  class='fixed left-0 flex w-full flex-col items-start justify-start bg-white px-6 pt-12 pb-20 text-base md:hidden'
+  class='fixed left-0 flex w-full flex-col items-start justify-start bg-white px-6 pt-2 pb-20 text-base md:hidden'
 >
   <nav class='flex flex-col justify-start gap-11'>
     {
@@ -42,20 +44,44 @@ const { pathname } = Astro.url
         </a>
       ))
     }
+    <button id='contact-btn-mobile' class='relative text-left transition-all hover:opacity-70'> CONTACT </button>
   </nav>
+</div>
+
+<div id='contact-overlay' class='fixed inset-0 flex items-center justify-center bg-white px-6 text-xl'>
+  <button
+    id='contact-close-btn'
+    class='absolute top-8 right-6 flex flex-col gap-1.5 md:top-20 md:right-14'
+    aria-label='Cerrar contacto'
+  >
+    <span class='h-0.5 w-6 origin-center bg-black transition-all duration-300' id='contact-line-1'></span>
+    <span class='h-0.5 w-6 bg-black transition-all duration-300' id='contact-line-2'></span>
+  </button>
+  <Contact />
 </div>
 
 <style>
   @reference "tailwindcss";
 
   #menu-overlay {
-    @apply z-40;
+    @apply z-30;
     top: 92px;
-    transform: translateY(-220px);
+    transform: translateY(-240px);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow:
-      rgba(0, 0, 0, 0.02) 0 1px 3px 0,
-      rgba(27, 31, 35, 0.15) 0 0 0 1px;
+  }
+
+  #contact-overlay {
+    @apply z-50;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.4s ease,
+      visibility 0.4s ease;
+  }
+
+  #contact-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
   }
 
   #menu-overlay.is-open {
@@ -64,34 +90,69 @@ const { pathname } = Astro.url
 </style>
 
 <script>
-  const btn = document.getElementById('menu-btn')
-  const overlay = document.getElementById('menu-overlay')
+  const menuBtn = document.getElementById('menu-btn')
+  const menuOverlay = document.getElementById('menu-overlay')
+  const contactBtns = [document.getElementById('contact-btn'), document.getElementById('contact-btn-mobile')]
+  const contactCloseBtn = document.getElementById('contact-close-btn')
+  const contactOverlay = document.getElementById('contact-overlay')
   const line1 = document.getElementById('line-1')
   const line2 = document.getElementById('line-2')
-  let isOpen = false
+  const contactLine1 = document.getElementById('contact-line-1')
+  const contactLine2 = document.getElementById('contact-line-2')
 
-  btn?.addEventListener('click', () => {
-    isOpen = !isOpen
+  let isMenuOpen = false
 
-    overlay?.classList.toggle('is-open', isOpen)
+  const toggleMenu = (forceClose = false) => {
+    isMenuOpen = forceClose ? false : !isMenuOpen
+    menuOverlay?.classList.toggle('is-open', isMenuOpen)
 
-    if (isOpen) {
+    if (isMenuOpen) {
       line1!.style.transform = 'translateY(4px) rotate(45deg)'
       line2!.style.transform = 'translateY(-4px) rotate(-45deg)'
       document.body.style.overflow = 'hidden'
     } else {
       line1!.style.transform = 'none'
       line2!.style.transform = 'none'
-      document.body.style.overflow = ''
+      if (!contactOverlay?.classList.contains('is-open')) {
+        document.body.style.overflow = ''
+      }
     }
+  }
+
+  menuBtn?.addEventListener('click', () => toggleMenu())
+
+  menuOverlay?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => toggleMenu(true))
   })
 
-  overlay?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      requestAnimationFrame(() => {
-        overlay.style.transform = 'translateY(-220px)'
-        document.body.style.overflow = 'auto'
-      })
-    })
+  const openContact = () => {
+    if (isMenuOpen) toggleMenu(true)
+
+    contactOverlay?.classList.add('is-open')
+    document.body.style.overflow = 'hidden'
+
+    // Animate contact close button to X
+    if (contactLine1) contactLine1.style.transform = 'translateY(4px) rotate(45deg)'
+    if (contactLine2) contactLine2.style.transform = 'translateY(-4px) rotate(-45deg)'
+  }
+
+  const closeContact = () => {
+    contactOverlay?.classList.remove('is-open')
+
+    if (!isMenuOpen) {
+      document.body.style.overflow = ''
+    }
+  }
+  contactBtns.forEach((btn) => {
+    btn?.addEventListener('click', openContact)
+  })
+
+  contactCloseBtn?.addEventListener('click', closeContact)
+
+  // Close contact on escape key
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && contactOverlay?.classList.contains('is-open')) {
+      closeContact()
+    }
   })
 </script>
