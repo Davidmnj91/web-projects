@@ -21,43 +21,24 @@ cloudinary.config({
   api_secret: import.meta.env.CLOUDINARY_API_SECRET,
 })
 
-// const getRandomInt = (min: number, max: number): number => {
-//   const minCeiled = Math.ceil(min)
-//   const maxFloored = Math.floor(max)
-//   return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled)
-// }
-
-// const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
-
 export const getImages = async (
   folder: IMAGE_TYPE,
   max_images?: number,
   next_cursor?: string,
 ): Promise<CloudinaryResponse> => {
-  // await delay(2000)
-
-  const query = cloudinary.search.expression(`folder:${folder}`).max_results(max_images)
+  const query = cloudinary.search
+    .expression(`folder:${folder}`)
+    .with_field('context')
+    .with_field('metadata')
+    .max_results(max_images)
+    .sort_by('public_id', 'asc') // Scalable naming convention sort (e.g. 001-image)
+    .sort_by('created_at', 'desc') // Fallback for images without numbering
 
   if (next_cursor) {
     query.next_cursor(next_cursor)
   }
 
   const result = (await query.execute()) as CloudinaryResponse
-
-  // const result = {
-  //   resources: Array.from({ length: 10 }, (_, i) => {
-  //     const width = getRandomInt(200, 600)
-  //     const height = getRandomInt(200, 600)
-  //     return {
-  //       public_id: 'public_id',
-  //       secure_url: `https://picsum.photos/${width}/${height}?random=${i}.jpg`,
-  //       width: width,
-  //       height: height,
-  //       format: 'jpg',
-  //     }
-  //   }),
-  //   next_cursor: 'testt',
-  // }
 
   return {
     resources: result.resources,
