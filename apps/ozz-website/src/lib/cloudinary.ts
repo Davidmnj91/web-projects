@@ -31,8 +31,7 @@ export const getImages = async (
     .with_field('context')
     .with_field('metadata')
     .max_results(max_images)
-    .sort_by('public_id', 'asc') // Scalable naming convention sort (e.g. 001-image)
-    .sort_by('created_at', 'desc') // Fallback for images without numbering
+    .sort_by('public_id', 'desc')
 
   if (next_cursor) {
     query.next_cursor(next_cursor)
