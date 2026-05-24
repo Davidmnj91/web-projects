@@ -1,14 +1,23 @@
 // @ts-check
-import node from '@astrojs/node'
+import sitemap from '@astrojs/sitemap'
+import vercel from '@astrojs/vercel'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
 
+const websiteUrl = 'https://etimatic.vercel.app'
+
 // https://astro.build/config
 export default defineConfig({
-  adapter: node({
-    mode: 'standalone',
-  }),
+  site: websiteUrl,
+  adapter: vercel(),
+  integrations: [sitemap()],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      sitemap({
+        changefreq: 'weekly',
+        priority: 0.7,
+      }),
+    ],
   },
 })
