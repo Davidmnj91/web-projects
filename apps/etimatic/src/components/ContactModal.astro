@@ -17,14 +17,14 @@ const { mail, location, phones } = Constants
         </svg>
       </button>
 
-      <div id='form-container' class='max-slim:flex-col flex h-full w-full flex-row'>
+      <div id='form-container' class='flex h-full w-full flex-row max-lg:flex-col'>
         <!-- Contact Info Panel -->
-        <div
-          class='bg-main max-slim:p-[20px_1em] max-slim:text-center max-slim:justify-around flex flex-1 flex-col p-[3em]'
-        >
-          <h2 class='text-accent max-slim:mb-2 text-3xl'>CONTACTA CON NOSOTROS</h2>
+        <div class='bg-main flex flex-1 flex-col p-[3em] max-lg:justify-around max-lg:p-[20px_1em] max-lg:text-center'>
+          <h2 class='text-accent text-3xl max-lg:mb-2'>CONTACTA CON NOSOTROS</h2>
 
-          <div class='max-slim:mt-0 max-slim:gap-4 text-body mt-[10em] flex flex-col gap-8 text-white'>
+          <div
+            class='mt-[10em] flex flex-col gap-8 text-base font-medium text-white max-lg:mt-0 max-lg:gap-4 max-lg:text-sm'
+          >
             <a
               href={location.mapsUrl}
               target='_blank'
@@ -52,15 +52,15 @@ const { mail, location, phones } = Constants
         </div>
 
         <!-- Form Panel -->
-        <div class='max-slim:p-8 flex min-h-100 flex-1 flex-col bg-white p-[3em]'>
+        <div class='flex min-h-100 flex-1 flex-col bg-white p-[3em] max-lg:p-8'>
           <div id='success-message' class='hidden flex-1 items-center justify-center'>
-            <h2 class='text-heading2 text-accent text-center'>
+            <h2 class='text-accent text-center text-5xl font-semibold max-lg:text-xl'>
               Gracias, nos pondremos en contacto cuanto antes con usted
             </h2>
           </div>
 
-          <form id='contact-form' class='max-slim:gap-4 flex h-full flex-col gap-8'>
-            <h2 class='text-heading2 text-main'>FORMULARIO</h2>
+          <form id='contact-form' class='flex h-full flex-col gap-8 max-lg:gap-4'>
+            <h2 class='text-main text-5xl font-semibold max-lg:text-xl'>FORMULARIO</h2>
 
             <input
               type='text'
@@ -82,13 +82,16 @@ const { mail, location, phones } = Constants
               class='border-main focus:border-accent min-h-30 w-full border-b-2 p-4 transition-colors outline-none'
             ></textarea>
 
-            <div class='max-slim:justify-center mt-auto flex items-center justify-between'>
-              <a href={`mailto:${mail}`} class='text-body text-main max-slim:hidden no-underline'>
+            <div class='mt-auto flex items-center justify-between max-lg:justify-center'>
+              <a
+                href={`mailto:${mail}`}
+                class='text-main text-base font-medium no-underline max-lg:hidden max-lg:text-sm'
+              >
                 {mail}
               </a>
               <button
                 type='submit'
-                class='bg-main hover:bg-accent hover:text-main max-slim:w-full min-w-[15em] rounded-full px-8 py-4 font-bold text-white transition-all'
+                class='bg-main hover:bg-accent hover:text-main min-w-[15em] rounded-full px-8 py-4 font-bold text-white transition-all max-lg:w-full'
               >
                 Enviar
               </button>

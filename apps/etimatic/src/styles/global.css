@@ -4,66 +4,9 @@
   --color-main: #393939;
   --color-accent: #00ffa3;
   --color-white: #ffffff;
-
-  --breakpoint-slim: 1199px;
-  --breakpoint-full: 1200px;
 }
 
 @layer base {
-  :root {
-    --font-heading1-size: 64px;
-    --font-heading1-line-height: 67px;
-    --font-heading1-weight: 800;
-
-    --font-heading2-size: 48px;
-    --font-heading2-line-height: 50px;
-    --font-heading2-weight: 600;
-
-    --font-title-size: 20px;
-    --font-title-line-height: 28px;
-    --font-title-weight: 500;
-
-    --font-body-size: 16px;
-    --font-body-line-height: 16px;
-    --font-body-weight: 500;
-
-    --font-highlight-size: 16px;
-    --font-highlight-line-height: 16px;
-    --font-highlight-weight: 600;
-
-    --font-small-size: 14px;
-    --font-small-line-height: 14px;
-    --font-small-weight: 500;
-  }
-
-  @media (max-width: 1199px) {
-    :root {
-      --font-heading1-size: 33px;
-      --font-heading1-line-height: 35px;
-      --font-heading1-weight: 800;
-
-      --font-heading2-size: 20px;
-      --font-heading2-line-height: 22px;
-      --font-heading2-weight: 600;
-
-      --font-title-size: 16px;
-      --font-title-line-height: 18px;
-      --font-title-weight: 500;
-
-      --font-body-size: 14px;
-      --font-body-line-height: 17px;
-      --font-body-weight: 500;
-
-      --font-highlight-size: 14px;
-      --font-highlight-line-height: 17px;
-      --font-highlight-weight: 600;
-
-      --font-small-size: 12px;
-      --font-small-line-height: 15px;
-      --font-small-weight: 500;
-    }
-  }
-
   body {
     @apply text-main bg-white;
     font-family:
@@ -81,46 +24,5 @@
       'Segoe UI Emoji',
       'Segoe UI Symbol',
       'Noto Color Emoji';
-    font-size: var(--font-body-size);
-    line-height: var(--font-body-line-height);
-    font-weight: var(--font-body-weight);
-  }
-}
-
-@layer utilities {
-  .text-heading1 {
-    font-size: var(--font-heading1-size);
-    line-height: var(--font-heading1-line-height);
-    font-weight: var(--font-heading1-weight);
-  }
-
-  .text-heading2 {
-    font-size: var(--font-heading2-size);
-    line-height: var(--font-heading2-line-height);
-    font-weight: var(--font-heading2-weight);
-  }
-
-  .text-title {
-    font-size: var(--font-title-size);
-    line-height: var(--font-title-line-height);
-    font-weight: var(--font-title-weight);
-  }
-
-  .text-body {
-    font-size: var(--font-body-size);
-    line-height: var(--font-body-line-height);
-    font-weight: var(--font-body-weight);
-  }
-
-  .text-highlight {
-    font-size: var(--font-highlight-size);
-    line-height: var(--font-highlight-line-height);
-    font-weight: var(--font-highlight-weight);
-  }
-
-  .text-small {
-    font-size: var(--font-small-size);
-    line-height: var(--font-small-line-height);
-    font-weight: var(--font-small-weight);
   }
 }
