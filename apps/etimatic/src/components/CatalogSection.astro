@@ -59,15 +59,15 @@ const CatalogItems = [
     {
       CatalogItems.map((catalog) => (
         <div class='flex flex-col items-center'>
-          <h3 class='text-title mb-4 flex min-h-[3rem] items-center text-center'>{catalog.title}</h3>
+          <h3 class='text-title mb-4 flex min-h-12 items-center text-center'>{catalog.title}</h3>
           <div
-            class='mb-5 h-[300px] w-full bg-contain bg-center bg-no-repeat'
+            class='mb-5 h-75 w-full bg-contain bg-center bg-no-repeat'
             style={`background-image: url(${catalog.image})`}
           />
           <a
             href={catalog.url}
             target='_blank'
-            class='catalog-link bg-main hover:bg-accent hover:text-main max-slim:w-[90%] w-full max-w-[400px] rounded-md px-8 py-3 text-center font-bold text-white no-underline transition-colors'
+            class='catalog-link bg-main hover:bg-accent hover:text-main max-slim:w-[90%] w-full max-w-100 rounded-full px-8 py-3 text-center font-bold text-white no-underline shadow-md transition-all duration-300 ease-in-out hover:shadow-lg active:scale-95'
             data-key={catalog.key}
           >
             Ver Catálogo

@@ -1,5 +1,0 @@
-@import '../font-face-factory';
-
-@mixin aleo-font-face() {
-  @include font-face-factory('Aleo', 'Aleo/Aleo-%weight%%style%');
-}
