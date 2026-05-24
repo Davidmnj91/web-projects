@@ -5,6 +5,12 @@ packages:
   - config/*
   - tools/*
 
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  esbuild: true
+  sharp: true
+
 catalogMode: prefer
 
 catalogs:
