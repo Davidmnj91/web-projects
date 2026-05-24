@@ -1,20 +1,8 @@
-import nodemailer from 'nodemailer'
-
-import { Constants } from '../../config/constants'
+import { sendEmail } from '../../lib/email.ts'
 
 import type { APIRoute } from 'astro'
 
 export const prerender = false
-
-const transporter = nodemailer.createTransport({
-  host: import.meta.env.MAIL_HOST,
-  port: 465,
-  secure: true,
-  auth: {
-    user: Constants.mail,
-    pass: import.meta.env.MAIL_PASSWORD,
-  },
-})
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -29,12 +17,11 @@ export const POST: APIRoute = async ({ request }) => {
 
     const mailData = {
       from: email,
-      to: Constants.mail,
       subject: `(WEB) Mensaje de ${name}`,
       html: `<div>${message}</div><p>Enviado por: ${name} (${email})</p>`,
     }
 
-    await transporter.sendMail(mailData)
+    await sendEmail(mailData)
 
     return new Response(JSON.stringify({ message: 'Success' }), {
       status: 200,
