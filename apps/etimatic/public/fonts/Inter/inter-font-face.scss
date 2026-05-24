@@ -1,0 +1,5 @@
+@import '../font-face-factory';
+
+@mixin inter-font-face() {
+  @include font-face-factory('inter', 'inter/inter-%weight%%style%');
+}

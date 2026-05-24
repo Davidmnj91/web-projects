@@ -1,0 +1,38 @@
+---
+
+---
+
+<div class='max-slim:p-[0_1em] relative flex h-[calc(100vh-60px)] w-full flex-col overflow-hidden p-[5em_5em_0]'>
+  <div
+    class="absolute top-[3em] left-0 h-full w-full bg-[url('/images/home_titulo.png')] bg-contain bg-top bg-no-repeat"
+  >
+  </div>
+
+  <div
+    id='bag-image'
+    class="max-slim:left-1/2 max-slim:-translate-x-1/2 max-slim:w-[150%] max-slim:bg-cover max-slim:bg-[position-y:unset] absolute bottom-0 left-0 h-full w-full bg-[position-y:bottom] bg-[url('/images/bag_home.png')] bg-contain bg-center bg-no-repeat opacity-85"
+  >
+  </div>
+
+  <button
+    id='cta-button'
+    class='bg-accent text-main max-slim:top-auto max-slim:bottom-[10%] max-slim:w-[240px] absolute top-3/4 left-1/2 -translate-x-1/2 rounded-full px-8 py-4 font-bold transition-opacity hover:opacity-90'
+  >
+    Necesito Packaging
+  </button>
+</div>
+
+<script>
+  // Handled in a global modal script or locally if needed
+  const cta = document.getElementById('cta-button')
+  cta?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('open-contact-modal'))
+  })
+
+  // Dynamic bag resizing if really needed, but trying to stick to CSS
+  // Original logic: height = (window.innerWidth * (textRatio * 10)) / 100
+  // where textRatio = 0.44. So height = innerWidth * 0.044?
+  // No, (0.44 * 10) / 100 = 4.4 / 100 = 0.044.
+  // Actually, that's very small.
+  // Wait: (window.innerWidth * (0.44 * 10)) / 100 = innerWidth * 4.4 / 100 = 4.4% of innerWidth.
+</script>
