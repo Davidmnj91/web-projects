@@ -12,7 +12,7 @@ const boxCarouselItems = [
 
 <div
   id='box-section'
-  class='max-slim:px-4 max-slim:mb-[3em] max-slim:h-auto max-slim:pb-[4em] relative flex h-[75vh] justify-center overflow-hidden px-[5em] pb-[5em]'
+  class='max-slim:px-4 max-slim:my-16 max-slim:h-auto relative flex h-[75vh] justify-center overflow-hidden px-[5em] pb-[5em]'
 >
   <div class='relative h-full w-full overflow-hidden'>
     <div id='carousel-track' class='flex h-full transition-transform duration-500 ease-in-out'>
@@ -20,11 +20,11 @@ const boxCarouselItems = [
         boxCarouselItems.map(({ title, boxImage }) => (
           <div class='max-slim:flex max-slim:flex-col max-slim:items-center relative h-full min-w-full'>
             <div
-              class='text-heading1 text-main max-slim:w-full max-slim:top-0 max-slim:relative max-slim:text-center absolute top-[120px] w-[60%]'
+              class='text-heading1 text-main max-slim:w-full max-slim:top-0 max-slim:relative max-slim:text-center absolute top-30 w-[60%]'
               set:html={title}
             />
             <div
-              class='max-slim:w-full max-slim:h-[300px] max-slim:relative max-slim:translate-x-0 max-slim:top-0 max-slim:mt-8 absolute top-1/2 right-0 h-full w-1/2 -translate-y-1/2 bg-contain bg-center bg-no-repeat'
+              class='max-slim:w-full max-slim:h-75 max-slim:relative max-slim:translate-x-0 max-slim:translate-y-0 max-slim:top-0 max-slim:mt-8 absolute top-1/2 right-0 h-full w-1/2 -translate-y-1/2 bg-contain bg-center bg-no-repeat'
               style={`background-image: url(${boxImage})`}
             />
           </div>
@@ -34,7 +34,7 @@ const boxCarouselItems = [
 
     <button
       id='box-cta'
-      class='bg-main max-slim:w-full max-slim:relative max-slim:bottom-0 max-slim:left-0 max-slim:translate-x-0 max-slim:mt-8 absolute bottom-[160px] max-w-[360px] min-w-[30%] rounded-full px-8 py-4 font-bold text-white transition-opacity hover:opacity-90'
+      class='bg-main hover:bg-accent hover:text-main max-slim:w-full max-slim:block max-slim:mx-auto max-slim:relative max-slim:bottom-0 max-slim:left-0 max-slim:translate-x-0 max-slim:mt-8 absolute bottom-40 max-w-90 min-w-[30%] cursor-pointer rounded-full px-8 py-4 font-bold text-white shadow-md transition-all duration-300 ease-in-out hover:shadow-lg active:scale-95'
     >
       Quiero más información
     </button>
