@@ -1,0 +1,92 @@
+---
+const boxCarouselItems = [
+  { title: 'PACKAGING <b>100% PERSONALIZADO</b> A TUS NECESIDADES', boxImage: '/images/box_closed.png' },
+  { title: 'LA <b>CALIDAD DE SIEMPRE</b>', boxImage: '/images/box_opening.png' },
+  {
+    title:
+      'EL <b>MISMO SERVICIO</b> <small class="flex text-xl font-medium max-lg:text-base leading-[28px] max-lg:block">Atención personalizada nos avalan más de 30 años en el sector, ofreciendo así a nuestros clientes todas las necesidades posibles.</small>',
+    boxImage: '/images/box_open.png',
+  },
+]
+---
+
+<div
+  id='box-section'
+  class='relative flex h-[75vh] justify-center overflow-hidden px-[5em] pb-[5em] max-lg:my-16 max-lg:h-auto max-lg:px-4'
+>
+  <div class='relative h-full w-full overflow-hidden'>
+    <div id='carousel-track' class='flex h-full transition-transform duration-500 ease-in-out'>
+      {
+        boxCarouselItems.map(({ title, boxImage }) => (
+          <div class='relative h-full min-w-full max-lg:flex max-lg:flex-col max-lg:items-center'>
+            <div
+              class='text-main absolute top-30 w-[60%] text-6xl font-extrabold max-lg:relative max-lg:top-0 max-lg:w-full max-lg:text-center max-lg:text-4xl'
+              set:html={title}
+            />
+            <div
+              class='absolute top-1/2 right-0 h-full w-1/2 -translate-y-1/2 bg-contain bg-center bg-no-repeat max-lg:relative max-lg:top-0 max-lg:mt-8 max-lg:h-75 max-lg:w-full max-lg:translate-x-0 max-lg:translate-y-0'
+              style={`background-image: url(${boxImage})`}
+            />
+          </div>
+        ))
+      }
+    </div>
+
+    <button
+      id='box-cta'
+      class='bg-main hover:bg-accent hover:text-main absolute bottom-40 max-w-90 min-w-[30%] cursor-pointer rounded-full px-8 py-4 font-bold text-white shadow-md transition-all duration-300 ease-in-out hover:shadow-lg active:scale-95 max-lg:relative max-lg:bottom-0 max-lg:left-0 max-lg:mx-auto max-lg:mt-8 max-lg:block max-lg:w-full max-lg:translate-x-0'
+    >
+      Quiero más información
+    </button>
+  </div>
+
+  <div id='carousel-dots' class='absolute bottom-[2em] left-1/2 flex -translate-x-1/2 gap-4 max-lg:bottom-0'>
+    {
+      boxCarouselItems.map((_, index) => (
+        <button
+          class='dot border-main bg-main hover:bg-accent hover:border-accent h-4 w-4 cursor-pointer rounded-full border-2 transition-all duration-200 hover:scale-110 active:scale-90'
+          data-index={index}
+        />
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const track = document.getElementById('carousel-track')
+  const dots = document.querySelectorAll('#carousel-dots .dot')
+  const cta = document.getElementById('box-cta')
+  let currentIndex = 0
+
+  function updateCarousel(index: number) {
+    if (!track) return
+    track.style.transform = `translateX(-${index * 100}%)`
+    dots.forEach((dot, i) => {
+      if (i === index) {
+        dot.classList.add('bg-accent', 'border-accent')
+        dot.classList.remove('bg-main', 'border-main')
+      } else {
+        dot.classList.remove('bg-accent', 'border-accent')
+        dot.classList.add('bg-main', 'border-main')
+      }
+    })
+    currentIndex = index
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => updateCarousel(i))
+  })
+
+  cta?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('open-contact-modal'))
+  })
+
+  // Optional: Auto-play
+  setInterval(() => {
+    const nextIndex = (currentIndex + 1) % dots.length
+    updateCarousel(nextIndex)
+  }, 5000)
+
+  // Initialize
+  updateCarousel(0)
+</script>

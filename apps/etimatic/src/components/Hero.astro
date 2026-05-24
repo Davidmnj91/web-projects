@@ -1,0 +1,39 @@
+---
+
+---
+
+<div class='relative flex h-[calc(100vh-60px)] w-full flex-col overflow-hidden p-[5em_5em_0] max-lg:p-[0_1em]'>
+  <h1 class='sr-only'>Etimatic - Fabricantes de Packaging Personalizado, Cajas y Etiquetas Adhesivas en España</h1>
+  <div
+    class="absolute top-[3em] left-0 h-full w-full bg-[url('/images/home_titulo.png')] bg-contain bg-top bg-no-repeat"
+  >
+  </div>
+
+  <div
+    id='bag-image'
+    class="absolute bottom-0 left-0 h-full w-full bg-[position-y:bottom] bg-[url('/images/bag_home.png')] bg-contain bg-bottom bg-no-repeat opacity-85 max-lg:left-1/2 max-lg:w-[150%] max-lg:-translate-x-1/2 max-lg:bg-[unset] max-lg:bg-cover"
+  >
+  </div>
+
+  <button
+    id='cta-button'
+    class='hover:bg-main bg-accent text-main absolute top-3/4 left-1/2 -translate-x-1/2 cursor-pointer rounded-full px-8 py-4 font-bold shadow-md transition-all duration-300 ease-in-out hover:text-white hover:shadow-lg active:scale-95 max-lg:top-auto max-lg:bottom-[10%] max-lg:w-60'
+  >
+    Necesito Packaging
+  </button>
+</div>
+
+<script>
+  // Handled in a global modal script or locally if needed
+  const cta = document.getElementById('cta-button')
+  cta?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('open-contact-modal'))
+  })
+
+  // Dynamic bag resizing if really needed, but trying to stick to CSS
+  // Original logic: height = (window.innerWidth * (textRatio * 10)) / 100
+  // where textRatio = 0.44. So height = innerWidth * 0.044?
+  // No, (0.44 * 10) / 100 = 4.4 / 100 = 0.044.
+  // Actually, that's very small.
+  // Wait: (window.innerWidth * (0.44 * 10)) / 100 = innerWidth * 4.4 / 100 = 4.4% of innerWidth.
+</script>
