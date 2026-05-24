@@ -1,0 +1,159 @@
+---
+import { Constants } from '../config/constants'
+const { mail, location, phones } = Constants
+---
+
+<dialog
+  id='contact-modal'
+  class='z-[100] h-full max-h-none w-full max-w-none border-none bg-transparent p-0 backdrop:bg-black/50'
+>
+  <div class='flex h-full w-full items-center justify-center'>
+    <div class='relative m-4 flex max-h-[90vh] w-full max-w-5xl overflow-auto bg-white shadow-2xl'>
+      <button id='close-modal' class='absolute top-4 right-4 z-10 cursor-pointer border-none bg-transparent p-2'>
+        <svg xmlns='http://www.w3.org/2000/svg' width='34' height='34' fill='#393939' viewBox='0 0 256 256'>
+          <path
+            d='M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z'
+          ></path>
+        </svg>
+      </button>
+
+      <div id='form-container' class='max-slim:flex-col flex h-full flex-row'>
+        <!-- Contact Info Panel -->
+        <div
+          class='bg-main max-slim:p-[50px_1em_10px] max-slim:text-center max-slim:justify-around flex flex-1 flex-col p-[5em]'
+        >
+          <h2 class='text-heading1 text-accent'>CONTACTA CON NOSOTROS</h2>
+
+          <div class='max-slim:mt-0 max-slim:gap-4 text-body mt-[10em] flex flex-col gap-8 text-white'>
+            <a
+              href={location.mapsUrl}
+              target='_blank'
+              rel='noreferrer'
+              class='hover:text-accent no-underline transition-colors'
+            >
+              {location.address}<br />{location.city}
+            </a>
+            <a href={`mailto:${mail}`} class='hover:text-accent no-underline transition-colors'>
+              {mail}
+            </a>
+            <div class='flex flex-col gap-2'>
+              {
+                phones.map(({ display, callNumber }) => (
+                  <a
+                    href={`tel:${callNumber}`}
+                    class='text-accent font-bold no-underline transition-opacity hover:opacity-80'
+                  >
+                    {display}
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Panel -->
+        <div class='max-slim:p-8 flex min-h-[400px] flex-1 flex-col bg-white p-[5em]'>
+          <div id='success-message' class='hidden flex-1 items-center justify-center'>
+            <h2 class='text-heading1 text-accent text-center'>
+              Gracias, nos pondremos en contacto cuanto antes con usted
+            </h2>
+          </div>
+
+          <form id='contact-form' class='max-slim:gap-4 flex h-full flex-col gap-8'>
+            <h2 class='text-heading1 text-main'>FORMULARIO</h2>
+
+            <input
+              type='text'
+              name='name'
+              placeholder='Nombre*'
+              required
+              class='border-main focus:border-accent w-full border-b-2 p-4 transition-colors outline-none'
+            />
+            <input
+              type='email'
+              name='email'
+              placeholder='Mail*'
+              required
+              class='border-main focus:border-accent w-full border-b-2 p-4 transition-colors outline-none'
+            />
+            <textarea
+              name='message'
+              placeholder='Tu mensaje'
+              class='border-main focus:border-accent min-h-[120px] w-full border-b-2 p-4 transition-colors outline-none'
+            ></textarea>
+
+            <div class='max-slim:justify-center mt-auto flex items-center justify-between'>
+              <a href={`mailto:${mail}`} class='text-body text-main max-slim:hidden no-underline'>
+                {mail}
+              </a>
+              <button
+                type='submit'
+                class='bg-main hover:bg-accent hover:text-main max-slim:w-full min-w-[15em] rounded-full px-8 py-4 font-bold text-white transition-all'
+              >
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const modal = document.getElementById('contact-modal') as HTMLDialogElement
+  const closeBtn = document.getElementById('close-modal')
+  const form = document.getElementById('contact-form') as HTMLFormElement
+  const formContainer = document.getElementById('contact-form')
+  const successMsg = document.getElementById('success-message')
+
+  window.addEventListener('open-contact-modal', () => {
+    modal?.showModal()
+    document.body.style.overflow = 'hidden'
+  })
+
+  const closeModal = () => {
+    modal?.close()
+    document.body.style.overflow = ''
+    // Reset form state after some time
+    setTimeout(() => {
+      form?.classList.remove('hidden')
+      successMsg?.classList.add('hidden')
+      form?.reset()
+    }, 500)
+  }
+
+  closeBtn?.addEventListener('click', closeModal)
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal()
+  })
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    const formData = new FormData(form)
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message'),
+    }
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (res.ok) {
+        form.classList.add('hidden')
+        successMsg?.classList.remove('hidden')
+        successMsg?.classList.add('flex')
+      }
+    } catch (err) {
+      console.error('Error submitting form:', err)
+      alert('Hubo un error al enviar el mensaje. Por favor, inténtelo de nuevo.')
+    }
+  })
+</script>

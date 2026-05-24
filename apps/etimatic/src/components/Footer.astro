@@ -1,0 +1,37 @@
+---
+import { Constants } from '../config/constants'
+const { mail, location, phones } = Constants
+---
+
+<footer class='flex justify-center bg-black p-[12px_0_24px]'>
+  <div class='flex flex-col items-center'>
+    <img src='/images/logo.svg' alt='Etimatic Logo' class='h-[80px] w-[180px] brightness-0 invert' />
+
+    <a
+      href={location.mapsUrl}
+      target='_blank'
+      rel='noreferrer'
+      class='text-body mt-8 flex flex-col items-center text-white no-underline'
+    >
+      <span>{location.address}</span>
+      <span>{location.city}</span>
+    </a>
+
+    <a href={`mailto:${mail}`} class='text-body mt-8 text-white no-underline'>
+      {mail}
+    </a>
+
+    <div class='mt-8 flex gap-2'>
+      {
+        phones.map(({ display, callNumber }, index) => (
+          <Fragment key={callNumber}>
+            <a href={`tel:${callNumber}`} class='text-body text-white no-underline'>
+              {display}
+            </a>
+            {index < phones.length - 1 && <span class='text-white'> / </span>}
+          </Fragment>
+        ))
+      }
+    </div>
+  </div>
+</footer>

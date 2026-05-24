@@ -1,0 +1,90 @@
+---
+const CatalogItems = [
+  {
+    title: 'Embalaje Decorado',
+    key: 'CATALOG_BOXES',
+    image: '/images/catalog_boxes.png',
+    url: '/catalogs/catalog_boxes.pdf',
+  },
+  {
+    title: 'Bolsas Algodón y TNT',
+    key: 'CATALOG_BAG_COTTON',
+    image: '/images/catalog_bag_cotton.png',
+    url: '/catalogs/catalog_bag_cotton.pdf',
+  },
+  {
+    title: 'Bolsas Papel',
+    key: 'CATALOG_BAG_PAPER',
+    image: '/images/catalog_bag_paper.png',
+    url: '/catalogs/catalog_bag_paper.pdf',
+  },
+  {
+    title: 'Decoración',
+    key: 'CATALOG_DECORATION',
+    image: '/images/catalog_decoration.png',
+    url: '/catalogs/catalog_decoration.pdf',
+  },
+  {
+    title: 'Cintas Decorativas e Impresas',
+    key: 'CATALOG_CINTAS',
+    image: '/images/catalog_cintas.png',
+    url: '/catalogs/catalog_cintas.pdf',
+  },
+  {
+    title: 'Etiquetas Adhesivas',
+    key: 'CATALOG_STICKERS',
+    image: '/images/catalog_stickers.png',
+    url: '/catalogs/catalog_stickers.pdf',
+  },
+  {
+    title: 'Tendencias Etimatic',
+    key: 'CATALOG_TRENDS',
+    image: '/images/catalog_trends.png',
+    url: '/catalogs/catalog_trends.pdf',
+  },
+  {
+    title: 'Papel Regalo',
+    key: 'CATALOG_GIFTS',
+    image: '/images/catalog_paper.png',
+    url: '/catalogs/catalog_paper.pdf',
+  },
+]
+---
+
+<section id='products' class='max-slim:px-4 max-slim:pb-[3em] flex w-full flex-col items-center px-[5em] pb-[5em]'>
+  <div class='max-slim:block border-main my-[3em] hidden w-full border-t'></div>
+  <h2 class='text-heading1 mb-10 text-center'>NUESTRO PRODUCTO</h2>
+
+  <div class='grid w-full grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+    {
+      CatalogItems.map((catalog) => (
+        <div class='flex flex-col items-center'>
+          <h3 class='text-title mb-4 flex min-h-[3rem] items-center text-center'>{catalog.title}</h3>
+          <div
+            class='mb-5 h-[300px] w-full bg-contain bg-center bg-no-repeat'
+            style={`background-image: url(${catalog.image})`}
+          />
+          <a
+            href={catalog.url}
+            target='_blank'
+            class='catalog-link bg-main hover:bg-accent hover:text-main max-slim:w-[90%] w-full max-w-[400px] rounded-md px-8 py-3 text-center font-bold text-white no-underline transition-colors'
+            data-key={catalog.key}
+          >
+            Ver Catálogo
+          </a>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const catalogLinks = document.querySelectorAll('.catalog-link')
+  catalogLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      const key = link.getAttribute('data-key')
+      // @ts-ignore
+      window.dataLayer?.push({ event: 'catalog_viewed', catalog_name: key })
+    })
+  })
+</script>

@@ -1,0 +1,110 @@
+---
+
+---
+
+<header
+  class='max-slim:justify-center max-slim:px-4 max-slim:shadow-[0_4px_4px_rgba(0,0,0,0.05)] sticky top-0 z-50 flex h-[60px] w-full items-center justify-between bg-white px-[3em]'
+>
+  <a href='/'>
+    <img src='/images/logo.svg' alt='Etimatic Logo' class='h-[60px] w-[180px]' />
+  </a>
+
+  <nav class='max-slim:hidden flex gap-[30px]'>
+    <button
+      class='nav-link text-main cursor-pointer border-none bg-transparent text-[18px] leading-[22px] font-semibold outline-none'
+      data-section='#products'>PRODUCTOS</button
+    >
+    <button
+      class='nav-link text-main cursor-pointer border-none bg-transparent text-[18px] leading-[22px] font-semibold outline-none'
+      data-section='#about_us'>QUIENES SOMOS</button
+    >
+    <button
+      class='nav-link text-main cursor-pointer border-none bg-transparent text-[18px] leading-[22px] font-semibold outline-none'
+      data-contact>CONTACTANOS</button
+    >
+  </nav>
+
+  <button
+    id='mobile-menu-toggle'
+    class='max-slim:block absolute right-4 hidden border-none bg-transparent outline-none'
+  >
+    <div id='menu-icon'>
+      <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='#393939' viewBox='0 0 256 256'>
+        <path
+          d='M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z'
+        ></path>
+      </svg>
+    </div>
+    <div id='close-icon' class='hidden'>
+      <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='#393939' viewBox='0 0 256 256'>
+        <path
+          d='M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z'
+        ></path>
+      </svg>
+    </div>
+  </button>
+
+  <div
+    id='mobile-menu'
+    class='fixed top-[60px] right-0 left-0 z-[40] h-0 overflow-hidden bg-white transition-[height] duration-300 ease-in-out'
+  >
+    <div class='flex flex-col p-4'>
+      <button
+        class='mobile-nav-link text-main border-none bg-transparent py-2 text-start text-[20px] leading-[22px] font-normal'
+        data-section='#products'>PRODUCTOS</button
+      >
+      <hr class='my-2 border-gray-100' />
+      <button
+        class='mobile-nav-link text-main border-none bg-transparent py-2 text-start text-[20px] leading-[22px] font-normal'
+        data-section='#about_us'>QUIENES SOMOS</button
+      >
+      <hr class='my-2 border-gray-100' />
+      <button
+        class='mobile-nav-link text-main border-none bg-transparent py-2 text-start text-[20px] leading-[22px] font-normal'
+        data-contact>CONTACTANOS</button
+      >
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle')
+  const menu = document.getElementById('mobile-menu')
+  const menuIcon = document.getElementById('menu-icon')
+  const closeIcon = document.getElementById('close-icon')
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.classList.contains('h-screen')
+    if (isOpen) {
+      menu?.classList.remove('h-screen')
+      menu?.classList.add('h-0')
+      menuIcon?.classList.remove('hidden')
+      closeIcon?.classList.add('hidden')
+    } else {
+      menu?.classList.remove('h-0')
+      menu?.classList.add('h-screen')
+      menuIcon?.classList.add('hidden')
+      closeIcon?.classList.remove('hidden')
+    }
+  })
+
+  const links = document.querySelectorAll('.nav-link, .mobile-nav-link')
+  links.forEach((link) => {
+    link.addEventListener('click', () => {
+      const sectionId = link.getAttribute('data-section')
+      const isContact = link.hasAttribute('data-contact')
+
+      // Close mobile menu
+      menu?.classList.remove('h-screen')
+      menu?.classList.add('h-0')
+      menuIcon?.classList.remove('hidden')
+      closeIcon?.classList.add('hidden')
+
+      if (sectionId) {
+        document.querySelector(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+      } else if (isContact) {
+        window.dispatchEvent(new CustomEvent('open-contact-modal'))
+      }
+    })
+  })
+</script>
