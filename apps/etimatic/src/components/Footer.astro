@@ -1,0 +1,47 @@
+---
+import { Constants } from '../config/constants'
+const { mail, location, phones } = Constants
+---
+
+<footer class='flex justify-center bg-black p-[12px_0_24px]'>
+  <div class='flex flex-col items-center'>
+    <img
+      src='/images/logo.svg'
+      alt='Etimatic - Soluciones de Embalaje y Packaging en España'
+      class='h-20 w-45 brightness-0 invert'
+    />
+
+    <a
+      href={location.mapsUrl}
+      target='_blank'
+      rel='noreferrer'
+      class='hover:text-accent mt-8 flex flex-col items-center text-base font-medium text-white no-underline transition-colors duration-200 max-lg:text-sm'
+    >
+      <span>{location.address}</span>
+      <span>{location.city}</span>
+    </a>
+
+    <a
+      href={`mailto:${mail}`}
+      class='hover:text-accent mt-8 text-base font-medium text-white no-underline transition-colors duration-200 max-lg:text-sm'
+    >
+      {mail}
+    </a>
+
+    <div class='mt-8 flex gap-2'>
+      {
+        phones.map(({ display, callNumber }, index) => (
+          <Fragment key={callNumber}>
+            <a
+              href={`tel:${callNumber}`}
+              class='hover:text-accent text-base font-medium text-white no-underline transition-colors duration-200 max-lg:text-sm'
+            >
+              {display}
+            </a>
+            {index < phones.length - 1 && <span class='text-white'> / </span>}
+          </Fragment>
+        ))
+      }
+    </div>
+  </div>
+</footer>
