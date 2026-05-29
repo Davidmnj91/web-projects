@@ -1,5 +1,6 @@
-import type { APIRoute } from 'astro'
 import { exchangePocketIdCode, signSession, cookieConfig } from '../../../lib/auth'
+
+import type { APIRoute } from 'astro'
 
 export const GET: APIRoute = async ({ request, cookies, redirect }) => {
   const url = new URL(request.url)

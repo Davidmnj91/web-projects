@@ -27,7 +27,7 @@ sudo npm install -g pnpm
 
 ## ⚙️ Configuración de Variables de Entorno
 
-Crea un archivo de configuración `.env` en el directorio de la aplicación (`apps/lista-nacimiento/`). Puedes usar el archivo [.env.example](file:///C:/Users/david/Documents/web-projects/apps/lista-nacimiento/.env.example) como base:
+Crea un archivo de configuración `.env` en el directorio de la aplicación (`apps/victoria-birth-list/`). Puedes usar el archivo [.env.example](file:///C:/Users/david/Documents/web-projects/apps/victoria-birth-list/.env.example) como base:
 
 ```ini
 # --- BASE DE DATOS (SQLite) ---
@@ -73,17 +73,17 @@ Navega a la raíz de tu monorepo y ejecuta los comandos de instalación y compil
 pnpm install --frozen-lockfile
 
 # Compilar la aplicación de la lista de nacimiento en modo producción
-pnpm --filter @web-projects/lista-nacimiento build
+pnpm --filter @web-projects/victoria-birth-list build
 ```
 
-Esto generará la carpeta `dist/` en `apps/lista-nacimiento/dist/` conteniendo la aplicación optimizada.
+Esto generará la carpeta `dist/` en `apps/victoria-birth-list/dist/` conteniendo la aplicación optimizada.
 
 ### Paso 2: Probar en Local / LXC
 
 Puedes arrancar el servidor temporalmente para verificar su correcto funcionamiento:
 
 ```bash
-PORT=3000 HOST=0.0.0.0 node apps/lista-nacimiento/dist/server/entry.mjs
+PORT=3000 HOST=0.0.0.0 node apps/victoria-birth-list/dist/server/entry.mjs
 ```
 
 Abre en tu navegador `http://<IP_DE_TU_LXC>:3000` y comprueba que la landing page sembrada con los regalos por defecto cargue perfectamente.
@@ -110,12 +110,12 @@ Para garantizar que tu aplicación se inicie automáticamente cuando se encienda
    [Service]
    Type=simple
    User=david
-   WorkingDirectory=/home/david/web-projects/apps/lista-nacimiento
+   WorkingDirectory=/home/david/web-projects/apps/victoria-birth-list
    Environment=NODE_ENV=production
    Environment=PORT=3000
    Environment=HOST=127.0.0.1
    # Carga el archivo .env automáticamente
-   EnvironmentFile=/home/david/web-projects/apps/lista-nacimiento/.env
+   EnvironmentFile=/home/david/web-projects/apps/victoria-birth-list/.env
    ExecStart=/usr/bin/node dist/server/entry.mjs
    Restart=on-failure
    RestartSec=5
@@ -137,58 +137,41 @@ Para garantizar que tu aplicación se inicie automáticamente cuando se encienda
    sudo systemctl status lista-victoria
    ```
 
----
+## 🔒 Configuración de Proxy Reverso (Caddy + SSL Automático)
 
-## 🔒 Configuración de Proxy Reverso (Nginx + SSL)
+Para exponer la web de forma segura con HTTPS utilizando **Caddy**, el cual consume poquísimos recursos y gestiona la renovación automática de certificados SSL (Let's Encrypt) de manera nativa:
 
-Para exponer de forma segura la web usando tu subdominio (`lista.petrolab.es` o similar) con HTTPS:
-
-1. Crea una configuración de sitio en Nginx:
-
+1. **Instalar Caddy** en tu LXC (Debian/Ubuntu):
    ```bash
-   sudo nano /etc/nginx/sites-available/lista-victoria
+   sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
+   curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+   curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+   sudo apt update
+   sudo apt install caddy -y
    ```
 
-2. Agrega la siguiente configuración redirigiendo el tráfico al puerto local `3000`:
+2. **Editar el archivo de configuración** de Caddy:
+   ```bash
+   sudo nano /etc/caddy/Caddyfile
+   ```
 
-   ```nginx
-   server {
-       listen 80;
-       server_name lista.petrolab.es;
-
+3. **Reemplazar el contenido** por la siguiente configuración (ajusta tu subdominio):
+   ```caddy
+   lista.petrolab.es {
        # Redirección de imágenes locales subidas
-       location /uploads/ {
-           alias /home/david/web-projects/apps/lista-nacimiento/public/uploads/;
-           expires 30d;
-           add_header Cache-Control "public, no-transform";
+       handle_path /uploads/* {
+           root * /home/david/web-projects/apps/victoria-birth-list/public/uploads
+           file_server
        }
 
-       location / {
-           proxy_pass http://127.0.0.1:3000;
-           proxy_http_version 1.1;
-           proxy_set_header Upgrade $http_upgrade;
-           proxy_set_header Connection 'upgrade';
-           proxy_set_header Host $host;
-           proxy_cache_bypass $http_upgrade;
-           proxy_set_header X-Real-IP $remote_addr;
-           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded-for;
-           proxy_set_header X-Forwarded-Proto $scheme;
-       }
+       # Proxy reverso hacia la aplicación Astro en Node.js
+       reverse_proxy 127.0.0.1:3000
    }
    ```
 
-3. Habilita el sitio y recarga Nginx:
-
+4. **Recargar Caddy** para aplicar los cambios y activar el SSL automático:
    ```bash
-   sudo ln -s /etc/nginx/sites-available/lista-victoria /etc/nginx/sites-enabled/
-   sudo nginx -t
-   sudo systemctl restart nginx
-   ```
-
-4. Genera tu certificado SSL gratuito con **Let's Encrypt / Certbot**:
-   ```bash
-   sudo apt-get install certbot python3-certbot-nginx -y
-   sudo certbot --nginx -d lista.petrolab.es
+   sudo systemctl reload caddy
    ```
 
 ---

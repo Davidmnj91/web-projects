@@ -1,17 +1,20 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { db, initDb } from '../../lib/db';
-import { verifySession, cookieConfig } from '../../lib/auth';
-import { Gift, Users, PlusCircle, Pencil, Trash2, Check, ExternalLink, Image, LogOut } from '@lucide/astro';
+ 
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import crypto from 'node:crypto';
+
+import { Gift, Users, PlusCircle, Pencil, Trash2, Check, ExternalLink, Image, LogOut } from '@lucide/astro';
+
+import Layout from '../../layouts/Layout.astro';
+import { verifySession, cookieConfig } from '../../lib/auth';
+import { db, initDb } from '../../lib/db';
 
 // 1. Authenticate Admin Session
 const sessionToken = Astro.cookies.get(cookieConfig.name)?.value;
 const user = verifySession(sessionToken);
 
-if (!user || !user.isAdmin) {
+if (!user?.isAdmin) {
   return Astro.redirect('/admin/login');
 }
 
@@ -24,21 +27,21 @@ let errorMessage = '';
 if (Astro.request.method === 'POST') {
   try {
     const formData = await Astro.request.formData();
-    const action = formData.get('action')?.toString();
+    const action = formData.get('action') as string | null;
 
     // --- CREATE GIFT ---
     if (action === 'create_gift') {
-      const title = formData.get('title')?.toString() || '';
-      const description = formData.get('description')?.toString() || '';
-      const price = parseFloat(formData.get('price')?.toString() || '0');
-      const linksRaw = formData.get('links')?.toString() || '';
+      const title = (formData.get('title') as string | null) ?? '';
+      const description = (formData.get('description') as string | null) ?? '';
+      const price = parseFloat((formData.get('price') as string | null) ?? '0');
+      const linksRaw = (formData.get('links') as string | null) ?? '';
       const links = linksRaw
         .split('\n')
         .map(l => l.trim())
         .filter(l => l.length > 0);
 
       // Handle Image Upload or URL reference
-      let imagePath = formData.get('image_url')?.toString() || '';
+      let imagePath = (formData.get('image_url') as string | null) ?? '';
       const imageFile = formData.get('image_file') as File | null;
 
       if (imageFile && imageFile.size > 0 && imageFile.name) {
@@ -49,6 +52,7 @@ if (Astro.request.method === 'POST') {
         const ext = path.extname(imageFile.name) || '.png';
         const filename = `${crypto.randomUUID()}${ext}`;
         const arrayBuffer = await imageFile.arrayBuffer();
+        // eslint-disable-next-line security/detect-non-literal-fs-filename
         fs.writeFileSync(path.join(uploadDir, filename), Buffer.from(arrayBuffer));
         imagePath = `/uploads/${filename}`;
       }
@@ -71,11 +75,11 @@ if (Astro.request.method === 'POST') {
 
     // --- UPDATE GIFT ---
     if (action === 'edit_gift') {
-      const id = formData.get('id')?.toString() || '';
-      const title = formData.get('title')?.toString() || '';
-      const description = formData.get('description')?.toString() || '';
-      const price = parseFloat(formData.get('price')?.toString() || '0');
-      const linksRaw = formData.get('links')?.toString() || '';
+      const id = (formData.get('id') as string | null) ?? '';
+      const title = (formData.get('title') as string | null) ?? '';
+      const description = (formData.get('description') as string | null) ?? '';
+      const price = parseFloat((formData.get('price') as string | null) ?? '0');
+      const linksRaw = (formData.get('links') as string | null) ?? '';
       const links = linksRaw
         .split('\n')
         .map(l => l.trim())
@@ -90,10 +94,10 @@ if (Astro.request.method === 'POST') {
         sql: 'SELECT image FROM gifts WHERE id = ? LIMIT 1',
         args: [id]
       });
-      let imagePath = currentGift.rows[0]?.image as string || '';
+      let imagePath = (currentGift.rows[0]?.image as string | null) ?? '';
 
       // Override image if a new URL is typed or file uploaded
-      const typedImageUrl = formData.get('image_url')?.toString();
+      const typedImageUrl = formData.get('image_url') as string | null;
       if (typedImageUrl) {
         imagePath = typedImageUrl;
       }
@@ -107,6 +111,7 @@ if (Astro.request.method === 'POST') {
         const ext = path.extname(imageFile.name) || '.png';
         const filename = `${crypto.randomUUID()}${ext}`;
         const arrayBuffer = await imageFile.arrayBuffer();
+        // eslint-disable-next-line security/detect-non-literal-fs-filename
         fs.writeFileSync(path.join(uploadDir, filename), Buffer.from(arrayBuffer));
         imagePath = `/uploads/${filename}`;
       }
@@ -125,18 +130,20 @@ if (Astro.request.method === 'POST') {
 
     // --- DELETE GIFT ---
     if (action === 'delete_gift') {
-      const id = formData.get('id')?.toString() || '';
+      const id = (formData.get('id') as string | null) ?? '';
       if (id) {
         // Delete physical file if it starts with /uploads/ (optional safety)
         const giftResult = await db.execute({
           sql: 'SELECT image FROM gifts WHERE id = ? LIMIT 1',
           args: [id]
         });
-        const currentImg = giftResult.rows[0]?.image as string;
-        if (currentImg && currentImg.startsWith('/uploads/')) {
+        const currentImg = giftResult.rows[0]?.image as string | null;
+        if (currentImg?.startsWith('/uploads/')) {
           try {
             const filepath = path.join(process.cwd(), 'public', currentImg);
+            // eslint-disable-next-line security/detect-non-literal-fs-filename
             if (fs.existsSync(filepath)) {
+              // eslint-disable-next-line security/detect-non-literal-fs-filename
               fs.unlinkSync(filepath);
             }
           } catch (err) {
@@ -154,8 +161,8 @@ if (Astro.request.method === 'POST') {
 
     // --- UPDATE RESERVATION STATUS ---
     if (action === 'update_reservation_status') {
-      const id = formData.get('id')?.toString() || '';
-      const status = formData.get('status')?.toString() || '';
+      const id = (formData.get('id') as string | null) ?? '';
+      const status = (formData.get('status') as string | null) ?? '';
       if (id && status) {
         await db.execute({
           sql: 'UPDATE reservations SET status = ? WHERE id = ?',
@@ -167,7 +174,7 @@ if (Astro.request.method === 'POST') {
 
     // --- DELETE RESERVATION ENTIRELY ---
     if (action === 'delete_reservation') {
-      const id = formData.get('id')?.toString() || '';
+      const id = (formData.get('id') as string | null) ?? '';
       if (id) {
         await db.execute({
           sql: 'DELETE FROM reservations WHERE id = ?',
@@ -176,9 +183,9 @@ if (Astro.request.method === 'POST') {
         successMessage = 'La reserva ha sido eliminada por completo de la base de datos.';
       }
     }
-  } catch (error: any) {
+  } catch (error) {
     console.error('Admin POST action error:', error);
-    errorMessage = error.message || 'Ha ocurrido un error al procesar la acción.';
+    errorMessage = (error instanceof Error ? error.message : null) ?? 'Ha ocurrido un error al procesar la acción.';
   }
 }
 

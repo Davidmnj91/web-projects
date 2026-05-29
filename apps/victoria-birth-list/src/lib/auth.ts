@@ -1,6 +1,6 @@
 import { createHmac } from 'node:crypto'
 
-const SESSION_SECRET = process.env.SESSION_SECRET || 'al-infinito-y-mas-alla-de-victoria-secret-key-2026'
+const SESSION_SECRET = process.env.SESSION_SECRET ?? 'al-infinito-y-mas-alla-de-victoria-secret-key-2026'
 const COOKIE_NAME = 'victoria_admin_session'
 
 // PocketID configurations from environment variables
@@ -55,9 +55,9 @@ export function getPocketIdAuthUrl(state: string): string {
     return `/api/auth/mock?state=${state}`
   }
 
-  const url = new URL(`${POCKETID_URL}/oauth/authorize`)
-  url.searchParams.append('client_id', POCKETID_CLIENT_ID || '')
-  url.searchParams.append('redirect_uri', POCKETID_REDIRECT_URI || '')
+  const url = new URL(`${POCKETID_URL ?? ''}/oauth/authorize`)
+  url.searchParams.append('client_id', POCKETID_CLIENT_ID ?? '')
+  url.searchParams.append('redirect_uri', POCKETID_REDIRECT_URI ?? '')
   url.searchParams.append('response_type', 'code')
   url.searchParams.append('scope', 'openid profile email')
   url.searchParams.append('state', state)
@@ -78,7 +78,7 @@ export async function exchangePocketIdCode(code: string): Promise<SessionUser | 
 
   try {
     // 1. Post code to token endpoint
-    const tokenUrl = `${POCKETID_URL}/oauth/token`
+    const tokenUrl = `${POCKETID_URL ?? ''}/oauth/token`
     const tokenResponse = await fetch(tokenUrl, {
       method: 'POST',
       headers: {
@@ -87,9 +87,9 @@ export async function exchangePocketIdCode(code: string): Promise<SessionUser | 
       body: new URLSearchParams({
         grant_type: 'authorization_code',
         code,
-        redirect_uri: POCKETID_REDIRECT_URI || '',
-        client_id: POCKETID_CLIENT_ID || '',
-        client_secret: POCKETID_CLIENT_SECRET || '',
+        redirect_uri: POCKETID_REDIRECT_URI ?? '',
+        client_id: POCKETID_CLIENT_ID ?? '',
+        client_secret: POCKETID_CLIENT_SECRET ?? '',
       }),
     })
 
@@ -105,7 +105,7 @@ export async function exchangePocketIdCode(code: string): Promise<SessionUser | 
     if (!accessToken) return null
 
     // 2. Fetch UserInfo
-    const userInfoUrl = `${POCKETID_URL}/oauth/userinfo`
+    const userInfoUrl = `${POCKETID_URL ?? ''}/oauth/userinfo`
     const userResponse = await fetch(userInfoUrl, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -117,13 +117,21 @@ export async function exchangePocketIdCode(code: string): Promise<SessionUser | 
       return null
     }
 
-    const userData = await userResponse.json()
+    const userData = (await userResponse.json()) as {
+      sub?: string
+      id?: string
+      name?: string
+      username?: string
+      email?: string
+      picture?: string
+      avatar?: string
+    }
 
     return {
-      id: userData.sub || userData.id,
-      name: userData.name || userData.username || 'Admin User',
-      email: userData.email || '',
-      avatar: userData.picture || userData.avatar || '',
+      id: userData.sub ?? userData.id ?? '',
+      name: userData.name ?? userData.username ?? 'Admin User',
+      email: userData.email ?? '',
+      avatar: userData.picture ?? userData.avatar ?? '',
       isAdmin: true, // Anyone who successfully logs in via homelab PocketID is an admin
     }
   } catch (error) {
