@@ -1,0 +1,58 @@
+---
+import { X, Info } from '@lucide/astro'
+---
+
+<dialog
+  id='detail-modal'
+  class='glass-panel animate-in fade-in zoom-in fixed inset-0 m-auto w-[92%] max-w-2xl overflow-hidden rounded-2xl border-0 p-0 shadow-2xl duration-200 backdrop:bg-black/45 focus:outline-none'
+>
+  <!-- Header/Image top area -->
+  <div class='relative h-64 bg-gray-50 md:h-80'>
+    <img id='modal-img' src='' alt='' class='h-full w-full object-cover' />
+    <button
+      id='close-detail-btn'
+      class='absolute top-4 right-4 cursor-pointer rounded-full border-0 bg-black/40 p-2 text-white transition-colors hover:bg-black/60'
+    >
+      <X class='h-5 w-5' />
+    </button>
+    <span
+      id='modal-price'
+      class='bg-primary text-primary-foreground absolute bottom-4 left-4 rounded-full px-4.5 py-2 font-serif text-lg font-medium shadow-md'
+    ></span>
+  </div>
+
+  <div class='p-8'>
+    <div class='mb-3 flex items-center gap-2'>
+      <span id='modal-status-badge' class='rounded-full px-3 py-1 text-xs font-bold tracking-wider uppercase'></span>
+    </div>
+
+    <h2 id='modal-title' class='font-display text-text-charcoal mb-3 text-2xl leading-snug font-bold'></h2>
+    <p id='modal-desc' class='text-text-muted mb-6 text-sm leading-relaxed'></p>
+
+    <!-- Shop Links Area -->
+    <div id='modal-shops-container' class='mb-8 border-t border-gray-100 pt-6'>
+      <h4 class='text-text-charcoal mb-3 flex items-center gap-1 text-xs font-bold tracking-wider uppercase'>
+        <Info class='h-3.5 w-3.5' /> ¿Dónde comprarlo?
+      </h4>
+      <div id='modal-links' class='flex flex-col gap-2'>
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class='flex flex-col gap-3 pt-2 sm:flex-row' id='modal-actions-wrapper'>
+      <button
+        id='btn-trigger-reserve'
+        class='bg-primary hover:bg-primary/90 text-primary-foreground flex-1 cursor-pointer rounded-full py-3.5 text-center text-sm font-semibold tracking-wide shadow-xs transition-all hover:shadow-md'
+      >
+        Lo reservo (para comprar luego)
+      </button>
+      <button
+        id='btn-trigger-purchase'
+        class='bg-card text-foreground border-border/80 hover:border-taupe flex-1 cursor-pointer rounded-full border py-3.5 text-center text-sm font-semibold tracking-wide shadow-xs transition-all'
+      >
+        Ya lo he comprado
+      </button>
+    </div>
+  </div>
+</dialog>

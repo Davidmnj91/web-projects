@@ -1,0 +1,33 @@
+{
+  "name": "@web-projects/victoria-birth-list",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "astro": "astro",
+    "build": "astro build",
+    "dev": "astro dev",
+    "format:check": "prettier \"**/*.{js,mjs,ts,tsx,astro,json,md,css}\" --list-different",
+    "format:write": "prettier \"**/*.{js,mjs,ts,tsx,astro,json,md,css}\" --list-different --write",
+    "lint": "eslint .  --max-warnings 0",
+    "lint:fix": "eslint . --fix --max-warnings 0",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/node": "^10.0.0",
+    "@libsql/client": "^0.14.0",
+    "@lucide/astro": "^1.16.0",
+    "@tailwindcss/vite": "catalog:tailwind",
+    "astro": "catalog:astro",
+    "nodemailer": "catalog:nodemailer",
+    "tailwindcss": "catalog:tailwind",
+    "zod": "catalog:zod"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:node",
+    "@types/nodemailer": "catalog:nodemailer",
+    "@web-projects/eslint": "workspace:*",
+    "@web-projects/prettier": "workspace:*",
+    "prettier-plugin-astro": "catalog:prettier",
+    "prettier-plugin-tailwindcss": "catalog:prettier"
+  }
+}
