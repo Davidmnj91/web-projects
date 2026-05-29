@@ -1,0 +1,647 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { db, initDb } from '../../lib/db';
+import { verifySession, cookieConfig } from '../../lib/auth';
+import { Gift, Users, PlusCircle, Pencil, Trash2, Check, ExternalLink, Image, LogOut } from '@lucide/astro';
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+
+// 1. Authenticate Admin Session
+const sessionToken = Astro.cookies.get(cookieConfig.name)?.value;
+const user = verifySession(sessionToken);
+
+if (!user || !user.isAdmin) {
+  return Astro.redirect('/admin/login');
+}
+
+await initDb();
+
+let successMessage = '';
+let errorMessage = '';
+
+// 2. Handle POST CRUD actions
+if (Astro.request.method === 'POST') {
+  try {
+    const formData = await Astro.request.formData();
+    const action = formData.get('action')?.toString();
+
+    // --- CREATE GIFT ---
+    if (action === 'create_gift') {
+      const title = formData.get('title')?.toString() || '';
+      const description = formData.get('description')?.toString() || '';
+      const price = parseFloat(formData.get('price')?.toString() || '0');
+      const linksRaw = formData.get('links')?.toString() || '';
+      const links = linksRaw
+        .split('\n')
+        .map(l => l.trim())
+        .filter(l => l.length > 0);
+
+      // Handle Image Upload or URL reference
+      let imagePath = formData.get('image_url')?.toString() || '';
+      const imageFile = formData.get('image_file') as File | null;
+
+      if (imageFile && imageFile.size > 0 && imageFile.name) {
+        const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+        if (!fs.existsSync(uploadDir)) {
+          fs.mkdirSync(uploadDir, { recursive: true });
+        }
+        const ext = path.extname(imageFile.name) || '.png';
+        const filename = `${crypto.randomUUID()}${ext}`;
+        const arrayBuffer = await imageFile.arrayBuffer();
+        fs.writeFileSync(path.join(uploadDir, filename), Buffer.from(arrayBuffer));
+        imagePath = `/uploads/${filename}`;
+      }
+
+      if (!title || price <= 0) {
+        throw new Error('El título y el precio son obligatorios.');
+      }
+
+      const newId = crypto.randomUUID();
+      await db.execute({
+        sql: `
+          INSERT INTO gifts (id, title, description, image, price, links, createdAt)
+          VALUES (?, ?, ?, ?, ?, ?, ?)
+        `,
+        args: [newId, title, description, imagePath, price, JSON.stringify(links), Date.now()]
+      });
+
+      successMessage = '¡Regalo añadido correctamente a la lista!';
+    }
+
+    // --- UPDATE GIFT ---
+    if (action === 'edit_gift') {
+      const id = formData.get('id')?.toString() || '';
+      const title = formData.get('title')?.toString() || '';
+      const description = formData.get('description')?.toString() || '';
+      const price = parseFloat(formData.get('price')?.toString() || '0');
+      const linksRaw = formData.get('links')?.toString() || '';
+      const links = linksRaw
+        .split('\n')
+        .map(l => l.trim())
+        .filter(l => l.length > 0);
+
+      if (!id || !title || price <= 0) {
+        throw new Error('Datos incompletos para actualizar el regalo.');
+      }
+
+      // Check current image path in DB
+      const currentGift = await db.execute({
+        sql: 'SELECT image FROM gifts WHERE id = ? LIMIT 1',
+        args: [id]
+      });
+      let imagePath = currentGift.rows[0]?.image as string || '';
+
+      // Override image if a new URL is typed or file uploaded
+      const typedImageUrl = formData.get('image_url')?.toString();
+      if (typedImageUrl) {
+        imagePath = typedImageUrl;
+      }
+
+      const imageFile = formData.get('image_file') as File | null;
+      if (imageFile && imageFile.size > 0 && imageFile.name) {
+        const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+        if (!fs.existsSync(uploadDir)) {
+          fs.mkdirSync(uploadDir, { recursive: true });
+        }
+        const ext = path.extname(imageFile.name) || '.png';
+        const filename = `${crypto.randomUUID()}${ext}`;
+        const arrayBuffer = await imageFile.arrayBuffer();
+        fs.writeFileSync(path.join(uploadDir, filename), Buffer.from(arrayBuffer));
+        imagePath = `/uploads/${filename}`;
+      }
+
+      await db.execute({
+        sql: `
+          UPDATE gifts
+          SET title = ?, description = ?, image = ?, price = ?, links = ?
+          WHERE id = ?
+        `,
+        args: [title, description, imagePath, price, JSON.stringify(links), id]
+      });
+
+      successMessage = '¡Regalo actualizado correctamente!';
+    }
+
+    // --- DELETE GIFT ---
+    if (action === 'delete_gift') {
+      const id = formData.get('id')?.toString() || '';
+      if (id) {
+        // Delete physical file if it starts with /uploads/ (optional safety)
+        const giftResult = await db.execute({
+          sql: 'SELECT image FROM gifts WHERE id = ? LIMIT 1',
+          args: [id]
+        });
+        const currentImg = giftResult.rows[0]?.image as string;
+        if (currentImg && currentImg.startsWith('/uploads/')) {
+          try {
+            const filepath = path.join(process.cwd(), 'public', currentImg);
+            if (fs.existsSync(filepath)) {
+              fs.unlinkSync(filepath);
+            }
+          } catch (err) {
+            console.error('Failed to delete old image file:', err);
+          }
+        }
+
+        await db.execute({
+          sql: 'DELETE FROM gifts WHERE id = ?',
+          args: [id]
+        });
+        successMessage = 'El regalo ha sido eliminado de la lista.';
+      }
+    }
+
+    // --- UPDATE RESERVATION STATUS ---
+    if (action === 'update_reservation_status') {
+      const id = formData.get('id')?.toString() || '';
+      const status = formData.get('status')?.toString() || '';
+      if (id && status) {
+        await db.execute({
+          sql: 'UPDATE reservations SET status = ? WHERE id = ?',
+          args: [status, id]
+        });
+        successMessage = `Reserva actualizada a estado: ${status === 'Reserved' ? 'RESERVADO' : status === 'Purchased' ? 'COMPRADO' : 'CANCELADO'}`;
+      }
+    }
+
+    // --- DELETE RESERVATION ENTIRELY ---
+    if (action === 'delete_reservation') {
+      const id = formData.get('id')?.toString() || '';
+      if (id) {
+        await db.execute({
+          sql: 'DELETE FROM reservations WHERE id = ?',
+          args: [id]
+        });
+        successMessage = 'La reserva ha sido eliminada por completo de la base de datos.';
+      }
+    }
+  } catch (error: any) {
+    console.error('Admin POST action error:', error);
+    errorMessage = error.message || 'Ha ocurrido un error al procesar la acción.';
+  }
+}
+
+// 3. Fetch data for listing
+const giftsResult = await db.execute('SELECT * FROM gifts ORDER BY createdAt DESC');
+const gifts = giftsResult.rows.map(row => ({
+  id: row.id as string,
+  title: row.title as string,
+  description: (row.description as string) || '',
+  image: (row.image as string) || '',
+  price: Number(row.price),
+  links: JSON.parse((row.links as string) || '[]') as string[],
+}));
+
+const reservationsResult = await db.execute(`
+  SELECT r.id, r.name, r.email, r.status, r.message, r.timestamp, g.title as giftTitle
+  FROM reservations r
+  JOIN gifts g ON r.giftId = g.id
+  ORDER BY r.timestamp DESC
+`);
+
+const reservations = reservationsResult.rows.map(row => ({
+  id: row.id as string,
+  name: row.name as string,
+  email: row.email as string,
+  status: row.status as string,
+  message: (row.message as string) || '',
+  timestamp: Number(row.timestamp),
+  giftTitle: row.giftTitle as string,
+}));
+---
+
+<Layout title="Admin Dashboard | Victoria 🍼" isAdmin={true}>
+  <div class="max-w-6xl mx-auto px-4 py-10">
+
+    <!-- Admin Header -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-gray-100">
+      <div>
+        <h1 class="text-3xl font-extrabold font-display text-text-charcoal flex items-center gap-2">
+          <span>👶</span> Panel de Control
+        </h1>
+        <p class="text-xs text-text-muted mt-1">Conectado como: <strong class="text-text-charcoal">{user.name} ({user.email})</strong></p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a
+          href="/"
+          target="_blank"
+          class="bg-white border border-gray-200 text-text-charcoal font-semibold text-xs px-4 py-2.5 rounded-xl hover:bg-gray-50 hover:border-brand-amber transition-all flex items-center gap-1"
+        >
+          <ExternalLink class="w-3.5 h-3.5" /> Ver Web Pública
+        </a>
+        <a
+          href="/api/auth/logout"
+          class="bg-brand-red-light text-brand-red font-semibold text-xs px-4 py-2.5 rounded-xl hover:bg-brand-red hover:text-white transition-all flex items-center gap-1"
+        >
+          <LogOut class="w-3.5 h-3.5" /> Cerrar Sesión
+        </a>
+      </div>
+    </div>
+
+    <!-- Status Alerts -->
+    {successMessage && (
+      <div class="bg-brand-sage border border-brand-olive/30 text-brand-olive-dark rounded-xl p-4 mb-8 text-sm font-semibold flex items-center gap-2">
+        <Check class="w-5 h-5" /> {successMessage}
+      </div>
+    )}
+
+    {errorMessage && (
+      <div class="bg-brand-red-light border border-brand-red/20 text-brand-red rounded-xl p-4 mb-8 text-sm font-semibold flex items-center gap-2">
+        <span>⚠️</span> {errorMessage}
+      </div>
+    )}
+
+    <!-- Tabs Container -->
+    <div class="space-y-12">
+
+      <!-- TAB 1: GESTIÓN DE REGALOS (GIFTS) -->
+      <section class="bg-white border border-gray-100 rounded-2xl shadow-xs overflow-hidden">
+        <div class="bg-gray-50/50 px-6 py-5 border-b border-gray-100 flex items-center justify-between flex-wrap gap-4">
+          <h2 class="font-display font-bold text-lg text-text-charcoal flex items-center gap-2">
+            <Gift class="w-5 h-5 text-brand-terracotta" /> Catálogo de Regalos ({gifts.length})
+          </h2>
+          <button
+            type="button"
+            id="btn-open-create-modal"
+            class="bg-brand-terracotta hover:bg-brand-terracotta-dark text-white font-semibold text-xs px-4 py-2.5 rounded-xl shadow-xs hover:shadow-md transition-all cursor-pointer flex items-center gap-1.5"
+          >
+            <PlusCircle class="w-4 h-4" /> Añadir Regalo
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          {gifts.length === 0 ? (
+            <div class="text-center py-16 text-text-muted">
+              <span class="text-4xl block mb-2">🎁</span>
+              <p class="font-medium">No hay regalos creados todavía.</p>
+              <p class="text-xs mt-1">Haz clic en "Añadir Regalo" para comenzar el catálogo.</p>
+            </div>
+          ) : (
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-gray-100 bg-gray-50/20 text-[10px] font-bold text-text-muted uppercase tracking-wider">
+                  <th class="px-6 py-4">Imagen</th>
+                  <th class="px-6 py-4">Detalles</th>
+                  <th class="px-6 py-4">Precio</th>
+                  <th class="px-6 py-4">Enlaces</th>
+                  <th class="px-6 py-4 text-right">Acciones</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-50 text-sm">
+                {gifts.map(gift => (
+                  <tr class="hover:bg-gray-50/30 transition-colors">
+                    <td class="px-6 py-4">
+                      <div class="w-14 h-14 rounded-lg bg-gray-100 border border-gray-200/50 overflow-hidden shadow-xs flex items-center justify-center">
+                        {gift.image ? (
+                          <img src={gift.image} alt={gift.title} class="w-full h-full object-cover" />
+                        ) : (
+                          <Image class="w-5 h-5 text-gray-300" />
+                        )}
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 max-w-sm">
+                      <h3 class="font-bold text-text-charcoal leading-snug">{gift.title}</h3>
+                      <p class="text-xs text-text-muted mt-1 leading-relaxed line-clamp-2">{gift.description || 'Sin descripción'}</p>
+                      <span class="font-mono text-[9px] text-gray-300 block mt-1 select-all">{gift.id}</span>
+                    </td>
+                    <td class="px-6 py-4 font-bold text-brand-terracotta">
+                      {gift.price.toLocaleString('es-ES', { minimumFractionDigits: 2 })} €
+                    </td>
+                    <td class="px-6 py-4">
+                      <span class="text-xs font-semibold px-2.5 py-1 bg-gray-100 text-text-charcoal rounded-md">
+                        {gift.links.length} {gift.links.length === 1 ? 'tienda' : 'tiendas'}
+                      </span>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                      <div class="inline-flex gap-1.5">
+                        <button
+                          type="button"
+                          data-edit-btn
+                          data-gift={JSON.stringify(gift)}
+                          class="bg-gray-100 hover:bg-brand-amber/20 hover:text-brand-terracotta p-2 rounded-lg text-text-charcoal transition-colors cursor-pointer"
+                          title="Editar"
+                        >
+                          <Pencil class="w-4 h-4" />
+                        </button>
+                        <form method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este regalo? Se eliminarán todas sus reservas asociadas.');" class="inline">
+                          <input type="hidden" name="action" value="delete_gift" />
+                          <input type="hidden" name="id" value={gift.id} />
+                          <button
+                            type="submit"
+                            class="bg-brand-red-light text-brand-red hover:bg-brand-red hover:text-white p-2 rounded-lg transition-colors cursor-pointer border-0"
+                            title="Eliminar"
+                          >
+                            <Trash2 class="w-4 h-4" />
+                          </button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </section>
+
+      <!-- TAB 2: RESERVAS Y COMPRAS -->
+      <section class="bg-white border border-gray-100 rounded-2xl shadow-xs overflow-hidden">
+        <div class="bg-gray-50/50 px-6 py-5 border-b border-gray-100">
+          <h2 class="font-display font-bold text-lg text-text-charcoal flex items-center gap-2">
+            <Users class="w-5 h-5 text-brand-olive-dark" /> Control de Reservas ({reservations.length})
+          </h2>
+        </div>
+
+        <div class="overflow-x-auto">
+          {reservations.length === 0 ? (
+            <div class="text-center py-16 text-text-muted">
+              <span class="text-4xl block mb-2">📋</span>
+              <p class="font-medium">No se han recibido reservas todavía.</p>
+              <p class="text-xs mt-1">Los registros aparecerán aquí cuando los invitados elijan un regalo.</p>
+            </div>
+          ) : (
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-gray-100 bg-gray-50/20 text-[10px] font-bold text-text-muted uppercase tracking-wider">
+                  <th class="px-6 py-4">ID / Fecha</th>
+                  <th class="px-6 py-4">Regalo</th>
+                  <th class="px-6 py-4">Invitado</th>
+                  <th class="px-6 py-4">Mensaje / Dedicatoria</th>
+                  <th class="px-6 py-4">Estado</th>
+                  <th class="px-6 py-4 text-right">Acciones</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-50 text-xs">
+                {reservations.map(res => (
+                  <tr class="hover:bg-gray-50/30 transition-colors">
+                    <td class="px-6 py-4">
+                      <span class="font-mono font-bold text-brand-terracotta bg-brand-amber-light/30 px-2 py-0.5 rounded-md select-all">{res.id}</span>
+                      <span class="block text-[10px] text-text-muted mt-1.5">{new Date(res.timestamp).toLocaleString('es-ES')}</span>
+                    </td>
+                    <td class="px-6 py-4 font-bold text-text-charcoal max-w-xs">{res.giftTitle}</td>
+                    <td class="px-6 py-4 leading-normal">
+                      <strong class="text-text-charcoal block">{res.name}</strong>
+                      <span class="text-text-muted">{res.email}</span>
+                    </td>
+                    <td class="px-6 py-4 max-w-sm italic text-text-muted whitespace-pre-line leading-relaxed">
+                      {res.message ? `"${res.message}"` : 'Sin dedicatoria'}
+                    </td>
+                    <td class="px-6 py-4">
+                      <span class={`inline-block font-bold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider ${
+                        res.status === 'Reserved'
+                          ? 'bg-brand-amber-light text-brand-terracotta border border-brand-amber/10'
+                          : res.status === 'Purchased'
+                            ? 'bg-brand-sage text-brand-olive-dark border border-brand-olive/20'
+                            : 'bg-brand-red-light text-brand-red border border-brand-red/10'
+                      }`}>
+                        {res.status === 'Reserved' ? 'RESERVADO' : res.status === 'Purchased' ? 'COMPRADO' : 'CANCELADO'}
+                      </span>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                      <div class="inline-flex gap-1">
+                        <!-- Quick Mark as Purchased -->
+                        {res.status === 'Reserved' && (
+                          <form method="POST" class="inline">
+                            <input type="hidden" name="action" value="update_reservation_status" />
+                            <input type="hidden" name="id" value={res.id} />
+                            <input type="hidden" name="status" value="Purchased" />
+                            <button
+                              type="submit"
+                              class="bg-brand-sage text-brand-olive-dark hover:bg-brand-olive hover:text-white p-1.5 rounded-lg transition-colors cursor-pointer border-0 font-bold"
+                              title="Marcar como Comprado"
+                            >
+                              <Check class="w-3.5 h-3.5" />
+                            </button>
+                          </form>
+                        )}
+
+                        <!-- Quick toggle back to Reserved if Cancelled -->
+                        {res.status === 'Cancelled' && (
+                          <form method="POST" class="inline">
+                            <input type="hidden" name="action" value="update_reservation_status" />
+                            <input type="hidden" name="id" value={res.id} />
+                            <input type="hidden" name="status" value="Reserved" />
+                            <button
+                              type="submit"
+                              class="bg-gray-100 hover:bg-brand-amber hover:text-white p-1.5 rounded-lg transition-colors cursor-pointer border-0"
+                              title="Restaurar a Reservado"
+                            >
+                              ⏳
+                            </button>
+                          </form>
+                        )}
+
+                        <!-- Delete Row -->
+                        <form method="POST" onsubmit="return confirm('¿Estás seguro de que deseas ELIMINAR del historial esta reserva? Esta acción liberará el regalo si no está cancelado.');" class="inline">
+                          <input type="hidden" name="action" value="delete_reservation" />
+                          <input type="hidden" name="id" value={res.id} />
+                          <button
+                            type="submit"
+                            class="bg-brand-red-light text-brand-red hover:bg-brand-red hover:text-white p-1.5 rounded-lg transition-colors cursor-pointer border-0"
+                            title="Eliminar de BD"
+                          >
+                            <Trash2 class="w-3.5 h-3.5" />
+                          </button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- --- CRUD DIALOGS (MODALS) --- -->
+
+  <!-- Create/Edit Gift Modal -->
+  <dialog id="gift-modal" class="rounded-2xl p-0 max-w-lg w-[92%] glass-panel fixed inset-0 m-auto backdrop:bg-black/45 border-0 shadow-2xl focus:outline-none overflow-hidden animate-in fade-in zoom-in duration-200">
+    <div class="bg-gradient-to-r from-brand-terracotta to-brand-amber px-6 py-5 text-white text-center">
+      <h3 class="text-lg font-bold font-display" id="gift-modal-title">Añadir Nuevo Regalo</h3>
+      <button id="close-gift-modal-btn" class="absolute top-4 right-4 hover:opacity-80 text-white cursor-pointer border-0 bg-transparent">
+        <span>✕</span>
+      </button>
+    </div>
+
+    <div class="p-8">
+      <form id="gift-form" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <input type="hidden" id="gift-form-action" name="action" value="create_gift" />
+        <input type="hidden" id="gift-form-id" name="id" />
+
+        <!-- Title -->
+        <div>
+          <label for="gift-title" class="block text-xs font-bold text-text-charcoal uppercase tracking-wider mb-2">Título del Regalo *</label>
+          <input
+            type="text"
+            id="gift-title"
+            name="title"
+            required
+            placeholder="Ej. Cuna evolutiva de madera"
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-terracotta focus:ring-1 focus:ring-brand-terracotta transition-colors"
+          />
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label for="gift-description" class="block text-xs font-bold text-text-charcoal uppercase tracking-wider mb-2">Descripción</label>
+          <textarea
+            id="gift-description"
+            name="description"
+            rows="3"
+            placeholder="Escribe detalles del regalo, tallas, colores preferidos..."
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-terracotta focus:ring-1 focus:ring-brand-terracotta transition-colors resize-none"
+          ></textarea>
+        </div>
+
+        <!-- Price -->
+        <div>
+          <label for="gift-price" class="block text-xs font-bold text-text-charcoal uppercase tracking-wider mb-2">Precio (€) *</label>
+          <input
+            type="number"
+            id="gift-price"
+            name="price"
+            step="0.01"
+            min="0"
+            required
+            placeholder="Ej. 120.50"
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-terracotta focus:ring-1 focus:ring-brand-terracotta transition-colors"
+          />
+        </div>
+
+        <!-- Links (one per line) -->
+        <div>
+          <label for="gift-links" class="block text-xs font-bold text-text-charcoal uppercase tracking-wider mb-2">Enlaces a Tiendas (Uno por línea)</label>
+          <textarea
+            id="gift-links"
+            name="links"
+            rows="3"
+            placeholder="https://tienda.com/producto-bebe&#10;https://otra-tienda.es/producto-bebe"
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-xs font-mono focus:outline-none focus:border-brand-terracotta focus:ring-1 focus:ring-brand-terracotta transition-colors resize-none"
+          ></textarea>
+        </div>
+
+        <!-- Image Upload -->
+        <div class="bg-gray-50/50 p-4 rounded-xl border border-gray-100 space-y-3">
+          <span class="block text-xs font-bold text-text-charcoal uppercase tracking-wider mb-1">Imagen del Regalo</span>
+
+          <div>
+            <label for="gift-image-file" class="block text-[10px] text-text-muted mb-1.5">Opción A: Subir imagen física (.png, .jpg)</label>
+            <input
+              type="file"
+              id="gift-image-file"
+              name="image_file"
+              accept="image/*"
+              class="w-full text-xs text-text-charcoal file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-brand-amber-light file:text-brand-terracotta file:cursor-pointer"
+            />
+          </div>
+
+          <div class="relative flex py-1 items-center">
+            <div class="flex-grow border-t border-gray-200/50"></div>
+            <span class="flex-shrink mx-2 text-[9px] text-gray-300 font-bold uppercase">ó</span>
+            <div class="flex-grow border-t border-gray-200/50"></div>
+          </div>
+
+          <div>
+            <label for="gift-image-url" class="block text-[10px] text-text-muted mb-1.5">Opción B: Referencia por URL de Internet</label>
+            <input
+              type="url"
+              id="gift-image-url"
+              name="image_url"
+              placeholder="https://ejemplo.com/foto-cuna.jpg"
+              class="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-brand-terracotta transition-colors"
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-brand-terracotta text-white font-semibold text-sm py-3.5 rounded-xl hover:bg-brand-terracotta-dark shadow-sm hover:shadow-md transition-all cursor-pointer text-center"
+        >
+          Guardar Regalo ➔
+        </button>
+      </form>
+    </div>
+  </dialog>
+</Layout>
+
+<script>
+  // CLIENT SIDE SCRIPTS FOR POPPING MODALS PREFILLED
+  const giftModal = document.getElementById('gift-modal') as HTMLDialogElement;
+  const giftModalTitle = document.getElementById('gift-modal-title') as HTMLElement;
+  const giftForm = document.getElementById('gift-form') as HTMLFormElement;
+
+  // Fields
+  const formAction = document.getElementById('gift-form-action') as HTMLInputElement;
+  const formId = document.getElementById('gift-form-id') as HTMLInputElement;
+  const formTitle = document.getElementById('gift-title') as HTMLInputElement;
+  const formDesc = document.getElementById('gift-description') as HTMLTextAreaElement;
+  const formPrice = document.getElementById('gift-price') as HTMLInputElement;
+  const formLinks = document.getElementById('gift-links') as HTMLTextAreaElement;
+  const formImageUrl = document.getElementById('gift-image-url') as HTMLInputElement;
+  const formImageFile = document.getElementById('gift-image-file') as HTMLInputElement;
+
+  // Open Create modal
+  document.getElementById('btn-open-create-modal')?.addEventListener('click', () => {
+    giftForm.reset();
+    formAction.value = 'create_gift';
+    formId.value = '';
+    giftModalTitle.textContent = 'Añadir Nuevo Regalo';
+
+    giftModal.showModal();
+  });
+
+  // Open Edit modal prefilled
+  document.querySelectorAll('[data-edit-btn]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const clicked = e.currentTarget as HTMLElement;
+      const giftDataRaw = clicked.getAttribute('data-gift');
+      if (!giftDataRaw) return;
+
+      const gift = JSON.parse(giftDataRaw);
+
+      // Prefill fields
+      formAction.value = 'edit_gift';
+      formId.value = gift.id;
+      formTitle.value = gift.title;
+      formDesc.value = gift.description;
+      formPrice.value = gift.price.toString();
+      formLinks.value = gift.links.join('\n');
+
+      // If image is a URL (doesn't start with /uploads/), show in URL field.
+      // If it starts with /uploads/, leave URL field blank (it keeps current file in SQLite unless overridden)
+      if (gift.image && !gift.image.startsWith('/uploads/')) {
+        formImageUrl.value = gift.image;
+      } else {
+        formImageUrl.value = '';
+      }
+
+      formImageFile.value = ''; // Reset file input
+
+      giftModalTitle.textContent = 'Editar Regalo';
+      giftModal.showModal();
+    });
+  });
+
+  // Close modal
+  document.getElementById('close-gift-modal-btn')?.addEventListener('click', () => {
+    giftModal.close();
+  });
+
+  // Close modal when clicking outside (on backdrop)
+  giftModal?.addEventListener('click', (e) => {
+    const dialogDimensions = giftModal.getBoundingClientRect();
+    if (
+      e.clientX < dialogDimensions.left ||
+      e.clientX > dialogDimensions.right ||
+      e.clientY < dialogDimensions.top ||
+      e.clientY > dialogDimensions.bottom
+    ) {
+      giftModal.close();
+    }
+  });
+</script>

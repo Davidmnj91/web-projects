@@ -1,0 +1,173 @@
+---
+import { ExternalLink } from '@lucide/astro'
+
+interface Props {
+  gift: {
+    id: string
+    title: string
+    description: string
+    image: string
+    price: number
+    links: string[]
+    status: string
+    resName: string | null
+  }
+}
+
+const { gift } = Astro.props
+
+// Infer category dynamically based on keywords in title/description to match Lovable's design system
+const getCategory = (title: string, desc: string) => {
+  const text = (title + ' ' + desc).toLowerCase()
+  if (
+    text.includes('baño') ||
+    text.includes('toalla') ||
+    text.includes('bañera') ||
+    text.includes('cuidado') ||
+    text.includes('manicura') ||
+    text.includes('suavinex')
+  )
+    return 'Baño y Cuidado'
+  if (
+    text.includes('ropa') ||
+    text.includes('bodies') ||
+    text.includes('pijama') ||
+    text.includes('vestidura') ||
+    text.includes('algodón')
+  )
+    return 'Ropa'
+  if (
+    text.includes('cochecito') ||
+    text.includes('bolsa de viaje') ||
+    text.includes('viaje') ||
+    text.includes('paseo') ||
+    text.includes('bolso')
+  )
+    return 'Paseo y Viaje'
+  if (
+    text.includes('cambiador') ||
+    text.includes('habitación') ||
+    text.includes('cuna') ||
+    text.includes('vigilabebe') ||
+    text.includes('cámara')
+  )
+    return 'Habitación y Sueño'
+  if (text.includes('juguete') || text.includes('montessori') || text.includes('sonajero') || text.includes('juego'))
+    return 'Juegos y Estimulación'
+  if (
+    text.includes('babero') ||
+    text.includes('biberón') ||
+    text.includes('dosificador') ||
+    text.includes('limpia biberones') ||
+    text.includes('alimentación') ||
+    text.includes('portaformula')
+  )
+    return 'Alimentación'
+  return 'Otros Detalles'
+}
+
+const category = getCategory(gift.title, gift.description)
+---
+
+<article
+  class='gift-card group border-border/70 bg-card flex cursor-pointer flex-col overflow-hidden rounded-2xl border shadow-[0_1px_2px_rgba(60,40,20,0.04)] transition-all hover:shadow-[0_10px_30px_-12px_rgba(60,40,20,0.18)]'
+  data-id={gift.id}
+  data-price={gift.price}
+  data-status={gift.status}
+  data-title={gift.title}
+  data-desc={gift.description}
+  data-image={gift.image}
+  data-links={JSON.stringify(gift.links)}
+>
+  <!-- Card Image & Status Badges (Top Right) -->
+  <div class='bg-secondary relative aspect-[4/3] overflow-hidden'>
+    <img
+      src={gift.image || 'https://images.unsplash.com/photo-1515488042361-404e9250afef?w=800&q=80'}
+      alt={gift.title}
+      class='h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]'
+      loading='lazy'
+    />
+
+    <!-- State Badges at the top right of the card -->
+    {
+      gift.status === 'Available' && (
+        <span class='border-border bg-card text-taupe absolute top-3 right-3 rounded-full border px-2.5 py-1 text-[10px] font-medium tracking-wider uppercase shadow-xs'>
+          Disponible
+        </span>
+      )
+    }
+    {
+      gift.status === 'Reserved' && (
+        <span class='border-border/80 bg-sand text-secondary-foreground absolute top-3 right-3 rounded-full border px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase shadow-xs'>
+          Reservado
+        </span>
+      )
+    }
+    {
+      gift.status === 'Purchased' && (
+        <span class='border-blush/60 bg-blush text-blush-foreground absolute top-3 right-3 rounded-full border px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase shadow-xs'>
+          Comprado
+        </span>
+      )
+    }
+  </div>
+
+  <!-- Card Body -->
+  <div class='flex flex-1 flex-col gap-3 p-5'>
+    <div>
+      <p class='text-taupe text-[11px] font-medium tracking-[0.2em] uppercase'>{category}</p>
+      <h3 class='text-foreground mt-1 line-clamp-2 font-serif text-xl leading-snug'>
+        {gift.title}
+      </h3>
+    </div>
+
+    <p class='text-muted-foreground line-clamp-3 text-sm leading-relaxed'>
+      {gift.description}
+    </p>
+
+    <!-- Price & Store Link -->
+    <div class='mt-auto flex items-baseline justify-between pt-1'>
+      <span class='text-foreground font-serif text-2xl font-medium'>
+        {gift.price.toLocaleString('es-ES', { minimumFractionDigits: 0 })} €
+      </span>
+
+      {
+        gift.links && gift.links.length > 0 && (
+          <a
+            href={gift.links[0]}
+            target='_blank'
+            rel='noopener noreferrer'
+            class='text-taupe hover:text-foreground stop-prop inline-flex items-center gap-1 text-xs tracking-wider uppercase underline-offset-4 hover:underline'
+          >
+            Ver producto <ExternalLink class='h-3 w-3' />
+          </a>
+        )
+      }
+    </div>
+
+    <!-- Action Button (dynamic based on status) -->
+    <div class='pt-3'>
+      {
+        gift.status === 'Available' && (
+          <button class='bg-primary text-primary-foreground hover:bg-primary/90 w-full cursor-pointer rounded-full px-4 py-3 text-sm font-semibold tracking-wide transition-colors'>
+            Lo reservo yo
+          </button>
+        )
+      }
+      {
+        gift.status === 'Reserved' && (
+          <button class='bg-secondary text-secondary-foreground border-border/80 w-full cursor-not-allowed rounded-full border px-4 py-3 text-sm font-semibold tracking-wide opacity-90'>
+            Reservado por {gift.resName || 'alguien'}
+          </button>
+        )
+      }
+      {
+        gift.status === 'Purchased' && (
+          <button class='bg-secondary text-secondary-foreground border-border/80 w-full cursor-not-allowed rounded-full border px-4 py-3 text-sm font-semibold tracking-wide opacity-80'>
+            ¡Comprado!
+          </button>
+        )
+      }
+    </div>
+  </div>
+</article>
