@@ -20,7 +20,7 @@ let resData: {
 try {
   await initDb();
 
-  // 1. Fetch Reservation Details
+  // Fetch reservation and gift details
   const result = await db.execute({
     sql: `
       SELECT r.id, r.name, r.email, r.giftId, r.status, r.message, g.title as giftTitle
@@ -29,7 +29,7 @@ try {
       WHERE r.id = ?
       LIMIT 1
     `,
-    args: [id || '']
+    args: [id ?? '']
   });
 
   if (result.rows.length === 0) {
@@ -42,7 +42,7 @@ try {
       email: row.email as string,
       giftId: row.giftId as string,
       status: row.status as string,
-      message: (row.message as string) || '',
+      message: (row.message as string | null) ?? '',
       giftTitle: row.giftTitle as string,
     };
   }
@@ -50,15 +50,16 @@ try {
   // 2. Handle POST forms
   if (Astro.request.method === 'POST' && resData) {
     const formData = await Astro.request.formData();
-    const action = formData.get('action')?.toString();
-    const nameInput = formData.get('name')?.toString() || resData.name;
-    const messageInput = formData.get('message')?.toString() || '';
+    const action = formData.get('action') as string | null;
+    const nameVal = formData.get('name') as string | null;
+    const nameInput = nameVal && nameVal.trim() !== '' ? nameVal : resData.name;
+    const messageInput = (formData.get('message') as string | null) ?? '';
 
     if (action === 'cancel') {
       // Transition to Cancelled
       await db.execute({
-        sql: 'UPDATE reservations SET status = "Cancelled" WHERE id = ?',
-        args: [id || '']
+        sql: "UPDATE reservations SET status = 'Cancelled' WHERE id = ?",
+        args: [id ?? '']
       });
       return Astro.redirect(`/reservation/${id}/cancel`);
     }
@@ -67,8 +68,8 @@ try {
       // Transition to Purchased
       const newTimestamp = Date.now();
       await db.execute({
-        sql: 'UPDATE reservations SET status = "Purchased", name = ?, message = ?, timestamp = ? WHERE id = ?',
-        args: [nameInput, messageInput, newTimestamp, id || '']
+        sql: "UPDATE reservations SET status = 'Purchased', name = ?, message = ?, timestamp = ? WHERE id = ?",
+        args: [nameInput, messageInput, newTimestamp, id ?? '']
       });
       
       // Update local state
@@ -93,8 +94,8 @@ try {
     if (action === 'save_changes' && resData.status === 'Purchased') {
       // Update name and message for purchased gift
       await db.execute({
-        sql: 'UPDATE reservations SET name = ?, message = ? WHERE id = ?',
-        args: [nameInput, messageInput]
+        sql: "UPDATE reservations SET name = ?, message = ? WHERE id = ?",
+        args: [nameInput, messageInput, id ?? '']
       });
 
       resData.name = nameInput;

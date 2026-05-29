@@ -6,7 +6,7 @@ const sessionToken = Astro.cookies.get(cookieConfig.name)?.value;
 const user = verifySession(sessionToken);
 
 // If already logged in as admin, bypass login screen
-if (user && user.isAdmin) {
+if (user?.isAdmin) {
   return Astro.redirect('/admin');
 }
 
@@ -31,12 +31,12 @@ const mockEnabled = isMockAuthEnabled();
 
         <div class="space-y-4">
           <!-- Standard PocketID Login Button -->
-          <a
+          {!mockEnabled && (<a
             href="/api/auth/login"
             class="w-full bg-brand-terracotta hover:bg-brand-terracotta-dark text-white font-semibold text-sm py-4 rounded-xl shadow-md hover:shadow-lg transition-all text-center flex items-center justify-center gap-2 cursor-pointer"
           >
             🔑 Iniciar Sesión con PocketID
-          </a>
+          </a>)}
 
           {mockEnabled && (
             <div class="pt-6 border-t border-gray-100">

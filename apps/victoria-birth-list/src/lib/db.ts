@@ -1,7 +1,7 @@
 import { createClient } from '@libsql/client'
 
 // Use environment variable for database file or default to a local sqlite file
-const databaseUrl = process.env.DATABASE_URL || 'file:birth_list.db'
+const databaseUrl = process.env.DATABASE_URL ?? 'file:birth_list.db'
 
 export const db = createClient({
   url: databaseUrl,

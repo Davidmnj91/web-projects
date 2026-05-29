@@ -1,7 +1,8 @@
-import type { APIRoute } from 'astro'
 import { cookieConfig } from '../../../lib/auth'
 
-export const GET: APIRoute = async ({ cookies, redirect }) => {
+import type { APIRoute } from 'astro'
+
+export const GET: APIRoute = ({ cookies, redirect }) => {
   cookies.delete(cookieConfig.name, { path: '/' })
   return redirect('/')
 }

@@ -466,46 +466,6 @@ importers:
         specifier: catalog:typescript
         version: 5.9.3
 
-  apps/lista-nacimiento:
-    dependencies:
-      '@astrojs/node':
-        specifier: ^10.0.0
-        version: 10.1.1(astro@6.3.7(@types/node@24.10.1)(@vercel/functions@3.4.3(@aws-sdk/credential-provider-web-identity@3.943.0))(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(yaml@2.8.2))
-      '@libsql/client':
-        specifier: ^0.14.0
-        version: 0.14.0
-      '@lucide/astro':
-        specifier: ^1.16.0
-        version: 1.16.0(astro@6.3.7(@types/node@24.10.1)(@vercel/functions@3.4.3(@aws-sdk/credential-provider-web-identity@3.943.0))(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(yaml@2.8.2))
-      '@tailwindcss/vite':
-        specifier: catalog:tailwind
-        version: 4.2.1(vite@7.3.3(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.31.1)(yaml@2.8.2))
-      astro:
-        specifier: catalog:astro
-        version: 6.3.7(@types/node@24.10.1)(@vercel/functions@3.4.3(@aws-sdk/credential-provider-web-identity@3.943.0))(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(yaml@2.8.2)
-      tailwindcss:
-        specifier: catalog:tailwind
-        version: 4.2.1
-      zod:
-        specifier: catalog:zod
-        version: 3.25.76
-    devDependencies:
-      '@types/node':
-        specifier: catalog:node
-        version: 24.10.1
-      '@web-projects/eslint':
-        specifier: workspace:*
-        version: link:../../config/eslint
-      '@web-projects/prettier':
-        specifier: workspace:*
-        version: link:../../config/prettier
-      prettier-plugin-astro:
-        specifier: catalog:prettier
-        version: 0.14.1
-      prettier-plugin-tailwindcss:
-        specifier: catalog:prettier
-        version: 0.7.2(prettier-plugin-astro@0.14.1)(prettier@3.7.4)
-
   apps/ozz-website:
     dependencies:
       '@astrojs/sitemap':
@@ -530,6 +490,52 @@ importers:
         specifier: catalog:tailwind
         version: 4.2.1
     devDependencies:
+      '@web-projects/eslint':
+        specifier: workspace:*
+        version: link:../../config/eslint
+      '@web-projects/prettier':
+        specifier: workspace:*
+        version: link:../../config/prettier
+      prettier-plugin-astro:
+        specifier: catalog:prettier
+        version: 0.14.1
+      prettier-plugin-tailwindcss:
+        specifier: catalog:prettier
+        version: 0.7.2(prettier-plugin-astro@0.14.1)(prettier@3.7.4)
+
+  apps/victoria-birth-list:
+    dependencies:
+      '@astrojs/node':
+        specifier: ^10.0.0
+        version: 10.1.1(astro@6.3.7(@types/node@24.10.1)(@vercel/functions@3.4.3(@aws-sdk/credential-provider-web-identity@3.943.0))(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(yaml@2.8.2))
+      '@libsql/client':
+        specifier: ^0.14.0
+        version: 0.14.0
+      '@lucide/astro':
+        specifier: ^1.16.0
+        version: 1.16.0(astro@6.3.7(@types/node@24.10.1)(@vercel/functions@3.4.3(@aws-sdk/credential-provider-web-identity@3.943.0))(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(yaml@2.8.2))
+      '@tailwindcss/vite':
+        specifier: catalog:tailwind
+        version: 4.2.1(vite@7.3.3(@types/node@24.10.1)(jiti@2.6.1)(lightningcss@1.31.1)(yaml@2.8.2))
+      astro:
+        specifier: catalog:astro
+        version: 6.3.7(@types/node@24.10.1)(@vercel/functions@3.4.3(@aws-sdk/credential-provider-web-identity@3.943.0))(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.59.0)(yaml@2.8.2)
+      nodemailer:
+        specifier: catalog:nodemailer
+        version: 8.0.1
+      tailwindcss:
+        specifier: catalog:tailwind
+        version: 4.2.1
+      zod:
+        specifier: catalog:zod
+        version: 3.25.76
+    devDependencies:
+      '@types/node':
+        specifier: catalog:node
+        version: 24.10.1
+      '@types/nodemailer':
+        specifier: catalog:nodemailer
+        version: 7.0.5
       '@web-projects/eslint':
         specifier: workspace:*
         version: link:../../config/eslint
