@@ -1,8 +1,10 @@
-import type { APIRoute } from 'astro'
 import { z } from 'zod'
+
 import { db, initDb } from '../../lib/db'
-import { generateUniqueReservationId } from '../../lib/funnyNames'
 import { sendReservationEmail } from '../../lib/email'
+import { generateUniqueReservationId } from '../../lib/funnyNames'
+
+import type { APIRoute } from 'astro'
 
 const reserveSchema = z.object({
   giftId: z.string().uuid(),
@@ -59,7 +61,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Check if there are active reservations that are not cancelled
     const activeResResult = await db.execute({
-      sql: 'SELECT id, status FROM reservations WHERE giftId = ? AND status != "Cancelled" LIMIT 1',
+      sql: "SELECT id, status FROM reservations WHERE giftId = ? AND status != 'Cancelled' LIMIT 1",
       args: [giftId],
     })
 
@@ -88,7 +90,7 @@ export const POST: APIRoute = async ({ request }) => {
         INSERT INTO reservations (id, name, email, giftId, status, message, timestamp)
         VALUES (?, ?, ?, ?, ?, ?, ?)
       `,
-      args: [reservationId, name, email, giftId, status, message || '', timestamp],
+      args: [reservationId, name, email, giftId, status, message ?? '', timestamp],
     })
 
     // 4. Send Confirmation Email via Resend
@@ -111,14 +113,14 @@ export const POST: APIRoute = async ({ request }) => {
         reservationId,
         status,
         emailSent: emailSent.success,
-        simulated: !!(emailSent as any).simulated,
+        simulated: !!(emailSent as { simulated?: boolean }).simulated,
       }),
       {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
       },
     )
-  } catch (error: any) {
+  } catch (error) {
     console.error('API Reserve Error:', error)
     return new Response(
       JSON.stringify({

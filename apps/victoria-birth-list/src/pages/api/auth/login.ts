@@ -1,7 +1,8 @@
-import type { APIRoute } from 'astro'
 import { getPocketIdAuthUrl } from '../../../lib/auth'
 
-export const GET: APIRoute = async ({ cookies, redirect }) => {
+import type { APIRoute } from 'astro'
+
+export const GET: APIRoute = ({ cookies, redirect }) => {
   const state = Math.random().toString(36).substring(2, 15)
 
   // Store state in a short-lived secure cookie to prevent CSRF attacks

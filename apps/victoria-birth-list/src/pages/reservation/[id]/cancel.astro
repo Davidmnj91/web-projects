@@ -27,7 +27,7 @@ try {
       WHERE r.id = ?
       LIMIT 1
     `,
-    args: [id || ''],
+    args: [id ?? ''],
   })
 
   if (result.rows.length === 0) {
@@ -47,8 +47,8 @@ try {
   // Handle post request to actually cancel
   if (Astro.request.method === 'POST' && resData && resData.status !== 'Cancelled') {
     await db.execute({
-      sql: 'UPDATE reservations SET status = "Cancelled" WHERE id = ?',
-      args: [id || ''],
+      sql: "UPDATE reservations SET status = 'Cancelled' WHERE id = ?",
+      args: [id ?? ''],
     })
     resData.status = 'Cancelled'
     success = true

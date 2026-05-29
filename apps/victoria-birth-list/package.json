@@ -1,5 +1,5 @@
 {
-  "name": "@web-projects/lista-nacimiento",
+  "name": "@web-projects/victoria-birth-list",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -18,11 +18,13 @@
     "@lucide/astro": "^1.16.0",
     "@tailwindcss/vite": "catalog:tailwind",
     "astro": "catalog:astro",
+    "nodemailer": "catalog:nodemailer",
     "tailwindcss": "catalog:tailwind",
     "zod": "catalog:zod"
   },
   "devDependencies": {
     "@types/node": "catalog:node",
+    "@types/nodemailer": "catalog:nodemailer",
     "@web-projects/eslint": "workspace:*",
     "@web-projects/prettier": "workspace:*",
     "prettier-plugin-astro": "catalog:prettier",

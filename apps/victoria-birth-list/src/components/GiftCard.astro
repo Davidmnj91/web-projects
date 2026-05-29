@@ -132,7 +132,7 @@ const category = getCategory(gift.title, gift.description)
       </span>
 
       {
-        gift.links && gift.links.length > 0 && (
+        gift.links.length > 0 && (
           <a
             href={gift.links[0]}
             target='_blank'
@@ -157,7 +157,7 @@ const category = getCategory(gift.title, gift.description)
       {
         gift.status === 'Reserved' && (
           <button class='bg-secondary text-secondary-foreground border-border/80 w-full cursor-not-allowed rounded-full border px-4 py-3 text-sm font-semibold tracking-wide opacity-90'>
-            Reservado por {gift.resName || 'alguien'}
+            Reservado
           </button>
         )
       }

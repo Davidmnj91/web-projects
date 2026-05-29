@@ -1,12 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import { db, initDb } from '../lib/db'
-import { Gift } from '@lucide/astro'
+
+import DetailModal from '../components/DetailModal.astro'
+import GiftCard from '../components/GiftCard.astro'
 import Hero from '../components/Hero.astro'
 import HowItWorks from '../components/HowItWorks.astro'
-import GiftCard from '../components/GiftCard.astro'
-import DetailModal from '../components/DetailModal.astro'
 import ReservationModal from '../components/ReservationModal.astro'
+import Layout from '../layouts/Layout.astro'
+import { db, initDb } from '../lib/db'
 
 // Ensure database is initialized
 await initDb()
@@ -103,6 +103,18 @@ const gifts = giftsResult.rows.map((row) => {
     status,
     resName: row.resName as string | null,
   }
+})
+
+// Sort: Available first, then Reserved, then Purchased last (maintaining ascending price sort within each status)
+gifts.sort((a, b) => {
+  const getWeight = (status: string) => {
+    if (status === 'Available') return 0
+    if (status === 'Reserved') return 1
+    return 2 // Purchased
+  }
+  const weightDiff = getWeight(a.status) - getWeight(b.status)
+  if (weightDiff !== 0) return weightDiff
+  return a.price - b.price
 })
 ---
 
@@ -412,7 +424,7 @@ const gifts = giftsResult.rows.map((row) => {
           modalStatusBadge.classList.add('bg-card', 'text-taupe', 'border-border')
           modalActionsWrapper.classList.remove('hidden')
         } else if (currentGift.status === 'Reserved') {
-          modalStatusBadge.textContent = `Reservado ${currentGift.resName ? 'por ' + currentGift.resName : ''}`
+          modalStatusBadge.textContent = 'Reservado'
           modalStatusBadge.classList.add('bg-sand', 'text-secondary-foreground', 'border-border/80')
           modalActionsWrapper.classList.add('hidden')
         } else {

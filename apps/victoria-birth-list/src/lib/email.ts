@@ -1,23 +1,66 @@
-const RESEND_API_KEY = process.env.RESEND_API_KEY
-const FROM_EMAIL = process.env.FROM_EMAIL || 'Lista de Victoria <victoria@send.petrolab.es>'
+import nodemailer from 'nodemailer';
+
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const FROM_EMAIL = process.env.FROM_EMAIL ?? 'Lista de Victoria <victoria@send.petrolab.es>';
+const NODE_ENV = process.env.NODE_ENV ?? 'development';
+
+const SMTP_HOST = process.env.SMTP_HOST ?? 'localhost';
+const SMTP_PORT = parseInt(process.env.SMTP_PORT ?? '1025', 10);
 
 interface SendEmailParams {
-  to: string
-  subject: string
-  html: string
+  to: string;
+  subject: string;
+  html: string;
 }
 
 export async function sendEmail({ to, subject, html }: SendEmailParams) {
+  // If NODE_ENV is development, send via Nodemailer to Mailhog container
+  if (NODE_ENV === 'development') {
+    try {
+      const transporter = nodemailer.createTransport({
+        host: SMTP_HOST,
+        port: SMTP_PORT,
+        secure: false, // Mailhog doesn't use SSL/TLS by default
+        tls: {
+          rejectUnauthorized: false
+        }
+      });
+
+      const info = await transporter.sendMail({
+        from: FROM_EMAIL,
+        to,
+        subject,
+        html,
+      });
+
+      console.log(`[SMTP Mailhog] Email enviado con éxito: ${info.messageId}`);
+      return { success: true, messageId: info.messageId, mailhog: true };
+    } catch (error) {
+      console.error('Error sending email via SMTP Mailhog:', error);
+      // Fallback to console simulation if SMTP fails in dev (e.g. Mailhog not running)
+      console.log('\n==================================================');
+      console.log(`[FALLBACK SIMULACIÓN EMAIL]`);
+      console.log(`De: ${FROM_EMAIL}`);
+      console.log(`Para: ${to}`);
+      console.log(`Asunto: ${subject}`);
+      console.log(`--------------------------------------------------`);
+      console.log(html);
+      console.log('==================================================\n');
+      return { success: false, error, simulated: true };
+    }
+  }
+
+  // Otherwise, use Resend API in production (default)
   if (!RESEND_API_KEY) {
-    console.log('\n==================================================')
-    console.log(`[SIMULACIÓN EMAIL RESEND]`)
-    console.log(`De: ${FROM_EMAIL}`)
-    console.log(`Para: ${to}`)
-    console.log(`Asunto: ${subject}`)
-    console.log(`--------------------------------------------------`)
-    console.log(html)
-    console.log('==================================================\n')
-    return { success: true, simulated: true }
+    console.log('\n==================================================');
+    console.log(`[SIMULACIÓN EMAIL RESEND]`);
+    console.log(`De: ${FROM_EMAIL}`);
+    console.log(`Para: ${to}`);
+    console.log(`Asunto: ${subject}`);
+    console.log(`--------------------------------------------------`);
+    console.log(html);
+    console.log('==================================================\n');
+    return { success: true, simulated: true };
   }
 
   try {
@@ -33,18 +76,18 @@ export async function sendEmail({ to, subject, html }: SendEmailParams) {
         subject,
         html,
       }),
-    })
+    });
 
     if (!response.ok) {
-      const errText = await response.text()
-      throw new Error(`Resend API Error (${response.status}): ${errText}`)
+      const errText = await response.text();
+      throw new Error(`Resend API Error (${response.status}): ${errText}`);
     }
 
-    const data = await response.json()
-    return { success: true, data }
+    const data = await response.json();
+    return { success: true, data };
   } catch (error) {
-    console.error('Error sending email via Resend:', error)
-    return { success: false, error }
+    console.error('Error sending email via Resend:', error);
+    return { success: false, error };
   }
 }
 

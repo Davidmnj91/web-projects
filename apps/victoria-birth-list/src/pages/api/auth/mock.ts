@@ -1,7 +1,8 @@
-import type { APIRoute } from 'astro'
 import { signSession, cookieConfig, isMockAuthEnabled } from '../../../lib/auth'
 
-export const GET: APIRoute = async ({ cookies, redirect }) => {
+import type { APIRoute } from 'astro'
+
+export const GET: APIRoute = ({ cookies, redirect }) => {
   if (!isMockAuthEnabled()) {
     return new Response(
       'Mock authentication is only available in development or local homelab settings without PocketID URL defined.',
