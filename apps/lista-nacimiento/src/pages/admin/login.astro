@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { verifySession, cookieConfig, isMockAuthEnabled } from '../../lib/auth';
+
+const sessionToken = Astro.cookies.get(cookieConfig.name)?.value;
+const user = verifySession(sessionToken);
+
+// If already logged in as admin, bypass login screen
+if (user && user.isAdmin) {
+  return Astro.redirect('/admin');
+}
+
+const mockEnabled = isMockAuthEnabled();
+---
+
+<Layout title="Acceso Administrador | Victoria 🍼">
+  <div class="max-w-md mx-auto px-4 py-20">
+    <div class="glass-panel rounded-2xl shadow-xl overflow-hidden border border-white">
+
+      <!-- Top header branding -->
+      <div class="bg-linear-to-r from-brand-terracotta to-brand-amber px-6 py-10 text-center text-white">
+        <span class="text-5xl block mb-2">🔐</span>
+        <h1 class="text-2xl font-bold font-display">Panel de Control</h1>
+        <p class="text-xs opacity-90 mt-1">Lista de Nacimiento de Victoria</p>
+      </div>
+
+      <div class="p-8 text-center">
+        <p class="text-sm text-text-muted leading-relaxed mb-8">
+          Bienvenido al área de administración. Para gestionar los regalos de la lista y supervisar las reservas recibidas de los invitados, inicia sesión de forma segura.
+        </p>
+
+        <div class="space-y-4">
+          <!-- Standard PocketID Login Button -->
+          <a
+            href="/api/auth/login"
+            class="w-full bg-brand-terracotta hover:bg-brand-terracotta-dark text-white font-semibold text-sm py-4 rounded-xl shadow-md hover:shadow-lg transition-all text-center flex items-center justify-center gap-2 cursor-pointer"
+          >
+            🔑 Iniciar Sesión con PocketID
+          </a>
+
+          {mockEnabled && (
+            <div class="pt-6 border-t border-gray-100">
+              <div class="flex items-center justify-center gap-1.5 text-brand-amber text-xs font-bold uppercase tracking-wider mb-3">
+                <span>⚠️</span> Entorno de Desarrollo
+              </div>
+              <!-- Mock login bypass button -->
+              <a
+                href="/api/auth/mock"
+                class="w-full bg-brand-sage hover:bg-brand-olive hover:text-white text-brand-olive-dark font-semibold text-xs py-3 rounded-xl transition-all text-center flex items-center justify-center gap-2 cursor-pointer border border-brand-olive/20"
+              >
+                🛠️ Acceso Rápido (Simulador Mock)
+              </a>
+              <p class="text-[10px] text-text-muted mt-2 leading-relaxed">
+                El bypass está activo porque estás en modo desarrollo o no tienes la variable de entorno <code class="bg-gray-100 px-1 py-0.5 rounded text-[9px] font-mono">POCKETID_URL</code> configurada en tu homelab.
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-gray-50 flex justify-between items-center text-xs text-text-muted">
+          <a href="/" class="hover:underline">← Volver a la web pública</a>
+          <span>Español 🇪🇸</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

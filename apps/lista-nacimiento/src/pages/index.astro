@@ -1,0 +1,586 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { db, initDb } from '../lib/db'
+import { Gift } from '@lucide/astro'
+import Hero from '../components/Hero.astro'
+import HowItWorks from '../components/HowItWorks.astro'
+import GiftCard from '../components/GiftCard.astro'
+import DetailModal from '../components/DetailModal.astro'
+import ReservationModal from '../components/ReservationModal.astro'
+
+// Ensure database is initialized
+await initDb()
+
+// Seed data helper if empty
+const countResult = await db.execute('SELECT COUNT(*) as count FROM gifts')
+const count = Number(countResult.rows[0].count)
+
+if (count === 0) {
+  const timestamp = Date.now()
+  const seedGifts = [
+    {
+      id: 'a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d',
+      title: 'Juguete Sensorial de Madera Montessori',
+      description:
+        'Precioso set de sonajeros y mordedores de madera natural y algodón orgánico para estimular los sentidos de Victoria durante sus primeros meses.',
+      image: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600&auto=format&fit=crop&q=80',
+      price: 18.5,
+      links: JSON.stringify(['https://www.amazon.es/s?k=juguete+madera+montessori+bebe']),
+      createdAt: timestamp - 50000,
+    },
+    {
+      id: 'b2c3d4e5-f67a-8b9c-0d1e-2f3a4b5c6d7e',
+      title: 'Set de Ropa de Algodón Orgánico',
+      description:
+        'Lote de 3 bodies de manga larga, polainas y gorrito de punto. Confeccionados en algodón orgánico 100%, súper suave y respetuoso con su piel.',
+      image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&auto=format&fit=crop&q=80',
+      price: 35.0,
+      links: JSON.stringify(['https://www.zara.com/es/es/kids-baby-newborn-l323.html']),
+      createdAt: timestamp - 40000,
+    },
+    {
+      id: 'c3d4e5f6-7a8b-9c0d-1e2f-3a4b5c6d7e8f',
+      title: 'Cámara Vigilabebe Inteligente HD',
+      description:
+        'Monitor con cámara HD, visión nocturna, sensor de temperatura y audio bidireccional para que podamos vigilar su sueño y bienestar desde el móvil.',
+      image: 'https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=600&auto=format&fit=crop&q=80',
+      price: 89.9,
+      links: JSON.stringify(['https://www.pccomponentes.com/vigilabebes']),
+      createdAt: timestamp - 30000,
+    },
+    {
+      id: 'd4e5f67a-8b9c-0d1e-2f3a-4b5c6d7e8f9a',
+      title: 'Bañera Plegable Ergonómica',
+      description:
+        'Bañera compacta con reductor acolchado para recién nacido. Ideal para baños cómodos y fácil almacenamiento en pisos pequeños.',
+      image: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=600&auto=format&fit=crop&q=80',
+      price: 49.0,
+      links: JSON.stringify(['https://www.elcorteingles.es/bebes/bano-e-higiene/baneras/']),
+      createdAt: timestamp - 20000,
+    },
+    {
+      id: 'e5f67a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b',
+      title: 'Cochecito de Bebé Trío Premium',
+      description:
+        'Cochecito completo de 3 piezas que incluye capazo, silla de paseo y portabebés grupo 0+. Ligero, de plegado fácil y excelente amortiguación.',
+      image: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?w=600&auto=format&fit=crop&q=80',
+      price: 499.0,
+      links: JSON.stringify(['https://www.elcorteingles.es/bebes/paseo/cochecitos-de-bebe/']),
+      createdAt: timestamp - 10000,
+    },
+  ]
+
+  for (const gift of seedGifts) {
+    await db.execute({
+      sql: `INSERT INTO gifts (id, title, description, image, price, links, createdAt)
+            VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      args: [gift.id, gift.title, gift.description, gift.image, gift.price, gift.links, gift.createdAt],
+    })
+  }
+}
+
+// Fetch all gifts along with their active reservation status
+const giftsResult = await db.execute(`
+  SELECT g.id, g.title, g.description, g.image, g.price, g.links, g.createdAt,
+         r.status as resStatus, r.name as resName
+  FROM gifts g
+  LEFT JOIN reservations r ON g.id = r.giftId AND r.status != 'Cancelled'
+  ORDER BY g.price ASC
+`)
+
+const gifts = giftsResult.rows.map((row) => {
+  let status = 'Available'
+  if (row.resStatus === 'Reserved') status = 'Reserved'
+  if (row.resStatus === 'Purchased') status = 'Purchased'
+
+  return {
+    id: row.id as string,
+    title: row.title as string,
+    description: row.description as string,
+    image: row.image as string,
+    price: Number(row.price),
+    links: JSON.parse((row.links as string) || '[]') as string[],
+    status,
+    resName: row.resName as string | null,
+  }
+})
+---
+
+<Layout>
+  <Hero />
+
+  <HowItWorks />
+
+  <!-- Gift List Section -->
+  <section id='lista-regalos' class='mx-auto max-w-6xl scroll-mt-20 px-4 py-16'>
+    <div class='mb-10 text-center'>
+      <h2 class='font-display text-text-charcoal text-3xl font-bold'>Ideas para Victoria</h2>
+      <p class='text-text-muted mt-2 text-sm'>Puedes filtrar los artículos por rango de precio o disponibilidad</p>
+    </div>
+
+    <!-- Filters Bar (Glassmorphic) -->
+    <div
+      class='glass-panel border-border/40 mb-10 flex flex-col items-center justify-between gap-6 rounded-2xl border p-6 shadow-xs md:flex-row'
+    >
+      <!-- Price Filters -->
+      <div class='w-full md:w-auto'>
+        <span class='text-taupe mb-3 block text-[11px] font-medium tracking-[0.2em] uppercase'>Filtrar por Precio</span>
+        <div class='flex flex-wrap gap-2' id='price-filters'>
+          <button
+            data-price-filter='all'
+            class='filter-btn active border-primary bg-primary text-primary-foreground cursor-pointer rounded-full border px-4 py-1.5 text-xs tracking-wide whitespace-nowrap transition-all'
+            >Todos</button
+          >
+          <button
+            data-price-filter='lt20'
+            class='filter-btn border-border bg-card text-muted-foreground hover:border-taupe hover:text-foreground cursor-pointer rounded-full border px-4 py-1.5 text-xs tracking-wide whitespace-nowrap transition-all'
+            >&lt; 20 €</button
+          >
+          <button
+            data-price-filter='lt50'
+            class='filter-btn border-border bg-card text-muted-foreground hover:border-taupe hover:text-foreground cursor-pointer rounded-full border px-4 py-1.5 text-xs tracking-wide whitespace-nowrap transition-all'
+            >&lt; 50 €</button
+          >
+          <button
+            data-price-filter='lt100'
+            class='filter-btn border-border bg-card text-muted-foreground hover:border-taupe hover:text-foreground cursor-pointer rounded-full border px-4 py-1.5 text-xs tracking-wide whitespace-nowrap transition-all'
+            >&lt; 100 €</button
+          >
+          <button
+            data-price-filter='gt100'
+            class='filter-btn border-border bg-card text-muted-foreground hover:border-taupe hover:text-foreground cursor-pointer rounded-full border px-4 py-1.5 text-xs tracking-wide whitespace-nowrap transition-all'
+            >&gt; 100 €</button
+          >
+        </div>
+      </div>
+
+      <!-- Status Filters -->
+      <div class='w-full md:w-auto'>
+        <span class='text-taupe mb-3 block text-[11px] font-medium tracking-[0.2em] uppercase'>Filtrar por Estado</span>
+        <div class='flex flex-wrap gap-2' id='status-filters'>
+          <button
+            data-status-filter='all'
+            class='filter-btn active border-primary bg-primary text-primary-foreground cursor-pointer rounded-full border px-4 py-1.5 text-xs tracking-wide whitespace-nowrap transition-all'
+            >Todos</button
+          >
+          <button
+            data-status-filter='Available'
+            class='filter-btn border-border bg-card text-muted-foreground hover:border-taupe hover:text-foreground cursor-pointer rounded-full border px-4 py-1.5 text-xs tracking-wide whitespace-nowrap transition-all'
+            >Disponible</button
+          >
+          <button
+            data-status-filter='Reserved'
+            class='filter-btn border-border bg-card text-muted-foreground hover:border-taupe hover:text-foreground cursor-pointer rounded-full border px-4 py-1.5 text-xs tracking-wide whitespace-nowrap transition-all'
+            >Reservado</button
+          >
+          <button
+            data-status-filter='Purchased'
+            class='filter-btn border-border bg-card text-muted-foreground hover:border-taupe hover:text-foreground cursor-pointer rounded-full border px-4 py-1.5 text-xs tracking-wide whitespace-nowrap transition-all'
+            >Comprado</button
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Filters Feedback & Empty state -->
+    <div id='filter-results-info' class='text-text-muted mb-6 hidden text-sm'>
+      Mostrando <span id='filtered-count' class='text-brand-terracotta font-bold'>0</span> de <span class='total-count'
+        >{gifts.length}</span
+      > regalos.
+    </div>
+
+    <!-- Gifts Grid -->
+    <div class='grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3' id='gifts-grid'>
+      {gifts.map((gift) => <GiftCard gift={gift} />)}
+    </div>
+
+    <!-- Empty State -->
+    <div id='empty-state' class='hidden rounded-2xl border border-gray-100 bg-white py-16 text-center shadow-xs'>
+      <span class='mb-4 block text-5xl'>🔍</span>
+      <h3 class='font-display text-text-charcoal mb-2 text-lg font-bold'>No se encontraron artículos</h3>
+      <p class='text-text-muted mx-auto max-w-sm text-sm'>
+        Prueba a cambiar tus filtros de precio o estado para ver otras ideas de la lista.
+      </p>
+    </div>
+  </section>
+
+  <!-- --- SPA INTERACTIVE DIALOGS (MODALS) --- -->
+  <DetailModal />
+  <ReservationModal />
+
+  <script>
+    // CLIENT SIDE SCRIPT FOR INTERACTIVE GRID FILTERS & SPA MODALS
+
+    // Global values for filters
+    let activePriceFilter = 'all'
+    let activeStatusFilter = 'all'
+
+    const priceFiltersEl = document.getElementById('price-filters')
+    const statusFiltersEl = document.getElementById('status-filters')
+    const giftsGridEl = document.getElementById('gifts-grid')
+    const cards = Array.from(document.querySelectorAll('.gift-card')) as HTMLElement[]
+    const emptyStateEl = document.getElementById('empty-state')
+    const filteredCountEl = document.getElementById('filtered-count')
+    const resultsInfoEl = document.getElementById('filter-results-info')
+
+    // Handle CSS class toggle on filters
+    function updateActiveButtonStyles(parentEl: HTMLElement | null, clickedBtn: HTMLElement) {
+      if (!parentEl) return
+      parentEl.querySelectorAll('.filter-btn').forEach((btn) => {
+        btn.classList.remove('active', 'bg-primary', 'text-primary-foreground', 'border-primary')
+        btn.classList.add(
+          'bg-card',
+          'text-muted-foreground',
+          'border-border',
+          'hover:border-taupe',
+          'hover:text-foreground',
+        )
+      })
+      clickedBtn.classList.add('active', 'bg-primary', 'text-primary-foreground', 'border-primary')
+      clickedBtn.classList.remove(
+        'bg-card',
+        'text-muted-foreground',
+        'border-border',
+        'hover:border-taupe',
+        'hover:text-foreground',
+      )
+    }
+
+    // Multi-criteria filter function
+    function applyFilters() {
+      let visibleCount = 0
+
+      cards.forEach((card) => {
+        const price = parseFloat(card.getAttribute('data-price') || '0')
+        const status = card.getAttribute('data-status') || ''
+
+        // Match Price
+        let matchesPrice = false
+        if (activePriceFilter === 'all') {
+          matchesPrice = true
+        } else if (activePriceFilter === 'lt20') {
+          matchesPrice = price < 20
+        } else if (activePriceFilter === 'lt50') {
+          matchesPrice = price < 50
+        } else if (activePriceFilter === 'lt100') {
+          matchesPrice = price < 100
+        } else if (activePriceFilter === 'gt100') {
+          matchesPrice = price >= 100
+        }
+
+        // Match Status
+        let matchesStatus = false
+        if (activeStatusFilter === 'all') {
+          matchesStatus = true
+        } else {
+          matchesStatus = status === activeStatusFilter
+        }
+
+        // Final Visibility check
+        if (matchesPrice && matchesStatus) {
+          card.style.display = 'flex'
+          visibleCount++
+        } else {
+          card.style.display = 'none'
+        }
+      })
+
+      // Update results indicator
+      if (filteredCountEl && resultsInfoEl) {
+        filteredCountEl.textContent = visibleCount.toString()
+        if (activePriceFilter !== 'all' || activeStatusFilter !== 'all') {
+          resultsInfoEl.classList.remove('hidden')
+        } else {
+          resultsInfoEl.classList.add('hidden')
+        }
+      }
+
+      // Toggle Empty state view
+      if (visibleCount === 0) {
+        emptyStateEl?.classList.remove('hidden')
+        giftsGridEl?.classList.add('hidden')
+      } else {
+        emptyStateEl?.classList.add('hidden')
+        giftsGridEl?.classList.remove('hidden')
+      }
+    }
+
+    // Setup Price Filter buttons
+    priceFiltersEl?.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement
+      if (target.classList.contains('filter-btn')) {
+        updateActiveButtonStyles(priceFiltersEl, target)
+        activePriceFilter = target.getAttribute('data-price-filter') || 'all'
+        applyFilters()
+      }
+    })
+
+    // Setup Status Filter buttons
+    statusFiltersEl?.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement
+      if (target.classList.contains('filter-btn')) {
+        updateActiveButtonStyles(statusFiltersEl, target)
+        activeStatusFilter = target.getAttribute('data-status-filter') || 'all'
+        applyFilters()
+      }
+    })
+
+    // --- SPA MODALS BEHAVIOR ---
+    const detailModal = document.getElementById('detail-modal') as HTMLDialogElement
+    const formModal = document.getElementById('form-modal') as HTMLDialogElement
+
+    // Detail Modal Elements
+    const modalImg = document.getElementById('modal-img') as HTMLImageElement
+    const modalPrice = document.getElementById('modal-price') as HTMLElement
+    const modalTitle = document.getElementById('modal-title') as HTMLElement
+    const modalDesc = document.getElementById('modal-desc') as HTMLElement
+    const modalStatusBadge = document.getElementById('modal-status-badge') as HTMLElement
+    const modalLinks = document.getElementById('modal-links') as HTMLElement
+    const modalShopsContainer = document.getElementById('modal-shops-container') as HTMLElement
+    const modalActionsWrapper = document.getElementById('modal-actions-wrapper') as HTMLElement
+    const btnTriggerReserve = document.getElementById('btn-trigger-reserve')
+    const btnTriggerPurchase = document.getElementById('btn-trigger-purchase')
+
+    // Form Modal Elements
+    const reservationForm = document.getElementById('reservation-form') as HTMLFormElement
+    const formGiftId = document.getElementById('form-gift-id') as HTMLInputElement
+    const formType = document.getElementById('form-type') as HTMLInputElement
+    const formModalTitle = document.getElementById('form-modal-title') as HTMLElement
+    const formModalSubtitle = document.getElementById('form-modal-subtitle') as HTMLElement
+    const formSubmitBtn = document.getElementById('form-submit-btn') as HTMLButtonElement
+    const formErrorAlert = document.getElementById('form-error-alert') as HTMLElement
+    const formSuccessScreen = document.getElementById('form-success-screen') as HTMLElement
+
+    // Active gift storage
+    let currentGift: any = null
+
+    // Open Details Modal click handler (clicking anywhere on the gift card)
+    document.querySelectorAll('.gift-card').forEach((card) => {
+      card.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement
+        // Do not trigger details modal when clicking external store links (marked with stop-prop)
+        if (target.closest('.stop-prop')) {
+          return
+        }
+
+        const cardEl = card as HTMLElement
+
+        currentGift = {
+          id: cardEl.getAttribute('data-id'),
+          title: cardEl.getAttribute('data-title'),
+          desc: cardEl.getAttribute('data-desc'),
+          image: cardEl.getAttribute('data-image'),
+          price: cardEl.getAttribute('data-price'),
+          status: cardEl.getAttribute('data-status'),
+          links: JSON.parse(cardEl.getAttribute('data-links') || '[]'),
+        }
+
+        // Populate dialog elements
+        modalImg.src = currentGift.image || 'https://images.unsplash.com/photo-1515488042361-404e9250afef?w=800&q=80'
+        modalPrice.textContent = `${parseFloat(currentGift.price).toLocaleString('es-ES', { minimumFractionDigits: 0 })} €`
+        modalTitle.textContent = currentGift.title
+        modalDesc.textContent = currentGift.desc
+
+        // Populate links
+        modalLinks.innerHTML = ''
+        if (currentGift.links.length > 0) {
+          modalShopsContainer.classList.remove('hidden')
+          currentGift.links.forEach((url: string, index: number) => {
+            let host = 'Enlace de Tienda'
+            try {
+              host = new URL(url).hostname.replace('www.', '')
+            } catch {}
+
+            const a = document.createElement('a')
+            a.href = url
+            a.target = '_blank'
+            a.rel = 'noopener noreferrer'
+            a.className =
+              'inline-flex items-center justify-between bg-secondary/50 border border-border/80 hover:border-taupe hover:bg-secondary p-3.5 rounded-xl font-semibold text-xs text-foreground transition-all'
+            a.innerHTML = `<span>👜 Comprar en <strong>${host}</strong></span> <span class='text-primary font-bold'>Ir a tienda ➔</span>`
+            modalLinks.appendChild(a)
+          })
+        } else {
+          modalShopsContainer.classList.add('hidden')
+        }
+
+        // Configure Badges and buttons actions according to status
+        modalStatusBadge.className =
+          'text-[10px] font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider border '
+        if (currentGift.status === 'Available') {
+          modalStatusBadge.textContent = 'Disponible'
+          modalStatusBadge.classList.add('bg-card', 'text-taupe', 'border-border')
+          modalActionsWrapper.classList.remove('hidden')
+        } else if (currentGift.status === 'Reserved') {
+          modalStatusBadge.textContent = `Reservado ${currentGift.resName ? 'por ' + currentGift.resName : ''}`
+          modalStatusBadge.classList.add('bg-sand', 'text-secondary-foreground', 'border-border/80')
+          modalActionsWrapper.classList.add('hidden')
+        } else {
+          modalStatusBadge.textContent = 'Comprado'
+          modalStatusBadge.classList.add('bg-blush', 'text-blush-foreground', 'border-blush/60')
+          modalActionsWrapper.classList.add('hidden')
+        }
+
+        // Display the dialog
+        detailModal?.showModal()
+      })
+    })
+
+    // Close Detail modal handler
+    document.getElementById('close-detail-btn')?.addEventListener('click', () => {
+      detailModal?.close()
+    })
+
+    // Close Detail modal when clicking outside (on backdrop)
+    detailModal?.addEventListener('click', (e) => {
+      const dialogDimensions = detailModal.getBoundingClientRect()
+      if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+      ) {
+        detailModal.close()
+      }
+    })
+
+    // Transition to Form modal (RESERVE)
+    btnTriggerReserve?.addEventListener('click', () => {
+      if (!currentGift) return
+      detailModal.close()
+
+      formModalTitle.textContent = 'Reservar Regalo'
+      formModalSubtitle.textContent = `Vas a reservar "${currentGift.title}". Estará guardado para ti para evitar duplicados.`
+      formGiftId.value = currentGift.id
+      formType.value = 'RESERVE'
+
+      // Reset Form views
+      resetFormState()
+
+      formModal.showModal()
+    })
+
+    // Transition to Form modal (PURCHASE)
+    btnTriggerPurchase?.addEventListener('click', () => {
+      if (!currentGift) return
+      detailModal.close()
+
+      formModalTitle.textContent = 'Confirmar Compra Directa'
+      formModalSubtitle.textContent = `Vas a marcar "${currentGift.title}" como COMPRADO directamente en la web.`
+      formGiftId.value = currentGift.id
+      formType.value = 'PURCHASE'
+
+      // Reset Form views
+      resetFormState()
+
+      formModal.showModal()
+    })
+
+    // Close Form modal handler
+    document.getElementById('close-form-btn')?.addEventListener('click', () => {
+      formModal?.close()
+    })
+
+    // Close Form modal when clicking outside (on backdrop)
+    formModal?.addEventListener('click', (e) => {
+      const dialogDimensions = formModal.getBoundingClientRect()
+      if (
+        e.clientX < dialogDimensions.left ||
+        e.clientX > dialogDimensions.right ||
+        e.clientY < dialogDimensions.top ||
+        e.clientY > dialogDimensions.bottom
+      ) {
+        formModal.close()
+      }
+    })
+
+    function resetFormState() {
+      reservationForm.classList.remove('hidden')
+      formSuccessScreen.classList.add('hidden')
+      formErrorAlert.classList.add('hidden')
+      reservationForm.reset()
+      formSubmitBtn.disabled = false
+      formSubmitBtn.innerHTML = 'Confirmar Detalle ➔'
+    }
+
+    // --- AJAX Submit Reservation Form ---
+    reservationForm?.addEventListener('submit', async (e) => {
+      e.preventDefault()
+      formErrorAlert.classList.add('hidden')
+      formSubmitBtn.disabled = true
+      formSubmitBtn.innerHTML = `
+      <svg class="animate-spin -ml-1 mr-3 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg> Procesando detalle...
+    `
+
+      const payload = {
+        giftId: formGiftId.value,
+        name: (document.getElementById('form-name') as HTMLInputElement).value,
+        email: (document.getElementById('form-email') as HTMLInputElement).value,
+        message: (document.getElementById('form-message') as HTMLTextAreaElement).value,
+        type: formType.value,
+      }
+
+      try {
+        const response = await fetch('/api/reserve', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        })
+
+        const data = await response.json()
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.error || 'Error al procesar tu solicitud.')
+        }
+
+        // Display Success screen
+        reservationForm.classList.add('hidden')
+        formSuccessScreen.classList.remove('hidden')
+
+        const successGuestName = document.getElementById('success-guest-name')
+        const successFunnyId = document.getElementById('success-funny-id')
+        const successGuestEmail = document.getElementById('success-guest-email')
+
+        if (successGuestName) successGuestName.textContent = payload.name
+        if (successFunnyId) successFunnyId.textContent = data.reservationId
+        if (successGuestEmail) successGuestEmail.textContent = payload.email
+
+        // Update the local card UI status dynamically!
+        const card = document.querySelector(`.gift-card[data-id="${payload.giftId}"]`) as HTMLElement
+        if (card) {
+          card.setAttribute('data-status', data.status)
+
+          // Find existing status area or image card area to add badge dynamically
+          const imgContainer = card.querySelector('.relative.h-56') as HTMLElement
+          if (imgContainer) {
+            // Remove existing badges
+            const clockBadge = imgContainer.querySelector('.absolute.top-4.right-4')
+            if (clockBadge) clockBadge.remove()
+
+            const newBadge = document.createElement('span')
+            newBadge.className = `absolute top-4 right-4 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1 bg-brand-${data.status === 'Reserved' ? 'amber' : 'olive'}`
+            newBadge.innerHTML =
+              data.status === 'Reserved'
+                ? `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Reservado por ${payload.name}`
+                : `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> ¡Comprado!`
+
+            imgContainer.appendChild(newBadge)
+          }
+        }
+      } catch (err: any) {
+        formErrorAlert.textContent = err.message || 'Ha ocurrido un error en el servidor. Revisa tus datos.'
+        formErrorAlert.classList.remove('hidden')
+        formSubmitBtn.disabled = false
+        formSubmitBtn.innerHTML = 'Confirmar Detalle ➔'
+      }
+    })
+
+    // Success screen close button
+    document.getElementById('btn-success-close')?.addEventListener('click', () => {
+      formModal?.close()
+    })
+  </script>
+</Layout>
