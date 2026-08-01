@@ -23,7 +23,7 @@ interface MoreInfoProps {
 }
 
 export const MoreInfo = ({
-  informationCategories = Object.values(InformationCategories) as InformationCategories[],
+  informationCategories = Object.values(InformationCategories),
   className,
 }: MoreInfoProps) => {
   const t = useTranslations('more-info')
