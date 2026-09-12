@@ -12,8 +12,8 @@
     "format:write": "prettier \"**/*\" --list-different --write",
     "lint": "eslint .  --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0",
-    "lint:markdown": "markdownlint \"**/*.md\" --dot --ignore node_modules --ignore .changeset",
-    "pipeline:local": "pnpm turbo run lint build",
+    "lint:markdown": "markdownlint \"**/*.md\" --dot --ignore \"**/node_modules/**\" --ignore .changeset",
+    "pipeline:local": "pnpm turbo run lint build test",
     "prepare": "husky",
     "typecheck": "tsc"
   },

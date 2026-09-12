@@ -1,6 +1,6 @@
 import eslint from '@eslint/js'
 import prettierConfig from 'eslint-config-prettier'
-import importPlugin from 'eslint-plugin-import'
+import importPlugin from 'eslint-plugin-import-x'
 import pluginSecurity from 'eslint-plugin-security'
 import turboPlugin from 'eslint-plugin-turbo'
 import globals from 'globals'
@@ -39,9 +39,9 @@ export const base = defineConfig(
   },
 
   {
-    plugins: { import: importPlugin },
+    plugins: { 'import-x': importPlugin },
     rules: {
-      'import/order': [
+      'import-x/order': [
         'error',
         {
           alphabetize: { order: 'asc', caseInsensitive: true },

@@ -1,0 +1,35 @@
+{
+  "name": "@web-projects/test",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared test utilities and containers for workspace",
+  "author": "David Manja",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "development": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf -g dist *.tsbuildinfo .turbo",
+    "lint": "eslint .  --max-warnings 0",
+    "lint:fix": "eslint . --fix --max-warnings 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "mailhog": "catalog:testcontainers",
+    "testcontainers": "catalog:testcontainers"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:node",
+    "@web-projects/eslint": "workspace:*",
+    "@web-projects/tsconfig": "workspace:*",
+    "rimraf": "catalog:default",
+    "typescript": "catalog:typescript"
+  }
+}

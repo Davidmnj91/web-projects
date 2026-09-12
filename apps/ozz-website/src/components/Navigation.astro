@@ -9,23 +9,26 @@ const { pathname } = Astro.url
 
 <header id='menu' class='sticky top-0 z-40 w-full bg-white py-8 transition-all duration-300 md:py-20'>
   <nav class='flex w-full flex-row items-center justify-between px-6 transition-all duration-300 md:px-14'>
-    <a href='/' class='text-xl font-medium transition-opacity hover:opacity-70'> OSCAR ZAMORA </a>
+    <a href='/' class='text-xl font-medium transition-opacity hover:opacity-70'>
+      {' '}
+      OSCAR ZAMORA{' '}
+    </a>
     <span class='hidden text-base font-normal text-black md:inline'> Portrait & Still photographer </span>
 
     <div class='hidden items-center gap-12 text-base font-medium tracking-widest uppercase md:flex'>
-      {
-        menu.map(({ href, label }) => (
-          <a
-            href={href}
-            class={`relative transition-all hover:opacity-70 ${pathname === href ? 'underline underline-offset-8' : ''}`}
-          >
-            {label}
-          </a>
-        ))
-      }
-      <button id='contact-btn' class='relative cursor-pointer transition-all hover:opacity-70'> CONTACT </button>
+      {menu.map(({ href, label }) => (
+        <a
+          href={href}
+          class={`relative transition-all hover:opacity-70 ${pathname === href ? 'underline underline-offset-8' : ''}`}
+        >
+          {label}
+        </a>
+      ))}
+      <button id='contact-btn' class='relative cursor-pointer transition-all hover:opacity-70'>
+        CONTACT
+      </button>
     </div>
-    <button id='menu-btn' class='flex flex-col gap-1.5 md:hidden' aria-label='Abrir menú'>
+    <button id='menu-btn' class='flex flex-col p-3 cursor-pointer gap-1.5 md:hidden' aria-label='Abrir menú'>
       <span class='h-0.5 w-6 origin-center bg-black transition-all duration-300' id='line-1'></span>
       <span class='h-0.5 w-6 bg-black transition-all duration-300' id='line-2'></span>
     </button>
@@ -37,21 +40,21 @@ const { pathname } = Astro.url
   class='fixed left-0 flex w-full flex-col items-start justify-start bg-white px-6 pt-2 pb-20 text-base md:hidden'
 >
   <nav class='flex flex-col justify-start gap-11'>
-    {
-      menu.map(({ href, label }) => (
-        <a href={href} class={`relative transition-all hover:opacity-70`}>
-          <span class={`${pathname === href ? 'underline underline-offset-8' : ''}`}>{label}</span>
-        </a>
-      ))
-    }
-    <button id='contact-btn-mobile' class='relative text-left transition-all hover:opacity-70'> CONTACT </button>
+    {menu.map(({ href, label }) => (
+      <a href={href} class={`relative transition-all hover:opacity-70`}>
+        <span class={`${pathname === href ? 'underline underline-offset-8' : ''}`}>{label}</span>
+      </a>
+    ))}
+    <button id='contact-btn-mobile' class='relative text-left transition-all hover:opacity-70'>
+      CONTACT
+    </button>
   </nav>
 </div>
 
 <div id='contact-overlay' class='fixed inset-0 flex items-center justify-center bg-white px-6 text-xl'>
   <button
     id='contact-close-btn'
-    class='absolute top-8 right-6 flex flex-col gap-1.5 md:top-20 md:right-14'
+    class='absolute cursor-pointer top-8 right-6 p-3 flex flex-col gap-1.5 md:top-20 md:right-14'
     aria-label='Cerrar contacto'
   >
     <span class='h-0.5 w-6 origin-center bg-black transition-all duration-300' id='contact-line-1'></span>

@@ -66,8 +66,7 @@ const schema = {
     />
     <meta property='twitter:image' content='https://etimatic.vercel.app/images/home_titulo.png' />
 
-    <script type='application/ld+json' set:html={JSON.stringify(schema)} />
-
+    <script type='application/ld+json' set:html={JSON.stringify(schema)}></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src='https://www.googletagmanager.com/gtag/js?id=G-0FMVBG47XE'></script>
     <script is:inline>
@@ -78,7 +77,6 @@ const schema = {
       gtag('js', new Date())
       gtag('config', 'G-0FMVBG47XE', { debug_mode: true })
     </script>
-
     <!-- Hotjar Tracking Code for Etimatic -->
     <script is:inline>
       ;(function (h, o, t, j, a, r) {
@@ -95,7 +93,6 @@ const schema = {
         a.appendChild(r)
       })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=')
     </script>
-
     <link rel='apple-touch-icon' sizes='57x57' href='/favicon/apple-icon-57x57.png' />
     <link rel='apple-touch-icon' sizes='60x60' href='/favicon/apple-icon-60x60.png' />
     <link rel='apple-touch-icon' sizes='72x72' href='/favicon/apple-icon-72x72.png' />

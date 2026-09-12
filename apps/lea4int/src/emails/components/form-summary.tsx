@@ -1,4 +1,4 @@
-import { Column, Text } from '@react-email/components'
+import { Column, Text } from 'react-email'
 
 import emails from '../../messages/emails.json'
 

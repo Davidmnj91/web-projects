@@ -78,6 +78,7 @@ web_modules/
 # dotenv environment variable files
 .env
 .env.*
+!.env.template
 
 # local db
 *.db
@@ -153,6 +154,9 @@ test-results/
 playwright-report/
 blob-report/
 playwright/.cache/
+
+# IDEs
+.idea/
 
 # Cspell cache
 .cspellcache

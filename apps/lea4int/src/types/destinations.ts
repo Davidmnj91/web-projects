@@ -8,8 +8,4 @@ export enum Destinations {
 }
 
 export type AvailableServices =
-  | 'work-experience'
-  | 'job-shadowing'
-  | 'language-courses'
-  | 'student-exchange'
-  | 'concierge'
+  'work-experience' | 'job-shadowing' | 'language-courses' | 'student-exchange' | 'concierge'

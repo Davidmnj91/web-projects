@@ -1,0 +1,26 @@
+{
+  "name": "@web-projects/vitest",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A package to share Vitest configurations in workspace",
+  "author": "David Manja",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    }
+  },
+  "scripts": {
+    "clean": "rimraf -g *.tsbuildinfo .turbo",
+    "lint": "eslint .  --max-warnings 0",
+    "lint:fix": "eslint . --fix --max-warnings 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@web-projects/eslint": "workspace:*",
+    "@web-projects/tsconfig": "workspace:*",
+    "vitest": "catalog:vitest"
+  }
+}
