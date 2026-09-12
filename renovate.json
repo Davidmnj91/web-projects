@@ -1,11 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
+  "extends": ["config:recommended"],
   "dependencyDashboard": true,
   "rangeStrategy": "replace",
-  "schedule": ["every weekend"],
+  "schedule": ["* 12 * * 0"],
+  "timezone": "Europe/Madrid",
+  "minimumReleaseAge": "14 days",
   "prConcurrentLimit": 5,
-  "prHourlyLimit": 2
+  "prHourlyLimit": 10
 }
