@@ -23,77 +23,78 @@ jobs:
 
       - name: Check for changeset
         id: check_changeset
+        env:
+          LABELS: ${{ toJson(github.event.pull_request.labels) }}
+          TITLE: ${{ github.event.pull_request.title }}
+          BASE_REF: ${{ github.base_ref }}
         run: |
-          labels="${{ toJson(github.event.pull_request.labels) }}"
-          title="${{ github.event.pull_request.title }}"
-
           # 1. Bypass si existe la etiqueta
-          if echo "$labels" | grep -q '"name": *"no-changeset-needed"'; then
-          echo "status=bypass" >> $GITHUB_OUTPUT
-          echo "⏩ Bypass: Label found."
-          exit 0
+          if echo "$LABELS" | grep -q '"name": *"no-changeset-needed"'; then
+            echo "status=bypass" >> $GITHUB_OUTPUT
+            echo "⏩ Bypass: Label found."
+            exit 0
           fi
 
           # 2. Bypass si el título es chore o docs
-          if echo "$title" | grep -Eiq '^(chore|docs)'; then
-          echo "status=bypass" >> $GITHUB_OUTPUT
-          echo "⏩ Bypass: Title is chore/docs."
-          exit 0
+          if echo "$TITLE" | grep -Eiq '^(chore|docs)'; then
+            echo "status=bypass" >> $GITHUB_OUTPUT
+            echo "⏩ Bypass: Title is chore/docs."
+            exit 0
           fi
 
           # 3. Buscar archivo .changeset
           # Nota: Ajustado para asegurar que comparamos correctamente las ramas
-          git fetch origin ${{ github.base_ref }}
-          if git diff --name-only origin/${{ github.base_ref }} | grep -q '^.changeset/.*\.md$'; then
-          echo "✅ Changeset found."
-          echo "status=found" >> $GITHUB_OUTPUT
+          git fetch origin "$BASE_REF"
+          if git diff --name-only "origin/$BASE_REF" | grep -q '^\.changeset/.*\.md$'; then
+            echo "✅ Changeset found."
+            echo "status=found" >> $GITHUB_OUTPUT
           else
-          echo "❌ Changeset missing."
-          echo "status=missing" >> $GITHUB_OUTPUT
-          # No hacemos exit 1 aquí todavía para permitir que el paso del comentario se ejecute
+            echo "❌ Changeset missing."
+            echo "status=missing" >> $GITHUB_OUTPUT
+            # No hacemos exit 1 aquí todavía para permitir que el paso del comentario se ejecute
           fi
 
-          - name: Manage PR comment
-            if: always() # Se ejecuta siempre, incluso si falló el paso anterior (aunque aquí controlamos el fallo manualmente)
-            uses: actions/github-script@v8
-            with:
-              script: |
-                const status = "${{ steps.check_changeset.outputs.status }}";
-                const issue_number = context.issue.number;
+      - name: Manage PR comment
+        if: always() # Se ejecuta siempre, incluso si falló el paso anterior (aunque aquí controlamos el fallo manualmente)
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const status = "${{ steps.check_changeset.outputs.status }}";
+            const issue_number = context.issue.number;
 
-                const { data: comments } = await github.rest.issues.listComments({
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+            });
+
+            const botComments = comments.filter(c =>
+              c.user.type === "Bot" &&
+              c.body.includes("This PR is missing a **Changeset**")
+            );
+
+            if (status === "missing") {
+              if (botComments.length === 0) {
+                await github.rest.issues.createComment({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number,
+                  body: "⚠️ This PR is missing a **Changeset**.\n\n" +
+                        "Please run `pnpm changeset` and commit the generated file under `.changeset/`.\n\n" +
+                        "➡️ Maintainers can bypass this check by adding the `no-changeset-needed` label.\n" +
+                        "ℹ️ PRs titled with `chore:` or `docs:` also skip this check automatically."
                 });
-
-                const botComments = comments.filter(c =>
-                  c.user.type === "Bot" &&
-                  c.body.includes("This PR is missing a **Changeset**")
-                );
-
-                if (status === "missing") {
-                  if (botComments.length === 0) {
-                    await github.rest.issues.createComment({
-                      owner: context.repo.owner,
-                      repo: context.repo.repo,
-                      issue_number,
-                      body: "⚠️ This PR is missing a **Changeset**.\n\n" +
-                            "Please run `pnpm changeset` and commit the generated file under `.changeset/`.\n\n" +
-                            "➡️ Maintainers can bypass this check by adding the `no-changeset-needed` label.\n" +
-                            "ℹ️ PRs titled with `chore:` or `docs:` also skip this check automatically."
-                    });
-                  }
-                  // Hacemos fallar el job AHORA, después de comentar
-                  core.setFailed("Changeset missing");
-                } else {
-                  // Si ya existe o bypass, borramos el comentario del bot si existe
-                  for (const comment of botComments) {
-                    await github.rest.issues.deleteComment({
-                      owner: context.repo.owner,
-                      repo: context.repo.repo,
-                      comment_id: comment.id,
-                    });
-                  }
-                }
-              github-token: ${{ secrets.GITHUB_TOKEN }}
+              }
+              // Hacemos fallar el job AHORA, después de comentar
+              core.setFailed("Changeset missing");
+            } else {
+              // Si ya existe o bypass, borramos el comentario del bot si existe
+              for (const comment of botComments) {
+                await github.rest.issues.deleteComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: comment.id,
+                });
+              }
+            }
