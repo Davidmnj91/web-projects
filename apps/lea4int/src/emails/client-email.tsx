@@ -1,18 +1,4 @@
-import {
-  Body,
-  Column,
-  Container,
-  Head,
-  Hr,
-  Html,
-  Img,
-  Link,
-  Preview,
-  Row,
-  Section,
-  Tailwind,
-  Text,
-} from '@react-email/components'
+import { Body, Column, Container, Head, Hr, Html, Img, Link, Preview, Row, Section, Tailwind, Text } from 'react-email'
 
 import config from '../../tailwind.config'
 import emails from '../messages/emails.json'
@@ -20,7 +6,6 @@ import { Contact, ContactServices } from '../types/contact'
 import { FormSummary } from './components/form-summary'
 
 import type { ContactEmailProps } from '../types/contact'
-import type { TailwindConfig } from '@react-email/components'
 
 const baseUrl = process.env.BASE_URL ?? ''
 
@@ -39,7 +24,7 @@ export const ClientEmail = ({ props = previewProps }) => {
         <title>{previewText}</title>
       </Head>
       <Preview>{previewText}</Preview>
-      <Tailwind config={config as TailwindConfig}>
+      <Tailwind config={config}>
         <Body className='mx-auto' style={bodyStyle}>
           <Section className='bg-basics-white py-8'>
             <Container className='max-w-[490px]'>

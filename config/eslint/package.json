@@ -15,7 +15,7 @@
     "clean": "rimraf -g *.tsbuildinfo .turbo",
     "lint": "eslint .  --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0",
-    "typecheck": "tsc"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@eslint/compat": "catalog:eslint",
@@ -24,7 +24,7 @@
     "@next/eslint-plugin-next": "catalog:eslint",
     "eslint-config-prettier": "catalog:eslint",
     "eslint-plugin-astro": "catalog:eslint",
-    "eslint-plugin-import": "catalog:eslint",
+    "eslint-plugin-import-x": "catalog:eslint",
     "eslint-plugin-jsx-a11y": "catalog:eslint",
     "eslint-plugin-react": "catalog:eslint",
     "eslint-plugin-react-hooks": "catalog:eslint",

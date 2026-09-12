@@ -78,6 +78,10 @@ web_modules/
 # dotenv environment variable files
 .env
 .env.*
+!.env.template
+
+# local db
+*.db
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -150,6 +154,9 @@ test-results/
 playwright-report/
 blob-report/
 playwright/.cache/
+
+# IDEs
+.idea/
 
 # Cspell cache
 .cspellcache

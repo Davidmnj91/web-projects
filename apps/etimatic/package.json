@@ -10,7 +10,9 @@
     "format:write": "prettier \"**/*.{js,mjs,ts,tsx,astro,json,md,css}\" --list-different --write",
     "lint": "eslint .  --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "test": "vitest run --config vitest.config.integration.mjs",
+    "test:integration": "vitest run --config vitest.config.integration.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "catalog:astro",
@@ -24,7 +26,10 @@
     "@types/nodemailer": "catalog:nodemailer",
     "@web-projects/eslint": "workspace:*",
     "@web-projects/prettier": "workspace:*",
+    "@web-projects/test": "workspace:*",
+    "@web-projects/vitest": "workspace:*",
     "prettier-plugin-astro": "catalog:prettier",
-    "prettier-plugin-tailwindcss": "catalog:prettier"
+    "prettier-plugin-tailwindcss": "catalog:prettier",
+    "vitest": "catalog:vitest"
   }
 }
