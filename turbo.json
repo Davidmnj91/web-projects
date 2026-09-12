@@ -1,5 +1,5 @@
 {
-  "$schema": "https://v2-9-14.turborepo.dev/schema.json",
+  "$schema": "https://turborepo.com/schema.json",
   "ui": "stream",
   "tasks": {
     "clean": {},
@@ -7,17 +7,18 @@
       "dependsOn": ["lint", "^build"],
       "outputs": [".next/**", "dist/**", ".vercel/output/**"]
     },
-    "lint": {},
+    "lint": {
+      "dependsOn": ["^build"]
+    },
     "test": {
-      "dependsOn": ["build"],
-      "outputs": ["coverage/**"]
+      "dependsOn": ["build"]
     }
   },
   "globalEnv": [
     "NODE_ENV",
     "APP_DOMAIN",
     "BASE_URL",
-    "GA_ID",
+    "NEXT_PUBLIC_GA_ID",
     "MAIL_CLIENT_ID",
     "MAIL_CLIENT_SECRET",
     "MAIL_USER",
@@ -25,25 +26,16 @@
     "OAUTH_REDIRECT_URL",
     "OAUTH_REFRESH_TOKEN",
     "MAIL_HOST",
+    "MAIL_PORT",
     "MAIL_PASSWORD",
     "YOUTUBE_API_KEY",
     "YOUTUBE_CHANEL_ID",
     "NEXT_PUBLIC_RE_CAPTCHA_SITE_KEY",
     "RE_CAPTCHA_PRIVATE_KEY",
+    "RE_CAPTCHA_DISABLED",
 
     "CLOUDINARY_CLOUD_NAME",
     "CLOUDINARY_API_KEY",
-    "CLOUDINARY_API_SECRET",
-
-    "SESSION_SECRET",
-    "POCKETID_URL",
-    "POCKETID_CLIENT_ID",
-    "POCKETID_CLIENT_SECRET",
-    "POCKETID_REDIRECT_URI",
-    "DATABASE_URL",
-    "RESEND_API_KEY",
-    "FROM_EMAIL",
-    "SMTP_HOST",
-    "SMTP_PORT"
+    "CLOUDINARY_API_SECRET"
   ]
 }

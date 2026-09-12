@@ -22,14 +22,23 @@ const transportFactory = (accessToken: string): SMTPTransport.Options => ({
 export const sendMail = async (subject: string, to: string, template: string) => {
   try {
     let transport: SMTPTransport.Options
-    if (process.env.NODE_ENV === 'development') {
-      transport = { host: 'localhost', port: 1025, secure: false }
+    const isDev = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
+
+    if (isDev) {
+      const host = process.env.MAIL_HOST
+      const port = Number(process.env.MAIL_PORT)
+
+      if (!host || !port) {
+        throw new Error('Missing mail configuration: MAIL_HOST and MAIL_PORT are required')
+      }
+
+      transport = { host, port, secure: false }
     } else {
       const token = await getAuthToken()
       transport = transportFactory(token)
     }
     const mailer = nodemailer.createTransport(transport)
-    await mailer.sendMail({
+    return await mailer.sendMail({
       from: process.env.MAIL_USER,
       to: to,
       subject: subject,
@@ -37,5 +46,6 @@ export const sendMail = async (subject: string, to: string, template: string) =>
     })
   } catch (e) {
     console.error(e)
+    throw e
   }
 }

@@ -11,9 +11,7 @@ export default defineConfig({
   site: websiteUrl,
   adapter: vercel(),
   integrations: [sitemap()],
-  experimental: {
-    cache: { provider: memoryCache() },
-  },
+  cache: { provider: memoryCache() },
   vite: {
     plugins: [
       tailwindcss(),

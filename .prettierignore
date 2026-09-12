@@ -10,6 +10,7 @@ makefile
 *.iml
 *.ts.map
 *.js.map
+*.env
 *.env.*
 *.png
 *.webp
@@ -18,6 +19,7 @@ makefile
 *.sh
 *.txt
 *.xml
+*.pdf
 *.json
 !package.json
 

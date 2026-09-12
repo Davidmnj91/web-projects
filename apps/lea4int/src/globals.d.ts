@@ -1,6 +1,8 @@
 declare interface Window {
   grecaptcha: {
-    ready: <R>(callback: () => R | Promise<R>) => Promise<R>
+    ready: (callback: () => void) => void
     execute: (siteKey: string, options: { action: string }) => Promise<string>
   }
 }
+
+declare module '*.css'

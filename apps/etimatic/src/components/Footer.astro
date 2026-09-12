@@ -29,19 +29,17 @@ const { mail, location, phones } = Constants
     </a>
 
     <div class='mt-8 flex gap-2'>
-      {
-        phones.map(({ display, callNumber }, index) => (
-          <Fragment key={callNumber}>
-            <a
-              href={`tel:${callNumber}`}
-              class='hover:text-accent text-base font-medium text-white no-underline transition-colors duration-200 max-lg:text-sm'
-            >
-              {display}
-            </a>
-            {index < phones.length - 1 && <span class='text-white'> / </span>}
-          </Fragment>
-        ))
-      }
+      {phones.map(({ display, callNumber }, index) => (
+        <Fragment key={callNumber}>
+          <a
+            href={`tel:${callNumber}`}
+            class='hover:text-accent text-base font-medium text-white no-underline transition-colors duration-200 max-lg:text-sm'
+          >
+            {display}
+          </a>
+          {index < phones.length - 1 && <span class='text-white'> / </span>}
+        </Fragment>
+      ))}
     </div>
   </div>
 </footer>
