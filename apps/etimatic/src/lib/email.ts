@@ -8,15 +8,33 @@ interface SendEmail {
   subject: string
 }
 
-const transporter = nodemailer.createTransport({
-  host: import.meta.env.MAIL_HOST,
-  port: 465,
-  secure: true,
-  auth: {
-    user: Constants.mail,
-    pass: import.meta.env.MAIL_PASSWORD,
-  },
-})
+export function getEmailTransporter() {
+  const host = process.env.MAIL_HOST
+  const port = Number(process.env.MAIL_PORT)
+  const isDev = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
+
+  if (!host || !port) {
+    throw new Error('Missing mail configuration: MAIL_HOST and MAIL_PORT are required')
+  }
+
+  if (isDev) {
+    return nodemailer.createTransport({
+      host,
+      port,
+      secure: false,
+    })
+  }
+
+  return nodemailer.createTransport({
+    host,
+    port,
+    secure: true,
+    auth: {
+      user: Constants.mail,
+      pass: process.env.MAIL_PASSWORD,
+    },
+  })
+}
 
 export async function sendEmail({ html, subject, from }: SendEmail) {
   const mailData = {
@@ -26,5 +44,6 @@ export async function sendEmail({ html, subject, from }: SendEmail) {
     html: html,
   }
 
+  const transporter = getEmailTransporter()
   return await transporter.sendMail(mailData)
 }

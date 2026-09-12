@@ -16,20 +16,18 @@ const boxCarouselItems = [
 >
   <div class='relative h-full w-full overflow-hidden'>
     <div id='carousel-track' class='flex h-full transition-transform duration-500 ease-in-out'>
-      {
-        boxCarouselItems.map(({ title, boxImage }) => (
-          <div class='relative h-full min-w-full max-lg:flex max-lg:flex-col max-lg:items-center'>
-            <div
-              class='text-main absolute top-30 w-[60%] text-6xl font-extrabold max-lg:relative max-lg:top-0 max-lg:w-full max-lg:text-center max-lg:text-4xl'
-              set:html={title}
-            />
-            <div
-              class='absolute top-1/2 right-0 h-full w-1/2 -translate-y-1/2 bg-contain bg-center bg-no-repeat max-lg:relative max-lg:top-0 max-lg:mt-8 max-lg:h-75 max-lg:w-full max-lg:translate-x-0 max-lg:translate-y-0'
-              style={`background-image: url(${boxImage})`}
-            />
-          </div>
-        ))
-      }
+      {boxCarouselItems.map(({ title, boxImage }) => (
+        <div class='relative h-full min-w-full max-lg:flex max-lg:flex-col max-lg:items-center'>
+          <div
+            class='text-main absolute top-30 w-[60%] text-6xl font-extrabold max-lg:relative max-lg:top-0 max-lg:w-full max-lg:text-center max-lg:text-4xl'
+            set:html={title}
+          />
+          <div
+            class='absolute top-1/2 right-0 h-full w-1/2 -translate-y-1/2 bg-contain bg-center bg-no-repeat max-lg:relative max-lg:top-0 max-lg:mt-8 max-lg:h-75 max-lg:w-full max-lg:translate-x-0 max-lg:translate-y-0'
+            style={`background-image: url(${boxImage})`}
+          />
+        </div>
+      ))}
     </div>
 
     <button
@@ -41,14 +39,12 @@ const boxCarouselItems = [
   </div>
 
   <div id='carousel-dots' class='absolute bottom-[2em] left-1/2 flex -translate-x-1/2 gap-4 max-lg:bottom-0'>
-    {
-      boxCarouselItems.map((_, index) => (
-        <button
-          class='dot border-main bg-main hover:bg-accent hover:border-accent h-4 w-4 cursor-pointer rounded-full border-2 transition-all duration-200 hover:scale-110 active:scale-90'
-          data-index={index}
-        />
-      ))
-    }
+    {boxCarouselItems.map((_, index) => (
+      <button
+        class='dot border-main bg-main hover:bg-accent hover:border-accent h-4 w-4 cursor-pointer rounded-full border-2 transition-all duration-200 hover:scale-110 active:scale-90'
+        data-index={index}
+      />
+    ))}
   </div>
 </div>
 

@@ -8,7 +8,9 @@
     "email:dev": "email dev -p 3001 -d src/emails",
     "lint": "eslint .  --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0",
-    "start": "next start"
+    "start": "next start",
+    "test": "vitest run --config vitest.config.integration.mjs",
+    "test:integration": "vitest run --config vitest.config.integration.mjs"
   },
   "dependencies": {
     "@headlessui/react": "catalog:ui-kit",
@@ -16,7 +18,6 @@
     "@hookform/resolvers": "catalog:hookform",
     "@next/third-parties": "catalog:next",
     "@phosphor-icons/react": "catalog:ui-kit",
-    "@react-email/components": "catalog:react-email",
     "@react-email/render": "catalog:react-email",
     "class-variance-authority": "catalog:ui-kit",
     "clsx": "catalog:ui-kit",
@@ -46,7 +47,10 @@
     "@types/react-dom": "catalog:react",
     "@web-projects/eslint": "workspace:*",
     "@web-projects/prettier": "workspace:*",
+    "@web-projects/test": "workspace:*",
+    "@web-projects/vitest": "workspace:*",
     "tailwindcss": "catalog:tailwind",
-    "typescript": "catalog:typescript"
+    "typescript": "catalog:typescript",
+    "vitest": "catalog:vitest"
   }
 }

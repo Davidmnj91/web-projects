@@ -14,9 +14,7 @@ const { mail, location, phones } = Constants
         class='text-main max-lg:text-accent absolute top-4 right-4 z-10 cursor-pointer border-none bg-transparent p-2 transition-transform duration-200 outline-none hover:scale-110 active:scale-95'
       >
         <svg xmlns='http://www.w3.org/2000/svg' width='34' height='34' fill='currentColor' viewBox='0 0 256 256'>
-          <path
-            d='M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z'
-          ></path>
+          <path d='M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z'></path>
         </svg>
       </button>
 
@@ -25,31 +23,29 @@ const { mail, location, phones } = Constants
         <div class='bg-main flex flex-1 flex-col p-[3em] max-lg:justify-around max-lg:p-[20px_1em] max-lg:text-center'>
           <h2 class='text-accent text-3xl max-lg:mb-2'>CONTACTA CON NOSOTROS</h2>
 
-          <div
-            class='mt-[10em] flex flex-col gap-8 text-base font-medium text-white max-lg:mt-0 max-lg:gap-4 max-lg:text-sm'
-          >
+          <div class='mt-[10em] flex flex-col gap-8 text-base font-medium text-white max-lg:mt-0 max-lg:gap-4 max-lg:text-sm'>
             <a
               href={location.mapsUrl}
               target='_blank'
               rel='noreferrer'
               class='hover:text-accent no-underline transition-colors'
             >
-              {location.address}<br />{location.city}
+              {location.address}
+              <br />
+              {location.city}
             </a>
             <a href={`mailto:${mail}`} class='hover:text-accent no-underline transition-colors'>
               {mail}
             </a>
             <div class='flex flex-col gap-2'>
-              {
-                phones.map(({ display, callNumber }) => (
-                  <a
-                    href={`tel:${callNumber}`}
-                    class='text-accent font-bold no-underline transition-opacity hover:opacity-80'
-                  >
-                    {display}
-                  </a>
-                ))
-              }
+              {phones.map(({ display, callNumber }) => (
+                <a
+                  href={`tel:${callNumber}`}
+                  class='text-accent font-bold no-underline transition-opacity hover:opacity-80'
+                >
+                  {display}
+                </a>
+              ))}
             </div>
           </div>
         </div>

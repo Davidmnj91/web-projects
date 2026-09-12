@@ -12,7 +12,6 @@ import type { Language } from '@/i18n/config'
 import type { ContactData, ContactEmailProps } from '@/types/contact'
 import type { Nullable, ValidationErrors } from '@/types/types'
 
-import { validateCaptcha } from '@/hooks/useCaptcha'
 import { defaultLanguage } from '@/i18n/config'
 import {
   HostFamilyContactSchema,
@@ -20,6 +19,7 @@ import {
   InstitutionsContactSchema,
   PartnerContactSchema,
 } from '@/schemas/contactSchemas'
+import { validateCaptcha } from '@/services/captcha.service'
 import { sendMail } from '@/services/mail.service'
 import { getValidationErrors } from '@/utils/getValidationErrors'
 
