@@ -1,5 +1,4 @@
 {
   "relatedProjects": ["prj_XVERN28HdW2a7o3xr8WEqJHg7yUn"],
-  "installCommand": "pnpm install --filter '@web-projects/etimatic...' --frozen-lockfile",
   "ignoreCommand": "npx --yes turbo-ignore @web-projects/etimatic"
 }
