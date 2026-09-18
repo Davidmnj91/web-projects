@@ -26,6 +26,5 @@
     "@web-projects/prettier": "workspace:*",
     "prettier-plugin-astro": "catalog:prettier",
     "prettier-plugin-tailwindcss": "catalog:prettier"
-  },
-  "packageManager": "pnpm@12.0.0"
+  }
 }

@@ -31,6 +31,5 @@
     "prettier-plugin-astro": "catalog:prettier",
     "prettier-plugin-tailwindcss": "catalog:prettier",
     "vitest": "catalog:vitest"
-  },
-  "packageManager": "pnpm@12.0.0"
+  }
 }

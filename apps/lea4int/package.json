@@ -52,6 +52,5 @@
     "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:typescript",
     "vitest": "catalog:vitest"
-  },
-  "packageManager": "pnpm@12.0.0"
+  }
 }
