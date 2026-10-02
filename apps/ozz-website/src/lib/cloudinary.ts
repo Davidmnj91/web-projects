@@ -26,21 +26,30 @@ export const getImages = async (
   max_images?: number,
   next_cursor?: string,
 ): Promise<CloudinaryResponse> => {
-  const query = cloudinary.search
-    .expression(`folder:${folder}`)
-    .with_field('context')
-    .with_field('metadata')
-    .max_results(max_images)
-    .sort_by('public_id', 'desc')
-
-  if (next_cursor) {
-    query.next_cursor(next_cursor)
+  if (!import.meta.env.CLOUDINARY_CLOUD_NAME) {
+    return { resources: [] }
   }
 
-  const result = (await query.execute()) as CloudinaryResponse
+  try {
+    const query = cloudinary.search
+      .expression(`folder:${folder}`)
+      .with_field('context')
+      .with_field('metadata')
+      .max_results(max_images)
+      .sort_by('public_id', 'desc')
 
-  return {
-    resources: result.resources,
-    next_cursor: result.next_cursor,
+    if (next_cursor) {
+      query.next_cursor(next_cursor)
+    }
+
+    const result = (await query.execute()) as CloudinaryResponse
+
+    return {
+      resources: result.resources,
+      next_cursor: result.next_cursor,
+    }
+  } catch (error) {
+    console.error('Cloudinary getImages error:', error)
+    return { resources: [] }
   }
 }

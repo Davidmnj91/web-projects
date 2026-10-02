@@ -1,4 +1,6 @@
 ---
+export const prerender = false
+
 import Layout from '../layouts/Layout.astro'
 import { getImages } from '../lib/cloudinary.ts'
 const { resources } = await getImages('partners')
