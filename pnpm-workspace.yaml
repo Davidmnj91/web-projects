@@ -65,7 +65,7 @@ catalogs:
     googleapis: ^186.0.0
   hookform:
     '@hookform/error-message': ^2.0.1
-    '@hookform/resolvers': ^5.9.1
+    '@hookform/resolvers': ^6.0.0
     react-hook-form: ^7.89.0
   i18n:
     next-intl: ^4.14.8
