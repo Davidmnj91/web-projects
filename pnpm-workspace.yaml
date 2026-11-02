@@ -108,7 +108,7 @@ catalogs:
     clsx: ^2.1.1
     embla-carousel: ^8.6.0
     embla-carousel-react: ^8.6.0
-    framer-motion: ^13.5.0
+    framer-motion: ^14.0.0
     react-datepicker: ^9.1.0
     react-hot-toast: ^2.6.0
     react-player: ^3.4.0
