@@ -75,7 +75,7 @@ catalogs:
     next: 16.3.8
     sharp: ^0.35.5
   node:
-    '@types/node': ^24.19.0
+    '@types/node': ^26.0.0
   nodemailer:
     '@types/nodemailer': ^8.0.2
     nodemailer: ^10.0.13
