@@ -47,7 +47,7 @@ catalogs:
     '@types/eslint-plugin-security': ^3.0.1
     '@typescript-eslint/utils': ^8.71.0
     eslint: ^10.11.0
-    eslint-config-next: 16.3.6
+    eslint-config-next: 16.4.2
     eslint-config-prettier: ^10.1.8
     eslint-plugin-astro: ^3.2.1
     eslint-plugin-import-x: ^4.17.1
@@ -72,7 +72,7 @@ catalogs:
     use-intl: ^4.14.8
   next:
     '@next/third-parties': ^16.3.8
-    next: 16.3.8
+    next: 16.4.2
     sharp: ^0.35.5
   node:
     '@types/node': ^26.0.0
